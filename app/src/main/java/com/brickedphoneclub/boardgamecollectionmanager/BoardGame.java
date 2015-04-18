@@ -9,7 +9,7 @@ public class BoardGame {
     //https://boardgamegeek.com/xmlapi2/collection?username=brickedphoneclub
     private String name;
     private long objectid;
-    private int yearpublished;
+    private String yearpublished;
     //private int numplays
     //private Map<String, String> status = new HashMap<String, String>() ;
     //I don't think we need these right now, possibly later.
@@ -34,7 +34,7 @@ public class BoardGame {
         this.name = name;
     }
 
-    public BoardGame(long objectid, String name, int yearpublished, String image, String thumbnail) {
+    public BoardGame(long objectid, String name, String yearpublished, String image, String thumbnail) {
         this.objectid = objectid;
         this.name = name;
         this.yearpublished = yearpublished;
@@ -59,11 +59,11 @@ public class BoardGame {
         this.objectid = objectid;
     }
 
-    public int getYearpublished() {
+    public String getYearpublished() {
         return yearpublished;
     }
 
-    public void setYearpublished(int yearpublished) {
+    public void setYearpublished(String yearpublished) {
         this.yearpublished = yearpublished;
     }
 
