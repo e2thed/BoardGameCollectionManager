@@ -1,6 +1,8 @@
 package com.brickedphoneclub.boardgamecollectionmanager;
 
 import android.content.Context;
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -19,6 +21,7 @@ public class BoardGameManager {
     }
 
     private BoardGameManager(Context context) {
+        createDefaults();
     }
 
     public void addBoardGame(BoardGame bg) {
@@ -35,6 +38,10 @@ public class BoardGameManager {
 
     private ArrayList<BoardGame> createDefaults() {
         //e.g.: contactList.add(new Contact("Malcolm", "Reynolds", "Captain", "Mobile", "123-456-7890", "", "m123.hotmail", "Twitter", "MRey", 1));
+        bgList.add(new BoardGame(1, "Test One"));
+        bgList.add(new BoardGame(2, "Test Two"));
+        bgList.add(new BoardGame(3, "Test Three"));
+        Log.i("Info", "Added the contacts to the List.");
         return bgList;
     }
 
