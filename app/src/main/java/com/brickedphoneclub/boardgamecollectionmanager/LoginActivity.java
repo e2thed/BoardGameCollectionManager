@@ -1,9 +1,12 @@
 package com.brickedphoneclub.boardgamecollectionmanager;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 
@@ -14,6 +17,19 @@ public class LoginActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         BoardGameManager bgm = BoardGameManager.getInstance(this);
+
+
+        final Button btn_Login = (Button) findViewById(R.id.btn_LoginSubmit);
+        btn_Login.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.i("Info", "Switching activity to MainCollectionActivity");
+                Intent myIntent=new Intent(LoginActivity.this, MainCollectionActivity.class );
+                startActivity(myIntent);
+                //LoginActivity.this.finish() // add this to finish it.
+
+            }
+        });
+
 
     }
 
