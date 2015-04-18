@@ -16,11 +16,12 @@
         android:text=""
         android:ems="10"
         android:id="@+id/login_name_field"
-        android:layout_alignParentRight="true"
         android:editable="true"
         android:hint="Email-ID"
 
-        />
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -29,10 +30,11 @@
         android:id="@+id/Submit"
         android:textStyle="bold"
         android:textSize="22dp"
-        android:layout_below="@+id/login_name_field"
 
 
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="165dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,9 +42,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="UserName"
         android:id="@+id/lbl_UserName"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/Submit"
-        android:layout_alignEnd="@+id/Submit" />
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/Submit"
+        android:layout_toStartOf="@+id/Submit" />
 
 
     <!--< <ImageView

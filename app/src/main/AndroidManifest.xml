@@ -20,6 +20,10 @@
             android:name=".MainCollectionActivity"
             android:label="@string/title_activity_main_collection" >
         </activity>
+        <activity
+            android:name=".FilterActivity"
+            android:label="@string/title_activity_filter" >
+        </activity>
     </application>
 
 </manifest>
