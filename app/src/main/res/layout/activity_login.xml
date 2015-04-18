@@ -17,7 +17,7 @@
         android:ems="10"
         android:id="@+id/login_name_field"
         android:editable="true"
-        android:hint="Email-ID"
+        android:hint="User-ID"
 
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
