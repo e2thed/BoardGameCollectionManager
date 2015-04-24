@@ -16,6 +16,8 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final FileHandler fh = FileHandler.getInstance(this);
+
         setContentView(R.layout.activity_login);
         BoardGameManager bgm = BoardGameManager.getInstance(this);
 
@@ -28,6 +30,7 @@ public class LoginActivity extends Activity {
                 startActivity(myIntent);
                 //LoginActivity.this.finish() // add this to finish it.
 
+                fh.setUser("brickedphoneclub");
             }
         });
 
