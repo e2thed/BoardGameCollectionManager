@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 public class LoginActivity extends Activity {
@@ -28,6 +29,11 @@ public class LoginActivity extends Activity {
                 Log.i("Info", "Switching activity to MainCollectionActivity");
                 Intent myIntent=new Intent(LoginActivity.this, MainCollectionActivity.class );
                 startActivity(myIntent);
+
+                //Grab username from form and print it for debugging.
+                final EditText editUserName = (EditText) findViewById(R.id.login_name_field);
+                String textUserName = editUserName.getText().toString();
+                Log.d("USERNAME", "User is:" + textUserName);
                 //LoginActivity.this.finish() // add this to finish it.
 
                 fh.setUser("brickedphoneclub");
