@@ -52,4 +52,15 @@ public class BoardGameManager {
     public void setBgList(ArrayList<BoardGame> bgList) {
         this.bgList = bgList;
     }
+
+    public BoardGame getBoardGameById(long id) {
+        for (BoardGame game : getBgList()) {
+            if (game.getObjectId() == id) {
+                Log.i("BoardGameManager", "Found game ID: " + game.getObjectId() + "\n");
+                return game;
+            }
+        }
+        return null;
+    }
+
 }
