@@ -2,6 +2,7 @@ package com.brickedphoneclub.boardgamecollectionmanager;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -50,6 +52,24 @@ public class MainCollectionActivity extends ListActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        BoardGame bg = (BoardGame)getListAdapter().getItem(position);
+        //Toast.makeText(this, "Clicked " + contact.getName() + " (" + id + ")", Toast.LENGTH_LONG).show();
+
+        //GG: Store data to be passed into next activity into a bundle
+        //See: http://www.101apps.co.za/articles/passing-data-between-activities.html
+        Bundle bgDetail = new Bundle();
+        bgDetail.putLong("id", bg.getObjectId());
+
+        //GG: Create Intent to switch to the contact detail screen. Clicking on the contact switches to the next screen.
+        //See here: http://developer.android.com/training/basics/firstapp/starting-activity.html
+        Intent intent = new Intent(this, BoardGameDetailActivity.class);
+        intent.putExtras(bgDetail);
+        startActivity(intent);
+    }
+
 
    class GameAdapter extends ArrayAdapter<BoardGame> {
 
