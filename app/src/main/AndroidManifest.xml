@@ -15,28 +15,27 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".MainCollectionActivity"
             android:label="@string/title_activity_main_collection"
-            android:parentActivityName = ".LoginActivity" >
-
+            android:parentActivityName=".LoginActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LoginActivity" />
-
-
         </activity>
         <activity
             android:name=".FilterActivity"
             android:label="@string/title_activity_filter" >
+        </activity>
+        <activity
+            android:name=".BoardGameDetailActivity"
+            android:label="@string/title_activity_board_game_detail" >
         </activity>
     </application>
 

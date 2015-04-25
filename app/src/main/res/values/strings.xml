@@ -12,5 +12,6 @@
     <string name="action_random">Random</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_record">Record Game Play</string>
+    <string name="title_activity_board_game_detail">BoardGameDetailActivity</string>
 
 </resources>
