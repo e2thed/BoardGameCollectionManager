@@ -3,9 +3,14 @@ package com.brickedphoneclub.boardgamecollectionmanager;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +20,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -69,18 +79,21 @@ public class MainCollectionActivity extends ListActivity {
                 view = convertView;
             }
             BoardGame bGame = getItem(position);
+
             TextView nameView = (TextView)view.findViewById(R.id.lbl_gamename);
-            TextView yearView = (TextView)view.findViewById(R.id.lbl_yrpub);
-            ImageView imgView = (ImageView)view.findViewById(R.id.img_game);
-
-
             nameView.setText(bGame.getName());
+
+            TextView yearView = (TextView)view.findViewById(R.id.lbl_yrpub);
             yearView.setText(bGame.getYearpublished());
-            Uri imgURI = Uri.parse("cf.geekdo-images.com/images/pic1104600_t.jpg");
-            imgView.setImageURI(imgURI);
+
+            ImageView imgView_game = (ImageView)view.findViewById(R.id.img_game);
+
+            AsyncTask<String, Void, Bitmap> thumbNail = new DownloadImageTask(imgView_game).execute("http://" + bGame.getThumbnail());
+
             return view;
         }
     }
 
 
 }
+

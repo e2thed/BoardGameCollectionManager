@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BoardGameCollectionManager</string>
+    <string name="app_name">BGM</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_main_collection">MainCollectionActivity</string>
     <string name="title_activity_filter">FilterActivity</string>
