@@ -100,11 +100,11 @@ public class FileHandler {
                 InputStream is = connection.getInputStream();
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
+                Log.i("Buffered Reader To String", br.toString());
                 String line;
-                while ((line = br.readLine()) != null) {
-                    System.out.println(line);
-                }
+                //while ((line = br.readLine()) != null) {
+                //    System.out.println(line);
+                //}
 
                 br.close();
 

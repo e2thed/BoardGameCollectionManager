@@ -8,8 +8,8 @@ public class BoardGame {
 
     //https://boardgamegeek.com/xmlapi2/collection?username=brickedphoneclub
     private String name;
-    private long objectid;
-    private String yearpublished;
+    private long objectId;
+    private String yearPublished;
     //private int numplays
     //private Map<String, String> status = new HashMap<String, String>() ;
     //I don't think we need these right now, possibly later.
@@ -20,24 +20,24 @@ public class BoardGame {
     //Board Game Details Fields
     //https://boardgamegeek.com/xmlapi2/thing?id=31260
     private String description;
-    private int minplayers;
-    private int maxplayers;
-    private int playingtime;
-    private int minplaytime;
-    private int maxplaytime;
-    private int minage;
-    private String[] boardgamecategory;
-    private String[] boardgamemechanic;
+    private int minPlayers;
+    private int maxPlayers;
+    private int playingTime;
+    private int minPlayTime;
+    private int maxPlayTime;
+    private int minAge;
+    private String[] boardGameCategory;
+    private String[] boardGameMechanic;
 
-    public BoardGame(long objectid, String name) {
-        this.objectid = objectid;
+    public BoardGame(long objectId, String name) {
+        this.objectId = objectId;
         this.name = name;
     }
 
-    public BoardGame(long objectid, String name, String yearpublished, String image, String thumbnail) {
-        this.objectid = objectid;
+    public BoardGame(long objectId, String name, String yearPublished, String image, String thumbnail) {
+        this.objectId = objectId;
         this.name = name;
-        this.yearpublished = yearpublished;
+        this.yearPublished = yearPublished;
         this.image = image;
         this.thumbnail = thumbnail;
     }
@@ -51,20 +51,20 @@ public class BoardGame {
         this.name = name;
     }
 
-    public long getObjectid() {
-        return objectid;
+    public long getObjectId() {
+        return objectId;
     }
 
-    public void setObjectid(long objectid) {
-        this.objectid = objectid;
+    public void setObjectId(long objectId) {
+        this.objectId = objectId;
     }
 
-    public String getYearpublished() {
-        return yearpublished;
+    public String getYearPublished() {
+        return yearPublished;
     }
 
-    public void setYearpublished(String yearpublished) {
-        this.yearpublished = yearpublished;
+    public void setYearPublished(String yearPublished) {
+        this.yearPublished = yearPublished;
     }
 
     public String getThumbnail() {
@@ -91,67 +91,67 @@ public class BoardGame {
         this.description = description;
     }
 
-    public int getMinplayers() {
-        return minplayers;
+    public int getMinPlayers() {
+        return minPlayers;
     }
 
-    public void setMinplayers(int minplayers) {
-        this.minplayers = minplayers;
+    public void setMinPlayers(int minPlayers) {
+        this.minPlayers = minPlayers;
     }
 
-    public int getMaxplayers() {
-        return maxplayers;
+    public int getMaxPlayers() {
+        return maxPlayers;
     }
 
-    public void setMaxplayers(int maxplayers) {
-        this.maxplayers = maxplayers;
+    public void setMaxPlayers(int maxPlayers) {
+        this.maxPlayers = maxPlayers;
     }
 
-    public int getPlayingtime() {
-        return playingtime;
+    public int getPlayingTime() {
+        return playingTime;
     }
 
-    public void setPlayingtime(int playingtime) {
-        this.playingtime = playingtime;
+    public void setPlayingTime(int playingTime) {
+        this.playingTime = playingTime;
     }
 
-    public int getMinplaytime() {
-        return minplaytime;
+    public int getMinPlayTime() {
+        return minPlayTime;
     }
 
-    public void setMinplaytime(int minplaytime) {
-        this.minplaytime = minplaytime;
+    public void setMinPlayTime(int minPlayTime) {
+        this.minPlayTime = minPlayTime;
     }
 
-    public int getMaxplaytime() {
-        return maxplaytime;
+    public int getMaxPlayTime() {
+        return maxPlayTime;
     }
 
-    public void setMaxplaytime(int maxplaytime) {
-        this.maxplaytime = maxplaytime;
+    public void setMaxPlayTime(int maxPlayTime) {
+        this.maxPlayTime = maxPlayTime;
     }
 
-    public int getMinage() {
-        return minage;
+    public int getMinAge() {
+        return minAge;
     }
 
-    public void setMinage(int minage) {
-        this.minage = minage;
+    public void setMinAge(int minAge) {
+        this.minAge = minAge;
     }
 
-    public String[] getBoardgamecategory() {
-        return boardgamecategory;
+    public String[] getBoardGameCategory() {
+        return boardGameCategory;
     }
 
-    public void setBoardgamecategory(String[] boardgamecategory) {
-        this.boardgamecategory = boardgamecategory;
+    public void setBoardGameCategory(String[] boardGameCategory) {
+        this.boardGameCategory = boardGameCategory;
     }
 
-    public String[] getBoardgamemechanic() {
-        return boardgamemechanic;
+    public String[] getBoardGameMechanic() {
+        return boardGameMechanic;
     }
 
-    public void setBoardgamemechanic(String[] boardgamemechanic) {
-        this.boardgamemechanic = boardgamemechanic;
+    public void setBoardGameMechanic(String[] boardGameMechanic) {
+        this.boardGameMechanic = boardGameMechanic;
     }
 }
