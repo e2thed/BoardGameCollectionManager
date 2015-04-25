@@ -6,7 +6,152 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.brickedphoneclub.boardgamecollectionmanager.FilterActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Number of Players"
+        android:id="@+id/lbl_Number_of_Players"
+        android:layout_marginTop="42dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Play Time"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/lbl_Play_Time"
+        android:layout_marginTop="57dp"
+        android:layout_below="@+id/lbl_Number_of_Players"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Youngest Player"
+        android:id="@+id/lbl_Youngest_Player"
+        android:layout_marginTop="65dp"
+        android:layout_below="@+id/lbl_Play_Time"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Type"
+        android:id="@+id/lbl_Type"
+        android:layout_marginTop="82dp"
+        android:layout_below="@+id/lbl_Youngest_Player"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text=""
+        android:ems="10"
+        android:id="@+id/number_of_players_field"
+        android:editable="true"
+        android:hint="e.g.4"
+        android:layout_above="@+id/lbl_Play_Time"
+        android:layout_toRightOf="@+id/lbl_Number_of_Players"
+        android:layout_toEndOf="@+id/lbl_Number_of_Players"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp" />
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/playtime_field"
+        android:editable="true"
+        android:hint="e.g.60 minutes"
+        android:layout_alignTop="@+id/lbl_Play_Time"
+        android:layout_alignLeft="@+id/number_of_players_field"
+        android:layout_alignStart="@+id/number_of_players_field" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/Youngest_Player_field"
+        android:editable="true"
+        android:hint="e.g.12"
+        android:layout_alignRight="@+id/space"
+        android:layout_alignEnd="@+id/space"
+        android:layout_alignTop="@+id/lbl_Youngest_Player"
+        android:layout_alignLeft="@+id/playtime_field"
+        android:layout_alignStart="@+id/playtime_field" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/Type_field"
+        android:editable="true"
+        android:hint="e.g.10"
+        android:layout_alignTop="@+id/lbl_Type"
+        android:layout_alignLeft="@+id/Youngest_Player_field"
+        android:layout_alignStart="@+id/Youngest_Player_field" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/btn_Cancel"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:paddingRight="14dp"
+        android:paddingLeft="14dp"
+        android:background="@color/ripple_material_light"
+
+        android:layout_alignBaseline="@+id/btn_Apply"
+        android:layout_alignBottom="@+id/btn_Apply"
+        android:layout_alignRight="@+id/lbl_Youngest_Player"
+        android:layout_alignEnd="@+id/lbl_Youngest_Player" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apply"
+        android:id="@+id/btn_Apply"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:paddingRight="14dp"
+        android:paddingLeft="14dp"
+        android:background="@color/material_blue_grey_800"
+        android:textAlignment="center"
+        android:layout_marginRight="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="41dp" />
+
+
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_alignTop="@+id/lbl_Number_of_Players"
+        android:layout_alignRight="@+id/btn_Apply"
+        android:layout_alignEnd="@+id/btn_Apply"
+        android:id="@+id/space" />
+
+
+
 
 </RelativeLayout>
