@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -82,6 +83,7 @@ public class MainCollectionActivity extends ListActivity {
         //See: http://www.101apps.co.za/articles/passing-data-between-activities.html
         Bundle bgDetail = new Bundle();
         bgDetail.putLong("id", bg.getObjectId());
+        Log.i("BG ID:", "Id is: " + bg.getObjectId());
 
         //GG: Create Intent to switch to the contact detail screen. Clicking on the contact switches to the next screen.
         //See here: http://developer.android.com/training/basics/firstapp/starting-activity.html

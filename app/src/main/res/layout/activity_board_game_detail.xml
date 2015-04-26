@@ -4,9 +4,176 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.brickedphoneclub.boardgamecollectionmanager.BoardGameDetailActivity">
+    tools:context="com.brickedphoneclub.boardgamecollectionmanager.BoardGameDetailActivity"
+    >
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/lbl_detailCategory"
+        android:layout_alignEnd="@+id/lbl_detailCategory" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="valueGameName"
+        android:id="@+id/lbl_detailValueGameName"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_alignLeft="@+id/lbl_detailValueNumPlayers"
+        android:layout_alignStart="@+id/lbl_detailValueNumPlayers" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Year:"
+        android:id="@+id/lbl_detailYearPub"
+        android:layout_below="@+id/lbl_detailValueGameName"
+        android:layout_alignLeft="@+id/lbl_detailValueGameName"
+        android:layout_alignStart="@+id/lbl_detailValueGameName"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Rating:"
+        android:id="@+id/lbl_detailRating"
+        android:layout_below="@+id/lbl_detailYearPub"
+        android:layout_alignLeft="@+id/lbl_detailYearPub"
+        android:layout_alignStart="@+id/lbl_detailYearPub"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Number of Players:"
+        android:id="@+id/lbl_detailNumPlayers"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/lbl_detailRating"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Playing Time:"
+        android:id="@+id/lbl_detailPlayTime"
+        android:layout_marginTop="23dp"
+        android:layout_below="@+id/lbl_detailNumPlayers"
+        android:layout_toLeftOf="@+id/lbl_detailValueNumPlayers"
+        android:layout_toStartOf="@+id/lbl_detailValueNumPlayers" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Age Group:"
+        android:id="@+id/lbl_detailAgeGroup"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/lbl_detailPlayTime"
+        android:layout_toLeftOf="@+id/lbl_detailValueNumPlayers"
+        android:layout_toStartOf="@+id/lbl_detailValueNumPlayers" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Category:"
+        android:id="@+id/lbl_detailCategory"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/lbl_detailAgeGroup"
+        android:layout_toLeftOf="@+id/lbl_detailValueNumPlayers"
+        android:layout_toStartOf="@+id/lbl_detailValueNumPlayers" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Mechanic:"
+        android:id="@+id/lbl_detailMechanic"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/lbl_detailCategory"
+        android:layout_alignRight="@+id/lbl_detailNumPlayers"
+        android:layout_alignEnd="@+id/lbl_detailNumPlayers" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="valueNumPlayers"
+        android:id="@+id/lbl_detailValueNumPlayers"
+        android:layout_above="@+id/lbl_detailPlayTime"
+        android:layout_toRightOf="@+id/lbl_detailNumPlayers"
+        android:layout_toEndOf="@+id/lbl_detailNumPlayers"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="valuePlayTime"
+        android:id="@+id/lbl_detailValuePlayTime"
+        android:layout_alignBottom="@+id/lbl_detailPlayTime"
+        android:layout_alignLeft="@+id/lbl_detailValueNumPlayers"
+        android:layout_alignStart="@+id/lbl_detailValueNumPlayers" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="valueAgeGroup"
+        android:id="@+id/lbl_detailValueAgeGroup"
+        android:layout_above="@+id/lbl_detailCategory"
+        android:layout_alignLeft="@+id/lbl_detailValuePlayTime"
+        android:layout_alignStart="@+id/lbl_detailValuePlayTime" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="valueCategory"
+        android:id="@+id/lbl_detailValueCategory"
+        android:layout_above="@+id/lbl_detailMechanic"
+        android:layout_alignLeft="@+id/lbl_detailValueAgeGroup"
+        android:layout_alignStart="@+id/lbl_detailValueAgeGroup" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="valueMechanic"
+        android:id="@+id/lbl_detailValueMechanic"
+        android:layout_alignBottom="@+id/lbl_detailMechanic"
+        android:layout_alignLeft="@+id/lbl_detailValueCategory"
+        android:layout_alignStart="@+id/lbl_detailValueCategory" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="valYear"
+        android:id="@+id/lbl_detailValueYear"
+        android:layout_above="@+id/lbl_detailRating"
+        android:layout_alignRight="@+id/lbl_detailValueNumPlayers"
+        android:layout_alignEnd="@+id/lbl_detailValueNumPlayers" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="valRating"
+        android:id="@+id/lbl_detailValueRating"
+        android:layout_above="@+id/lbl_detailNumPlayers"
+        android:layout_alignLeft="@+id/lbl_detailValueYear"
+        android:layout_alignStart="@+id/lbl_detailValueYear" />
 
 </RelativeLayout>

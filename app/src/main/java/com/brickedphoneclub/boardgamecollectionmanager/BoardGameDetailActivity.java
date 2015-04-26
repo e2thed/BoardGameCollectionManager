@@ -1,9 +1,12 @@
 package com.brickedphoneclub.boardgamecollectionmanager;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class BoardGameDetailActivity extends Activity {
@@ -12,6 +15,13 @@ public class BoardGameDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_game_detail);
+
+        Intent intentExtras = getIntent();
+        Bundle extrasBundle = intentExtras.getExtras();
+        if (!(extrasBundle == null) && !(extrasBundle.isEmpty())) {
+            loadGame(extrasBundle.getLong("id"));
+        }
+
     }
 
 
@@ -36,4 +46,37 @@ public class BoardGameDetailActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    private void loadGame(long id){
+        BoardGameManager bgm = BoardGameManager.getInstance(this);
+        BoardGame game = bgm.getBoardGameById(id);
+
+        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
+        ((TextView) findViewById(R.id.lbl_detailValueYear)).setText(game.getYearPublished());
+        /*((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
+        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
+        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
+        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
+        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
+        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
+        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
+        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
+        ((TextView) findViewById(R.id.contact_details_last_name_field)).setText(contact.getLastName());
+        ((TextView) findViewById(R.id.contact_details_title_field)).setText(contact.getContactTitle());
+        ((TextView) findViewById(R.id.contact_details_phone_field)).setText(contact.getPhoneType());
+        ((TextView) findViewById(R.id.contact_details_phone_field2)).setText(contact.getPhoneNumber());
+        ((TextView) findViewById(R.id.contact_details_email_field)).setText(contact.getEmailType());
+        ((TextView) findViewById(R.id.contact_details_email_field2)).setText(contact.getEmailAdd());
+        ((TextView) findViewById(R.id.contact_details_social_field)).setText(contact.getSocialType());
+        ((TextView) findViewById(R.id.contact_details_social_field2)).setText(contact.getSocial());
+
+        Log.i("ContactDetails", "ID: " + contactId +
+                " First Name: " + contact.getFirstName() +
+                " Last Name: " + contact.getLastName() +
+                " Title: " + contact.getContactTitle() +
+                " Phone: " + contact.getPhoneNumber());
+        */
+    }
+
 }
