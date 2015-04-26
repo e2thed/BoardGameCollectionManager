@@ -7,6 +7,7 @@
     tools:context="com.brickedphoneclub.boardgamecollectionmanager.BoardGameDetailActivity"
     >
 
+    <!-- Game Image -->
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,6 +18,7 @@
         android:layout_alignRight="@+id/lbl_detailCategory"
         android:layout_alignEnd="@+id/lbl_detailCategory" />
 
+    <!-- Game Name value -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,6 +29,7 @@
         android:layout_alignLeft="@+id/lbl_detailValueNumPlayers"
         android:layout_alignStart="@+id/lbl_detailValueNumPlayers" />
 
+    <!-- Year Published label -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,6 +41,7 @@
         android:layout_alignStart="@+id/lbl_detailValueGameName"
         android:layout_marginTop="16dp" />
 
+    <!-- Rating label -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,6 +53,7 @@
         android:layout_alignStart="@+id/lbl_detailYearPub"
         android:layout_marginTop="20dp" />
 
+    <!-- Num of players label -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,6 +65,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <!-- Play time label -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,6 +77,7 @@
         android:layout_toLeftOf="@+id/lbl_detailValueNumPlayers"
         android:layout_toStartOf="@+id/lbl_detailValueNumPlayers" />
 
+    <!-- Age group label -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,6 +89,7 @@
         android:layout_toLeftOf="@+id/lbl_detailValueNumPlayers"
         android:layout_toStartOf="@+id/lbl_detailValueNumPlayers" />
 
+    <!-- Category label -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -93,6 +101,7 @@
         android:layout_toLeftOf="@+id/lbl_detailValueNumPlayers"
         android:layout_toStartOf="@+id/lbl_detailValueNumPlayers" />
 
+    <!-- Mechanic label -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -104,6 +113,7 @@
         android:layout_alignRight="@+id/lbl_detailNumPlayers"
         android:layout_alignEnd="@+id/lbl_detailNumPlayers" />
 
+    <!-- Num of players value -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -116,6 +126,7 @@
         android:layout_marginLeft="19dp"
         android:layout_marginStart="19dp" />
 
+    <!-- Play time value -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -126,6 +137,7 @@
         android:layout_alignLeft="@+id/lbl_detailValueNumPlayers"
         android:layout_alignStart="@+id/lbl_detailValueNumPlayers" />
 
+    <!-- Age group value -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -136,6 +148,7 @@
         android:layout_alignLeft="@+id/lbl_detailValuePlayTime"
         android:layout_alignStart="@+id/lbl_detailValuePlayTime" />
 
+    <!-- Category value -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -146,6 +159,7 @@
         android:layout_alignLeft="@+id/lbl_detailValueAgeGroup"
         android:layout_alignStart="@+id/lbl_detailValueAgeGroup" />
 
+    <!-- Mechanic value -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -156,6 +170,9 @@
         android:layout_alignLeft="@+id/lbl_detailValueCategory"
         android:layout_alignStart="@+id/lbl_detailValueCategory" />
 
+    <!-- Year value -->
+    <!--android:layout_alignRight="@+id/lbl_detailValueNumPlayers"
+    android:layout_alignEnd="@+id/lbl_detailValueNumPlayers"-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -163,9 +180,10 @@
         android:text="valYear"
         android:id="@+id/lbl_detailValueYear"
         android:layout_above="@+id/lbl_detailRating"
-        android:layout_alignRight="@+id/lbl_detailValueNumPlayers"
-        android:layout_alignEnd="@+id/lbl_detailValueNumPlayers" />
+        android:layout_toRightOf="@+id/lbl_detailValueCategory"
+        android:layout_toEndOf="@+id/lbl_detailValueCategory" />
 
+    <!-- Rating value -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

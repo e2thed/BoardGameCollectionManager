@@ -41,7 +41,18 @@ public class BoardGameManager {
         bgList.add(new BoardGame(1, "Test One", "2015", "", "cf.geekdo-images.com/images/pic1104600_t.jpg"));
         bgList.add(new BoardGame(2, "Test Two", "2008", "", "cf.geekdo-images.com/images/pic719935_t.jpg"));
         BoardGame game1 = new BoardGame(3, "Test Three", "2003", "", "cf.geekdo-images.com/images/pic1324609_t.jpg");
+        //Mockup Info to test details screen since we don't have XML working yet.
         game1.setRating(7.1234);
+        game1.setMinPlayers(2);
+        game1.setMaxPlayers(4);
+        game1.setMinPlayTime(60);
+        game1.setMaxPlayTime(120);
+        game1.setMinAge(10);
+        String[] categories = {"Bluffing","Card Game", "Science Fiction"};
+        game1.setBoardGameCategory(categories);
+        String[] mechanics = {"HandManagement","Secret Unit Deployment", "Variable Player Powers"};
+        game1.setBoardGameMechanic(mechanics);
+
         bgList.add(game1);
         Log.i("Info", "Added default board games to list.");
         return bgList;
@@ -64,5 +75,4 @@ public class BoardGameManager {
         }
         return null;
     }
-
 }

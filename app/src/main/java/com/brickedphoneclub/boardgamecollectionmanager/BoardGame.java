@@ -177,4 +177,55 @@ public class BoardGame {
     public String getRatingToString() {
         return Double.toString(rating);
     }
+
+    //Return the range of number of players as a string. If the game only can be played with a specific number
+    //then return just that number.
+    public String getPlayerRange() {
+        if(minPlayers == maxPlayers) {
+            return Integer.toString(minPlayers);
+        } else {
+            return Integer.toString(minPlayers) + " to " + Integer.toString(maxPlayers);
+        }
+    }
+
+    //Return the play time range based on the min and max play time.
+    public String getPlayTimeRangeToString() {
+        if (minPlayTime == maxPlayTime) {
+            return Integer.toString(minPlayTime) + " minutes";
+        } else {
+            return Integer.toString(minPlayTime) + " to " + Integer.toString(maxPlayTime) + " minutes";
+        }
+    }
+
+    //Get the age group as a string.
+    public String getAgeGroupToString() {
+        return minAge + "+";
+    }
+
+    //Get a string of the board game category array
+    public String getCategoryToString() {
+        String category = "";
+        //Check for null otherwise return the empty string
+        if (boardGameCategory != null) {
+            for (String cat : boardGameCategory) {
+                category += cat + "\n";
+            }
+        }
+        return category;
+    }
+
+
+
+    //Get a string of the board game mechanics array
+    public String getMechanicsToString() {
+        String mechanics = "";
+        //Check for null otherwise return the empty string
+        if (boardGameMechanic != null) {
+            for (String mec : boardGameMechanic) {
+                mechanics += mec + "\n";
+            }
+        }
+        return mechanics;
+    }
+
 }

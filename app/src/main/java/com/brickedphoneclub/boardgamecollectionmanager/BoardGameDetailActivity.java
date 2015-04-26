@@ -57,16 +57,12 @@ public class BoardGameDetailActivity extends Activity {
         ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
         ((TextView) findViewById(R.id.lbl_detailValueYear)).setText(game.getYearPublished());
         ((TextView) findViewById(R.id.lbl_detailValueRating)).setText(game.getRatingToString());
-        /*
-        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
-        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
-        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
-        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
-        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
-        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
-        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
-        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
-        */
+        ((TextView) findViewById(R.id.lbl_detailValueNumPlayers)).setText(game.getPlayerRange());
+        ((TextView) findViewById(R.id.lbl_detailValuePlayTime)).setText(game.getPlayTimeRangeToString());
+        ((TextView) findViewById(R.id.lbl_detailValueAgeGroup)).setText(game.getAgeGroupToString());
+        ((TextView) findViewById(R.id.lbl_detailValueCategory)).setText(game.getCategoryToString());
+        ((TextView) findViewById(R.id.lbl_detailValueMechanic)).setText(game.getMechanicsToString());
+        Log.i("Detail Loaded", "Details of game loaded for ID:" + game.getObjectId());
     }
 
 }
