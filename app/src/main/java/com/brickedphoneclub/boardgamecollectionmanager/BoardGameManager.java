@@ -48,7 +48,7 @@ public class BoardGameManager {
         game1.setMinPlayTime(60);
         game1.setMaxPlayTime(120);
         game1.setMinAge(10);
-        String[] categories = {"Bluffing","Card Game", "Science Fiction"};
+        String[] categories = {"Bluffing","Card Game", "Science Fiction", "Science Fiction", "Science Fiction", "Science Fiction", "Science Fiction", "Science Fiction"};
         game1.setBoardGameCategory(categories);
         String[] mechanics = {"HandManagement","Secret Unit Deployment", "Variable Player Powers"};
         game1.setBoardGameMechanic(mechanics);
