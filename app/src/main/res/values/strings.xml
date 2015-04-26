@@ -3,8 +3,8 @@
 
     <string name="app_name">BGM</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_main_collection">MainCollectionActivity</string>
-    <string name="title_activity_filter">FilterActivity</string>
+    <string name="title_activity_main_collection">My Collection</string>
+    <string name="title_activity_filter">Filter</string>
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
     <string name="action_filter">Filter</string>
@@ -12,11 +12,8 @@
     <string name="action_random">Random</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_record">Record Game Play</string>
-    <string name="title_activity_board_game_detail">BoardGameDetailActivity</string>
-    <string name="title_activity_sort">SortActivity</string>
-    <string name="title_activity_random_game">RandomGameActivity</string>
-    <string name="title_activity_search_game">SearchGameActivity</string>
-    <string name="title_activity_board_game_settings">BoardGameSettingsActivity</string>
-    <string name="title_activity_refresh_game">RefreshGameActivity</string>
+    <string name="title_activity_board_game_detail">Game Details</string>
+    <string name="title_activity_sort">Sort</string>
+    <string name="title_activity_random_game">Random Game</string>
 
 </resources>
