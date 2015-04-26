@@ -63,8 +63,6 @@ public class MainCollectionActivity extends ListActivity {
             startActivity(intent);
             return true;
         }else if(id == R.id.action_search){
-            Intent intent = new Intent(this, SearchGameActivity.class);
-            startActivity(intent);
             return true;
         }else if(id == R.id.action_refresh){
             return true;
