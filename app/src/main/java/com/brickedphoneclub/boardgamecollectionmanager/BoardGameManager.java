@@ -25,7 +25,7 @@ public class BoardGameManager {
     }
 
     public void addBoardGame(BoardGame bg) {
-
+        bgList.add(bg);
     }
 
     public void deleteBoardGame(BoardGame bg) {
@@ -40,7 +40,9 @@ public class BoardGameManager {
         //e.g.: contactList.add(new Contact("Malcolm", "Reynolds", "Captain", "Mobile", "123-456-7890", "", "m123.hotmail", "Twitter", "MRey", 1));
         bgList.add(new BoardGame(1, "Test One", "2015", "", "cf.geekdo-images.com/images/pic1104600_t.jpg"));
         bgList.add(new BoardGame(2, "Test Two", "2008", "", "cf.geekdo-images.com/images/pic719935_t.jpg"));
-        bgList.add(new BoardGame(3, "Test Three", "2003", "", "cf.geekdo-images.com/images/pic1324609_t.jpg"));
+        BoardGame game1 = new BoardGame(3, "Test Three", "2003", "", "cf.geekdo-images.com/images/pic1324609_t.jpg");
+        game1.setRating(7.1234);
+        bgList.add(game1);
         Log.i("Info", "Added default board games to list.");
         return bgList;
     }

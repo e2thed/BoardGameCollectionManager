@@ -15,6 +15,8 @@ public class BoardGame {
     //I don't think we need these right now, possibly later.
     private String thumbnail;
     private String image;
+    private int rank;
+    private double rating;
 
 
     //Board Game Details Fields
@@ -153,5 +155,26 @@ public class BoardGame {
 
     public void setBoardGameMechanic(String[] boardGameMechanic) {
         this.boardGameMechanic = boardGameMechanic;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    //Return the double rating value as a string for printing out and added to text fields.
+    public String getRatingToString() {
+        return Double.toString(rating);
     }
 }

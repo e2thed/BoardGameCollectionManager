@@ -20,6 +20,8 @@ public class BoardGameDetailActivity extends Activity {
         Bundle extrasBundle = intentExtras.getExtras();
         if (!(extrasBundle == null) && !(extrasBundle.isEmpty())) {
             loadGame(extrasBundle.getLong("id"));
+        } else {
+            Log.e("NO GAME ID", "Error the game id wasn't found in the bundle.");
         }
 
     }
@@ -54,7 +56,8 @@ public class BoardGameDetailActivity extends Activity {
 
         ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
         ((TextView) findViewById(R.id.lbl_detailValueYear)).setText(game.getYearPublished());
-        /*((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
+        ((TextView) findViewById(R.id.lbl_detailValueRating)).setText(game.getRatingToString());
+        /*
         ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
         ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
         ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
@@ -62,20 +65,7 @@ public class BoardGameDetailActivity extends Activity {
         ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
         ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
         ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
-        ((TextView) findViewById(R.id.contact_details_last_name_field)).setText(contact.getLastName());
-        ((TextView) findViewById(R.id.contact_details_title_field)).setText(contact.getContactTitle());
-        ((TextView) findViewById(R.id.contact_details_phone_field)).setText(contact.getPhoneType());
-        ((TextView) findViewById(R.id.contact_details_phone_field2)).setText(contact.getPhoneNumber());
-        ((TextView) findViewById(R.id.contact_details_email_field)).setText(contact.getEmailType());
-        ((TextView) findViewById(R.id.contact_details_email_field2)).setText(contact.getEmailAdd());
-        ((TextView) findViewById(R.id.contact_details_social_field)).setText(contact.getSocialType());
-        ((TextView) findViewById(R.id.contact_details_social_field2)).setText(contact.getSocial());
-
-        Log.i("ContactDetails", "ID: " + contactId +
-                " First Name: " + contact.getFirstName() +
-                " Last Name: " + contact.getLastName() +
-                " Title: " + contact.getContactTitle() +
-                " Phone: " + contact.getPhoneNumber());
+        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
         */
     }
 
