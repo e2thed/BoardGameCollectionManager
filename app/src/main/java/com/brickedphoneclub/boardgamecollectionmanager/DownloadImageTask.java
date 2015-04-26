@@ -20,7 +20,7 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         String urldisplay = urls[0];
         Bitmap mIcon11 = null;
         try {
-            Log.e("TryBlock","In Try Block");
+            //Log.e("Debug","In try block");
             InputStream in = new java.net.URL(urldisplay).openStream();
             mIcon11 = BitmapFactory.decodeStream(in);
         }

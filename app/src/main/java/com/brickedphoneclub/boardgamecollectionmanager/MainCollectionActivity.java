@@ -49,6 +49,28 @@ public class MainCollectionActivity extends ListActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        else if(id == R.id.action_sort){
+            Intent intent = new Intent(this, SortActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if(id == R.id.action_random){
+            Intent intent = new Intent(this, RandomGameActivity.class);
+            startActivity(intent);
+            return true;
+        }else if(id == R.id.action_filter){
+            Intent intent = new Intent(this, FilterActivity.class);
+            startActivity(intent);
+            return true;
+        }else if(id == R.id.action_search){
+            Intent intent = new Intent(this, SearchGameActivity.class);
+            startActivity(intent);
+            return true;
+        }else if(id == R.id.action_refresh){
+            return true;
+        }else if(id == R.id.action_record){
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

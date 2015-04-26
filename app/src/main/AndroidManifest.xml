@@ -36,10 +36,34 @@
         <activity
             android:name=".BoardGameDetailActivity"
             android:label="@string/title_activity_board_game_detail"
-            android:parentActivityName=".MainCollectionActivity">
+            android:parentActivityName=".MainCollectionActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LoginActivity" />
+        </activity>
+        <activity
+            android:name=".SortActivity"
+            android:label="@string/title_activity_sort" >
+        </activity>
+        <activity
+            android:name=".RandomGameActivity"
+            android:label="@string/title_activity_random_game" >
+        </activity>
+        <activity
+            android:name=".SearchGameActivity"
+            android:label="@string/title_activity_search_game" >
+        </activity>
+        <activity
+            android:name=".BoardGameSettingsActivity"
+            android:label="@string/title_activity_board_game_settings" >
+        </activity>
+        <activity
+            android:name=".RefreshGameActivity"
+            android:label="@string/title_activity_refresh_game" >
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 

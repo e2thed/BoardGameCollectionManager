@@ -13,5 +13,10 @@
     <string name="action_refresh">Refresh</string>
     <string name="action_record">Record Game Play</string>
     <string name="title_activity_board_game_detail">BoardGameDetailActivity</string>
+    <string name="title_activity_sort">SortActivity</string>
+    <string name="title_activity_random_game">RandomGameActivity</string>
+    <string name="title_activity_search_game">SearchGameActivity</string>
+    <string name="title_activity_board_game_settings">BoardGameSettingsActivity</string>
+    <string name="title_activity_refresh_game">RefreshGameActivity</string>
 
 </resources>
