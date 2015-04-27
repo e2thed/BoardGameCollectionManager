@@ -23,6 +23,7 @@ import java.util.Collections;
 
 public class MainCollectionActivity extends ListActivity {
 
+    public String[] sortOptions = new String[3];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +56,8 @@ public class MainCollectionActivity extends ListActivity {
         }
         else if(id == R.id.action_sort){
             Intent intent = new Intent(this, SortActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 1);
+            //startActivity(intent);
             return true;
         }
         else if(id == R.id.action_random){
@@ -76,6 +78,8 @@ public class MainCollectionActivity extends ListActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -137,6 +141,16 @@ public class MainCollectionActivity extends ListActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                sortOptions = data.getStringArrayExtra("soptions");
+                Log.i("Sort Options Selected:", sortOptions[0] + "/" + sortOptions[1] + "/" + sortOptions[2]);
 
+            }
+        }
+    }
 }
 

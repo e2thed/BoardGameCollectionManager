@@ -1,13 +1,16 @@
 package com.brickedphoneclub.boardgamecollectionmanager;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 
@@ -15,6 +18,7 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
 
     Spinner spinner_name, spinner_rating, spinner_yrpub;
     public static String selectedName, selectedRating, selectedYearPublished = null;
+    public String[] sortOptionsSelected = new String[3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,8 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
         spinner_name = (Spinner) findViewById(R.id.spnr_sortbyname);
         spinner_rating = (Spinner) findViewById(R.id.spnr_sortbyrating);
         spinner_yrpub = (Spinner) findViewById(R.id.spnr_sortbyyear);
+        final Button buttonApply = (Button) findViewById(R.id.btn_sortapply);
+        final Button buttonCancel = (Button) findViewById(R.id.btn_sortcancel);
 
 
         // Create an ArrayAdapter of name spinner using the string array and a default spinner layout
@@ -59,6 +65,32 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
 
 
         System.out.println(selectedName+" / "+selectedRating+" / "+selectedYearPublished );
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        buttonApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                sortOptionsSelected[0]= selectedName ;
+                sortOptionsSelected[1]= selectedRating ;
+                sortOptionsSelected[2]= selectedYearPublished ;
+
+                Bundle sortBundle = new Bundle();
+                sortBundle.putStringArray("soptions",sortOptionsSelected);
+                Log.i("Sort Options:", sortOptionsSelected[0] + "/" + sortOptionsSelected[1] + "/" + sortOptionsSelected[2]);
+
+                Intent lastIntent = new Intent();
+                lastIntent.putExtras(sortBundle);
+                setResult(RESULT_OK, lastIntent);
+                finish();
+            }
+        });
 
     }
 
@@ -102,7 +134,7 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
         }*/
         selectedName  = spinner_name.getSelectedItem().toString();
         selectedRating  = spinner_rating.getSelectedItem().toString();
-        selectedYearPublished  = spinner_rating.getSelectedItem().toString();
+        selectedYearPublished  = spinner_yrpub.getSelectedItem().toString();
         System.out.println(selectedName+" / "+selectedRating+" / "+selectedYearPublished );
 
     }
