@@ -30,7 +30,7 @@ public class MainCollectionActivity extends ListActivity {
         setContentView(R.layout.activity_main_collection);
         BoardGameManager bgm = BoardGameManager.getInstance(this);
         // initialize the list view
-       // Collections.sort(bgm.getBgList(), new ListComparator());
+        //Collections.sort(bgm.getBgList(), new ListComparator());
         setListAdapter(new GameAdapter(this, R.layout.game_item, bgm.getBgList()));
 
     }
@@ -99,6 +99,13 @@ public class MainCollectionActivity extends ListActivity {
         startActivity(intent);
     }
 
+   class ListComparator implements Comparator<BoardGame> {
+        @Override
+        public int compare(BoardGame lhs, BoardGame rhs) {
+            return lhs.getName().compareTo(rhs.getName());
+            //return 0;
+        }
+    }
 
    class GameAdapter extends ArrayAdapter<BoardGame> {
 
@@ -148,6 +155,11 @@ public class MainCollectionActivity extends ListActivity {
             if (resultCode == RESULT_OK) {
                 sortOptions = data.getStringArrayExtra("soptions");
                 Log.i("Sort Options Passed:", sortOptions[0] + "/" + sortOptions[1] + "/" + sortOptions[2]);
+                BoardGameManager bgm = BoardGameManager.getInstance(this);
+                if (sortOptions[0].trim().equals("A-Z")) {
+                    Collections.sort(bgm.getBgList(), new ListComparator());
+                    setListAdapter(new GameAdapter(this, R.layout.game_item, bgm.getBgList()));
+                }
 
             }
         }

@@ -145,18 +145,4 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
     }
 }
 
-/*
 
-package com.brickedphoneclub.boardgamecollectionmanager;
-
-import java.util.Comparator;
-
-public class ListComparator implements Comparator<BoardGame> {
-    @Override
-    public int compare(BoardGame lhs, BoardGame rhs) {
-        return lhs.getName().compareTo(rhs.getName());
-        //return 0;
-    }
-}
-
- */
