@@ -23,12 +23,10 @@
     <string-array name="rating_array">
         <item>Highest First</item>
         <item>Lowest First</item>
-        <item>None</item>
     </string-array>
     <string-array name="year_array">
         <item>Latest First</item>
         <item>Earliest First</item>
-        <item>None</item>
     </string-array>
 
 </resources>
