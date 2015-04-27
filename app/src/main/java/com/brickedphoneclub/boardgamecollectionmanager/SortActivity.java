@@ -19,16 +19,29 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
     Spinner spinner_name, spinner_rating, spinner_yrpub;
     public static String selectedName, selectedRating, selectedYearPublished = null;
     public String[] sortOptionsSelected = new String[3];
+    public static String activeSortName, activeSortRating, activeSortYrPub = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sort);
 
-        //default sort options
-        selectedName = "A-Z";
-        selectedRating = "Highest First";
-        selectedYearPublished = "Latest First";
+        // active sort options
+
+        Intent intentActiveSort = getIntent();
+        Bundle activeSortBundle = intentActiveSort.getExtras();
+
+        if (!(activeSortBundle == null) && !(activeSortBundle.isEmpty())) {
+            sortOptionsSelected = activeSortBundle.getStringArray("asoptions");
+            activeSortName = sortOptionsSelected[0];
+            activeSortRating = sortOptionsSelected[1];
+            activeSortYrPub = sortOptionsSelected[2];
+        } else {
+            activeSortName = "A-Z";
+            activeSortRating = "Highest First";
+            activeSortYrPub = "Latest First";
+        }
+
 
 
         //Populate spinners
@@ -47,6 +60,9 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
         adapter_name.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the name spinner
         spinner_name.setAdapter(adapter_name);
+        // set value for name spinner
+        spinner_name.setSelection(((ArrayAdapter<String>)spinner_name.getAdapter()).getPosition(activeSortName));
+        // listener for change in selection
         spinner_name.setOnItemSelectedListener(this);
 
         //Populate rating spinner
@@ -54,6 +70,7 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
                 R.array.rating_array, android.R.layout.simple_spinner_item);
         adapter_rating.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_rating.setAdapter(adapter_rating);
+        spinner_rating.setSelection(((ArrayAdapter<String>)spinner_rating.getAdapter()).getPosition(activeSortRating));
         spinner_rating.setOnItemSelectedListener(this);
 
         //Populate year published spinner
@@ -61,6 +78,7 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
                 R.array.year_array, android.R.layout.simple_spinner_item);
         adapter_yrpub.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_yrpub.setAdapter(adapter_yrpub);
+        spinner_yrpub.setSelection(((ArrayAdapter<String>)spinner_yrpub.getAdapter()).getPosition(activeSortYrPub));
         spinner_yrpub.setOnItemSelectedListener(this);
 
 

@@ -23,7 +23,9 @@ import java.util.Collections;
 
 public class MainCollectionActivity extends ListActivity {
 
-    public String[] sortOptions = new String[3];
+    public String[] activeSortOptions = new String[3];
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +57,13 @@ public class MainCollectionActivity extends ListActivity {
             return true;
         }
         else if(id == R.id.action_sort){
-            Intent intent = new Intent(this, SortActivity.class);
-            startActivityForResult(intent, 1);
-            //startActivity(intent);
+            Bundle sortBundle = new Bundle();
+            sortBundle.putStringArray("asoptions",activeSortOptions);
+            Log.i("Sort Options Active:", activeSortOptions[0] + "/" + activeSortOptions[1] + "/" + activeSortOptions[2]);
+
+            Intent sortIntent = new Intent(this, SortActivity.class);
+            sortIntent.putExtras(sortBundle);
+            startActivityForResult(sortIntent, 1);
             return true;
         }
         else if(id == R.id.action_random){
@@ -153,10 +159,10 @@ public class MainCollectionActivity extends ListActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                sortOptions = data.getStringArrayExtra("soptions");
-                Log.i("Sort Options Passed:", sortOptions[0] + "/" + sortOptions[1] + "/" + sortOptions[2]);
+                activeSortOptions = data.getStringArrayExtra("soptions");
+                Log.i("Sort Options Passed:", activeSortOptions[0] + "/" + activeSortOptions[1] + "/" + activeSortOptions[2]);
                 BoardGameManager bgm = BoardGameManager.getInstance(this);
-                if (sortOptions[0].trim().equals("A-Z")) {
+                if (activeSortOptions[0].trim().equals("A-Z")) {
                     Collections.sort(bgm.getBgList(), new ListComparator());
                     setListAdapter(new GameAdapter(this, R.layout.game_item, bgm.getBgList()));
                 }
