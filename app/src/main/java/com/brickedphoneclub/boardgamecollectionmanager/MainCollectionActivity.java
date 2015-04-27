@@ -147,7 +147,7 @@ public class MainCollectionActivity extends ListActivity {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 sortOptions = data.getStringArrayExtra("soptions");
-                Log.i("Sort Options Selected:", sortOptions[0] + "/" + sortOptions[1] + "/" + sortOptions[2]);
+                Log.i("Sort Options Passed:", sortOptions[0] + "/" + sortOptions[1] + "/" + sortOptions[2]);
 
             }
         }

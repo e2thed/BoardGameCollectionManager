@@ -83,7 +83,7 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
 
                 Bundle sortBundle = new Bundle();
                 sortBundle.putStringArray("soptions",sortOptionsSelected);
-                Log.i("Sort Options:", sortOptionsSelected[0] + "/" + sortOptionsSelected[1] + "/" + sortOptionsSelected[2]);
+                Log.i("Sort Options Selected:", sortOptionsSelected[0] + "/" + sortOptionsSelected[1] + "/" + sortOptionsSelected[2]);
 
                 Intent lastIntent = new Intent();
                 lastIntent.putExtras(sortBundle);
