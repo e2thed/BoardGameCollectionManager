@@ -17,6 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Collections;
 
 
 public class MainCollectionActivity extends ListActivity {
@@ -27,6 +29,7 @@ public class MainCollectionActivity extends ListActivity {
         setContentView(R.layout.activity_main_collection);
         BoardGameManager bgm = BoardGameManager.getInstance(this);
         // initialize the list view
+       // Collections.sort(bgm.getBgList(), new ListComparator());
         setListAdapter(new GameAdapter(this, R.layout.game_item, bgm.getBgList()));
 
     }
@@ -99,7 +102,18 @@ public class MainCollectionActivity extends ListActivity {
             super(context, resource, objects);
         }
 
-        @Override
+       @Override
+       public int getCount() {
+           //Log.e("List Size", String.valueOf(super.getCount()));
+           return super.getCount();
+       }
+
+       @Override
+       public BoardGame getItem(int position) {
+           return super.getItem(position);
+       }
+
+       @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view;
             if(convertView == null) {
