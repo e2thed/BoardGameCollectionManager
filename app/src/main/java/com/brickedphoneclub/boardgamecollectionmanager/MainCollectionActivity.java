@@ -68,8 +68,11 @@ public class MainCollectionActivity extends ListActivity {
             return true;
         }
         else if(id == R.id.action_random){
-            Intent intent = new Intent(this, RandomGameActivity.class);
-            startActivity(intent);
+            Bundle randomBundle = new Bundle();
+            randomBundle.putInt("CollectionSize", 5);
+            Intent randomIntent = new Intent(this, RandomGameActivity.class);
+            randomIntent.putExtras(randomBundle);
+            startActivityForResult(randomIntent, 1);
             return true;
         }else if(id == R.id.action_filter){
             Intent intent = new Intent(this, FilterActivity.class);
