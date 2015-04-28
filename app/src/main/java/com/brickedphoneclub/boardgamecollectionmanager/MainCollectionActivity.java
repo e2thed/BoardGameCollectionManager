@@ -38,6 +38,7 @@ public class MainCollectionActivity extends ListActivity {
     }
 
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -105,13 +106,6 @@ public class MainCollectionActivity extends ListActivity {
         startActivity(intent);
     }
 
-   class ListComparator implements Comparator<BoardGame> {
-        @Override
-        public int compare(BoardGame lhs, BoardGame rhs) {
-            return lhs.getName().compareTo(rhs.getName());
-            //return 0;
-        }
-    }
 
    class GameAdapter extends ArrayAdapter<BoardGame> {
 
@@ -152,7 +146,36 @@ public class MainCollectionActivity extends ListActivity {
 
             return view;
         }
+
+   }
+
+
+    class ListComparator implements Comparator<BoardGame> {
+
+        private String orderType;
+
+        public ListComparator(String type) {
+
+            this.orderType = type;
+
+        }
+
+        @Override
+        public int compare(BoardGame lhs, BoardGame rhs) {
+
+            int res=0;
+            if (orderType.equals("A-Z")) {
+                res = (lhs.getName()).compareTo(rhs.getName());
+            }
+            else if (orderType.equals("Z-A")) {
+                res = (rhs.getName()).compareTo(lhs.getName());
+            }
+            return res;
+        }
+            //return lhs.getName().compareTo(rhs.getName());
+
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -161,14 +184,14 @@ public class MainCollectionActivity extends ListActivity {
             if (resultCode == RESULT_OK) {
                 activeSortOptions = data.getStringArrayExtra("soptions");
                 Log.i("Sort Options Passed:", activeSortOptions[0] + "/" + activeSortOptions[1] + "/" + activeSortOptions[2]);
-                BoardGameManager bgm = BoardGameManager.getInstance(this);
-                if (activeSortOptions[0].trim().equals("A-Z")) {
-                    Collections.sort(bgm.getBgList(), new ListComparator());
-                    setListAdapter(new GameAdapter(this, R.layout.game_item, bgm.getBgList()));
-                }
+                BoardGameManager bgmSort = BoardGameManager.getInstance(this);
+                Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[0].trim()));
 
+                setListAdapter(new GameAdapter(this, R.layout.game_item, bgmSort.getBgList()));
             }
         }
     }
+
+
 }
 
