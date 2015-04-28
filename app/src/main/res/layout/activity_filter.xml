@@ -7,151 +7,222 @@
     tools:context="com.brickedphoneclub.boardgamecollectionmanager.FilterActivity">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Number of Players"
-        android:id="@+id/lbl_Number_of_Players"
-        android:layout_marginTop="42dp"
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/linearLayout" >
 
-    <TextView
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#d3d3d3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Number of Players"
+                        android:id="@+id/lbl_filterNumPlayers"
+                        android:gravity="center_horizontal"
+                        android:layout_column="0"
+                        android:layout_margin="5dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spn_filterNumPlayers"
+                        android:layout_column="0"
+                        android:spinnerMode="dropdown"
+                        android:layout_margin="5dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#d3d3d3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Play Time"
+                        android:id="@+id/lbl_filterPlayTime"
+                        android:gravity="center_horizontal"
+                        android:layout_column="0"
+                        android:layout_margin="5dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spn_filterPlayTime"
+                        android:layout_column="0"
+                        android:spinnerMode="dropdown"
+                        android:layout_margin="5dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#d3d3d3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Age Group"
+                        android:id="@+id/lbl_filterAgeGroup"
+                        android:gravity="center_horizontal"
+                        android:layout_column="0"
+                        android:layout_margin="5dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spn_filterAgeGroup"
+                        android:layout_column="0"
+                        android:spinnerMode="dropdown"
+                        android:layout_margin="5dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#d3d3d3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Category"
+                        android:id="@+id/lbl_filterCategory"
+                        android:gravity="center_horizontal"
+                        android:layout_column="0"
+                        android:layout_margin="5dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spn_filterCategory"
+                        android:layout_column="0"
+                        android:spinnerMode="dropdown"
+                        android:layout_margin="5dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#d3d3d3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Mechanic"
+                        android:id="@+id/lbl_filterMechanic"
+                        android:gravity="center_horizontal"
+                        android:layout_column="0"
+                        android:layout_margin="5dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spn_filterMechanic"
+                        android:layout_column="0"
+                        android:spinnerMode="dropdown"
+                        android:layout_margin="5dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#d3d3d3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Rating"
+                        android:id="@+id/lbl_filterRating"
+                        android:gravity="center_horizontal"
+                        android:layout_column="0"
+                        android:layout_margin="5dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spn_filterRating"
+                        android:layout_column="0"
+                        android:spinnerMode="dropdown"
+                        android:layout_margin="5dp" />
+                </TableRow>
+
+            </TableLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Play Time"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/lbl_Play_Time"
-        android:layout_marginTop="57dp"
-        android:layout_below="@+id/lbl_Number_of_Players"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Youngest Player"
-        android:id="@+id/lbl_Youngest_Player"
-        android:layout_marginTop="65dp"
-        android:layout_below="@+id/lbl_Play_Time"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Type"
-        android:id="@+id/lbl_Type"
-        android:layout_marginTop="82dp"
-        android:layout_below="@+id/lbl_Youngest_Player"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text=""
-        android:ems="10"
-        android:id="@+id/number_of_players_field"
-        android:editable="true"
-        android:hint="e.g.4"
-        android:layout_above="@+id/lbl_Play_Time"
-        android:layout_toRightOf="@+id/lbl_Number_of_Players"
-        android:layout_toEndOf="@+id/lbl_Number_of_Players"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp" />
-
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/playtime_field"
-        android:editable="true"
-        android:hint="e.g.60 minutes"
-        android:layout_alignTop="@+id/lbl_Play_Time"
-        android:layout_alignLeft="@+id/number_of_players_field"
-        android:layout_alignStart="@+id/number_of_players_field" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/Youngest_Player_field"
-        android:editable="true"
-        android:hint="e.g.12"
-        android:layout_alignRight="@+id/space"
-        android:layout_alignEnd="@+id/space"
-        android:layout_alignTop="@+id/lbl_Youngest_Player"
-        android:layout_alignLeft="@+id/playtime_field"
-        android:layout_alignStart="@+id/playtime_field" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/Type_field"
-        android:editable="true"
-        android:hint="e.g.10"
-        android:layout_alignTop="@+id/lbl_Type"
-        android:layout_alignLeft="@+id/Youngest_Player_field"
-        android:layout_alignStart="@+id/Youngest_Player_field" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:id="@+id/btn_Cancel"
-        android:textStyle="bold"
-        android:textSize="22dp"
-        android:paddingRight="14dp"
-        android:paddingLeft="14dp"
-        android:background="@color/ripple_material_light"
-
-        android:layout_alignBaseline="@+id/btn_Apply"
-        android:layout_alignBottom="@+id/btn_Apply"
-        android:layout_alignRight="@+id/lbl_Youngest_Player"
-        android:layout_alignEnd="@+id/lbl_Youngest_Player" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Apply"
-        android:id="@+id/btn_Apply"
-        android:textStyle="bold"
-        android:textSize="22dp"
-        android:paddingRight="14dp"
-        android:paddingLeft="14dp"
-        android:background="@color/material_blue_grey_800"
-        android:textAlignment="center"
-        android:layout_marginRight="32dp"
-        android:layout_marginEnd="32dp"
+        android:id="@+id/linearLayout"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="41dp" />
+        android:layout_centerHorizontal="true">
 
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_cancel"
+            android:id="@+id/btn_filterCancel"
+            android:layout_marginRight="20dp" />
 
-
-    <Space
-        android:layout_width="20px"
-        android:layout_height="20px"
-        android:layout_alignTop="@+id/lbl_Number_of_Players"
-        android:layout_alignRight="@+id/btn_Apply"
-        android:layout_alignEnd="@+id/btn_Apply"
-        android:id="@+id/space" />
-
-
-
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_apply"
+            android:id="@+id/btn_filterApply"
+            android:layout_marginLeft="20dp" />
+    </LinearLayout>
 
 </RelativeLayout>

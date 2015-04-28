@@ -15,6 +15,8 @@
     <string name="title_activity_board_game_detail">Game Details</string>
     <string name="title_activity_sort">Sort</string>
     <string name="title_activity_random_game">Random Game</string>
+    <string name="filter_cancel">Cancel</string>
+    <string name="filter_apply">Apply</string>
     <string-array name="alpha_array">
         <item>A-Z</item>
         <item>Z-A</item>
