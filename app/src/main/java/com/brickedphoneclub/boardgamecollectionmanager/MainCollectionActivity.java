@@ -149,35 +149,7 @@ public class MainCollectionActivity extends ListActivity {
 
    }
 
-
-    class ListComparator implements Comparator<BoardGame> {
-
-        private String orderType;
-
-        public ListComparator(String type) {
-
-            this.orderType = type;
-
-        }
-
-        @Override
-        public int compare(BoardGame lhs, BoardGame rhs) {
-
-            int res=0;
-            if (orderType.equals("A-Z")) {
-                res = (lhs.getName()).compareTo(rhs.getName());
-            }
-            else if (orderType.equals("Z-A")) {
-                res = (rhs.getName()).compareTo(lhs.getName());
-            }
-            return res;
-        }
-            //return lhs.getName().compareTo(rhs.getName());
-
-    }
-
-
-    @Override
+  @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
@@ -186,7 +158,8 @@ public class MainCollectionActivity extends ListActivity {
                 Log.i("Sort Options Passed:", activeSortOptions[0] + "/" + activeSortOptions[1] + "/" + activeSortOptions[2]);
                 BoardGameManager bgmSort = BoardGameManager.getInstance(this);
                 Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[0].trim()));
-
+                Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[1].trim()));
+                Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[2].trim()));
                 setListAdapter(new GameAdapter(this, R.layout.game_item, bgmSort.getBgList()));
             }
         }
