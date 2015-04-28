@@ -32,5 +32,63 @@
         <item>Earliest First</item>
         <item>None</item>
     </string-array>
+    <string-array name="filter_player_count_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10+</item>
+    </string-array>
+    <string-array name="filter_play_time_array">
+        <item>15 minutes</item>
+        <item>30</item>
+        <item>30-60</item>
+        <item>60</item>
+        <item>60-90</item>
+        <item>90</item>
+        <item>90-120</item>
+        <item>120</item>
+        <item>120-180</item>
+        <item>180+</item>
+    </string-array>
+    <string-array name="filter_age_group_array">
+        <item>5 or younger</item>
+        <item>5&#8211;7</item>
+        <item>7-9</item>
+        <item>10-12</item>
+        <item>12-14</item>
+        <item>14-16</item>
+        <item>16+</item>
+    </string-array>
+    <string-array name="filter_mechanic_array">
+        <item>Hand Management</item>
+        <item>Secret Unit Deployment</item>
+        <item>Variable Play Powers</item>
+        <item>Drafting</item>
+        <item>Engine Building</item>
+        <item>Worker Placement</item>
+    </string-array>
+    <string-array name="filter_category_array">
+        <item>Bluffing</item>
+        <item>Card Game</item>
+        <item>Science Fiction</item>
+        <item>Economic</item>
+        <item>Simulation</item>
+    </string-array>
+    <string-array name="filter_rating_array">
+        <item>3 or less</item>
+        <item>4+</item>
+        <item>5+</item>
+        <item>6+</item>
+        <item>7+</item>
+        <item>8+</item>
+        <item>9+</item>
+        <item>10</item>
+    </string-array>
 
 </resources>
