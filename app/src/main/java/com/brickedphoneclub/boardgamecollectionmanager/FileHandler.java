@@ -89,7 +89,7 @@ public class FileHandler {
 
         try {
 
-            URL url = new URL("https://boardgamegeek.com/xmlapi2/collection?username="+username);
+            URL url = new URL("https://boardgamegeek.com/xmlapi2/collection?username="+username+"&own=1");
             DFT.execute(url);
 
         } catch (MalformedURLException mue) {
@@ -142,39 +142,55 @@ public class FileHandler {
     private class DownloadFilesTask extends AsyncTask<URL, Integer, Long> {
 
         protected Long doInBackground(URL... urls) {
+            boolean connected = false;
 
             Log.v("DownloadFilesTask", "Attempting to download collection...");
 
             try {
-                HttpURLConnection connection = (HttpURLConnection)urls[0].openConnection();
-                connection.setReadTimeout(5000 /* milliseconds */);
-                connection.setConnectTimeout(6000 /* milliseconds */);
-                connection.setRequestMethod("GET");
-                connection.connect();
-                InputStream is = connection.getInputStream();
+                HttpURLConnection connection;
+                int code = -1;
 
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                for (int retry = 0; retry <= 8 && !connected; retry++) {
+                    if (retry > 0) {
+                        Log.i("XML Details Parsing", "Attempting connection retry");
+                        Thread.sleep(200);  //200 milliseconds
+                    }
+                    connection = (HttpURLConnection)urls[0].openConnection();
+                    connection.setReadTimeout(5000 /* milliseconds */);
+                    connection.setConnectTimeout(6000 /* milliseconds */);
+                    connection.setRequestMethod("GET");
+                    connection.connect();
+                    code = connection.getResponseCode();
+                    if (code == HttpURLConnection.HTTP_OK) {
+                        connected = true;
+                        InputStream is = connection.getInputStream();
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-                Writer writer = new FileWriter(collection_file);
-                BufferedWriter bw = new BufferedWriter(writer);
+                        Writer writer = new FileWriter(collection_file);
+                        BufferedWriter bw = new BufferedWriter(writer);
 
-                String line;
-                while ((line = br.readLine()) != null) {
-                    bw.write(line);
-                    bw.newLine();
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            bw.write(line);
+                            bw.newLine();
+                        }
+
+                        br.close();
+                        bw.close();
+
+                        Reader reader = new FileReader(collection_file);
+                        br = new BufferedReader(reader);
+
+                        while ((line = br.readLine()) != null) {
+                            //Log.v("Cached file content", line);     //sanity check
+                        }
+
+                        br.close();
+
+                        connection.disconnect();
+                        break;
+                    }
                 }
-
-                br.close();
-                bw.close();
-
-                Reader reader = new FileReader(collection_file);
-                br = new BufferedReader(reader);
-
-                while ((line = br.readLine()) != null) {
-                    //Log.v("Cached file content", line);     //sanity check
-                }
-
-                br.close();
 
             } catch (IOException ioe) {
                 Log.e("XML Downloader", "io error", ioe);
