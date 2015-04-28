@@ -34,9 +34,9 @@ public class LoginActivity extends Activity {
                 final EditText editUserName = (EditText) findViewById(R.id.login_name_field);
                 String textUserName = editUserName.getText().toString();
                 Log.d("USERNAME", "User is:" + textUserName);
-                //LoginActivity.this.finish() // add this to finish it.
 
-                fh.setUser("brickedphoneclub");
+                fh.setUser(textUserName);
+                LoginActivity.this.finish();
             }
         });
 

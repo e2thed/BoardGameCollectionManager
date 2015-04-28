@@ -37,6 +37,17 @@ public class MainCollectionActivity extends ListActivity {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        BoardGameManager bgm = BoardGameManager.getInstance(this);
+        GameAdapter ga = new GameAdapter(this,R.layout.game_item, bgm.getBgList());
+        ga.notifyDataSetChanged();
+        setListAdapter(ga);
+        Log.d("On Resume", "The number of boardgames in the collection is "+bgm.getCollectionSize());
+    }
+
+
 
 
     @Override
@@ -81,6 +92,7 @@ public class MainCollectionActivity extends ListActivity {
         }else if(id == R.id.action_search){
             return true;
         }else if(id == R.id.action_refresh){
+            this.onResume();
             return true;
         }else if(id == R.id.action_record){
             return true;
@@ -109,6 +121,13 @@ public class MainCollectionActivity extends ListActivity {
         startActivity(intent);
     }
 
+   class ListComparator implements Comparator<BoardGame> {
+        @Override
+        public int compare(BoardGame lhs, BoardGame rhs) {
+            return lhs.getName().compareTo(rhs.getName());
+            //return 0;
+        }
+    }
 
    class GameAdapter extends ArrayAdapter<BoardGame> {
 
@@ -145,11 +164,10 @@ public class MainCollectionActivity extends ListActivity {
 
             ImageView imgView_game = (ImageView)view.findViewById(R.id.img_game);
 
-            AsyncTask<String, Void, Bitmap> thumbNail = new DownloadImageTask(imgView_game).execute("http://" + bGame.getThumbnail());
+            AsyncTask<String, Void, Bitmap> thumbNail = new DownloadImageTask(imgView_game).execute("http:" + bGame.getThumbnail());
 
             return view;
         }
-
    }
 
   @Override
@@ -160,9 +178,9 @@ public class MainCollectionActivity extends ListActivity {
                 activeSortOptions = data.getStringArrayExtra("soptions");
                 Log.i("Sort Options Passed:", activeSortOptions[0] + "/" + activeSortOptions[1] + "/" + activeSortOptions[2]);
                 BoardGameManager bgmSort = BoardGameManager.getInstance(this);
-                Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[0].trim()));
-                Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[1].trim()));
-                Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[2].trim()));
+                //Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[0].trim()));
+                //Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[1].trim()));
+                //Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[2].trim()));
                 setListAdapter(new GameAdapter(this, R.layout.game_item, bgmSort.getBgList()));
             }
         }
