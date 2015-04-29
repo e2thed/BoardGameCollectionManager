@@ -23,7 +23,7 @@ import java.util.Collections;
 
 public class MainCollectionActivity extends ListActivity {
 
-    public String[] activeSortOptions = new String[3];
+    public static String[] activeSortOptions = new String[3];
 
 
     @Override
@@ -121,13 +121,13 @@ public class MainCollectionActivity extends ListActivity {
         startActivity(intent);
     }
 
-   class ListComparator implements Comparator<BoardGame> {
+ /*  class ListComparator implements Comparator<BoardGame> {
         @Override
         public int compare(BoardGame lhs, BoardGame rhs) {
             return lhs.getName().compareTo(rhs.getName());
             //return 0;
         }
-    }
+    }*/
 
    class GameAdapter extends ArrayAdapter<BoardGame> {
 
@@ -144,6 +144,11 @@ public class MainCollectionActivity extends ListActivity {
        @Override
        public BoardGame getItem(int position) {
            return super.getItem(position);
+       }
+
+       @Override
+       public void notifyDataSetChanged() {
+           super.notifyDataSetChanged();
        }
 
        @Override
@@ -175,13 +180,17 @@ public class MainCollectionActivity extends ListActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
+
                 activeSortOptions = data.getStringArrayExtra("soptions");
                 Log.i("Sort Options Passed:", activeSortOptions[0] + "/" + activeSortOptions[1] + "/" + activeSortOptions[2]);
                 BoardGameManager bgmSort = BoardGameManager.getInstance(this);
-                //Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[0].trim()));
-                //Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[1].trim()));
-                //Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[2].trim()));
-                setListAdapter(new GameAdapter(this, R.layout.game_item, bgmSort.getBgList()));
+                Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[0].trim()));
+                Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[1].trim()));
+                Collections.sort(bgmSort.getBgList(), new ListComparator(activeSortOptions[2].trim()));
+                GameAdapter newGA = new GameAdapter(this, R.layout.game_item, bgmSort.getBgList());
+                setListAdapter(newGA);
+                newGA.notifyDataSetChanged();
+
             }
         }
     }

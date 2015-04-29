@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 
@@ -20,6 +22,9 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
     public static String selectedName, selectedRating, selectedYearPublished = null;
     public String[] sortOptionsSelected = new String[3];
     public static String activeSortName, activeSortRating, activeSortYrPub = null;
+    private RadioGroup radioSortGroup;
+    private RadioButton radioSortButton, radioSortNameButton, radioSortRatingButton, radioSortYearPubButton;
+    private int selectedRadioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +38,23 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
 
         if (!(activeSortBundle == null) && !(activeSortBundle.isEmpty())) {
             sortOptionsSelected = activeSortBundle.getStringArray("asoptions");
-            activeSortName = sortOptionsSelected[0];
-            activeSortRating = sortOptionsSelected[1];
-            activeSortYrPub = sortOptionsSelected[2];
-        } else {
-            activeSortName = "A-Z";
-            activeSortRating = "Highest First";
-            activeSortYrPub = "Latest First";
+
+            if((sortOptionsSelected[0] == null) && (sortOptionsSelected[2] == null) && (sortOptionsSelected[2] == null))
+            {
+                System.out.println("Default");
+                activeSortName = "A-Z";
+                activeSortRating = "None";
+                activeSortYrPub = "None";
+            }
+            else {
+                activeSortName = sortOptionsSelected[0];
+                activeSortRating = sortOptionsSelected[1];
+                activeSortYrPub = sortOptionsSelected[2];
+                System.out.println("User Selection");
+            }
         }
 
-
+        System.out.println(activeSortName+" @ "+activeSortRating+" @ "+activeSortYrPub );
 
         //Populate spinners
 
@@ -51,7 +63,6 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
         spinner_yrpub = (Spinner) findViewById(R.id.spnr_sortbyyear);
         final Button buttonApply = (Button) findViewById(R.id.btn_sortapply);
         final Button buttonCancel = (Button) findViewById(R.id.btn_sortcancel);
-
 
         // Create an ArrayAdapter of name spinner using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter_name = ArrayAdapter.createFromResource(this,
@@ -81,8 +92,41 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
         spinner_yrpub.setSelection(((ArrayAdapter<String>)spinner_yrpub.getAdapter()).getPosition(activeSortYrPub));
         spinner_yrpub.setOnItemSelectedListener(this);
 
+        // Update Radio Button Status
 
-        System.out.println(selectedName+" / "+selectedRating+" / "+selectedYearPublished );
+        radioSortGroup = (RadioGroup) findViewById(R.id.radioSort);
+        radioSortNameButton = (RadioButton) findViewById(R.id.radioByName);
+        radioSortRatingButton = (RadioButton) findViewById(R.id.radioByrating);
+        radioSortYearPubButton = (RadioButton) findViewById(R.id.radioByYrpub);
+
+        radioSortGroup.clearCheck();
+        if (!(activeSortName.equals("None")))
+        {
+            radioSortGroup.check(R.id.radioByName);
+            radioSortNameButton.setChecked(true);
+            spinner_name.setEnabled(true);
+            spinner_yrpub.setEnabled(false);
+            spinner_rating.setEnabled(false);
+        }
+        else if ((!activeSortRating.equals("None")))
+        {
+            radioSortGroup.check(R.id.radioByrating);
+            radioSortRatingButton.setChecked(true);
+            spinner_name.setEnabled(false);
+            spinner_yrpub.setEnabled(false);
+            spinner_rating.setEnabled(true);
+        }
+        else if ((!activeSortYrPub.equals("None")))
+        {
+
+            radioSortGroup.check(R.id.radioByYrpub);
+            radioSortYearPubButton.setChecked(true);
+            spinner_name.setEnabled(false);
+            spinner_yrpub.setEnabled(true);
+            spinner_rating.setEnabled(false);
+        }
+
+        //Button Listeners
 
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,28 +182,58 @@ public class SortActivity extends Activity implements AdapterView.OnItemSelected
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-       /* switch(parent.getId()){
+       switch(parent.getId()){
             case R.id.spnr_sortbyname :
-
-                //Your Action Here.
+                selectedName  = spinner_name.getSelectedItem().toString();
+                selectedRating = "None";
+                selectedYearPublished = "None";
                 break;
             case R.id.spnr_sortbyrating :
-
+                selectedRating  = spinner_rating.getSelectedItem().toString();
+                selectedName = "None";
+                selectedYearPublished = "None";
                 break;
             case R.id.spnr_sortbyyear :
-
+                selectedYearPublished  = spinner_yrpub.getSelectedItem().toString();
+                selectedRating = "None";
+                selectedName = "None";
                 break;
-        }*/
-        selectedName  = spinner_name.getSelectedItem().toString();
-        selectedRating  = spinner_rating.getSelectedItem().toString();
-        selectedYearPublished  = spinner_yrpub.getSelectedItem().toString();
-        System.out.println(selectedName+" / "+selectedRating+" / "+selectedYearPublished );
+        }
+
+        //System.out.println(selectedName+" - "+selectedRating+" - "+selectedYearPublished );
 
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radioByName:
+                if (checked)
+                    spinner_name.setEnabled(true);
+                    spinner_yrpub.setEnabled(false);
+                    spinner_rating.setEnabled(false);
+                    break;
+            case R.id.radioByrating:
+                if (checked)
+                    spinner_name.setEnabled(false);
+                    spinner_yrpub.setEnabled(false);
+                    spinner_rating.setEnabled(true);
+                    break;
+            case R.id.radioByYrpub:
+                if (checked)
+                    spinner_name.setEnabled(false);
+                    spinner_yrpub.setEnabled(true);
+                    spinner_rating.setEnabled(false);
+                    break;
+        }
     }
 }
 

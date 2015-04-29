@@ -13,10 +13,13 @@
     <string name="action_refresh">Refresh</string>
     <string name="action_record">Record Game Play</string>
     <string name="title_activity_board_game_detail">Game Details</string>
-    <string name="title_activity_sort">Sort</string>
+    <string name="title_activity_sort">Sort By</string>
     <string name="title_activity_random_game">Random Game</string>
     <string name="filter_cancel">Cancel</string>
     <string name="filter_apply">Apply</string>
+    <string name="sort_byname">Name</string>
+    <string name="sort_byrating">Rating</string>
+    <string name="sort_byyrpub">Year Published</string>
     <string-array name="alpha_array">
         <item>A-Z</item>
         <item>Z-A</item>
