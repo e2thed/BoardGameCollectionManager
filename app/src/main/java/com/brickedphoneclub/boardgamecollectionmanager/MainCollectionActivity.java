@@ -90,6 +90,8 @@ public class MainCollectionActivity extends ListActivity {
             startActivity(intent);
             return true;
         }else if(id == R.id.action_search){
+            Intent searchIntent = new Intent(this, SearchActivity.class);
+            startActivity(searchIntent);
             return true;
         }else if(id == R.id.action_refresh){
             this.onResume();
@@ -121,13 +123,6 @@ public class MainCollectionActivity extends ListActivity {
         startActivity(intent);
     }
 
- /*  class ListComparator implements Comparator<BoardGame> {
-        @Override
-        public int compare(BoardGame lhs, BoardGame rhs) {
-            return lhs.getName().compareTo(rhs.getName());
-            //return 0;
-        }
-    }*/
 
    class GameAdapter extends ArrayAdapter<BoardGame> {
 
