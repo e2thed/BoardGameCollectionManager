@@ -10,6 +10,7 @@ public class Filter {
 
     private String numPlayers, playTime, ageGroup, mechanic, category, rating;
     private Context context;
+    private boolean activeFilter;
 
     public static Filter getInstance(Context context) {
         if (ourInstance == null) {
@@ -25,6 +26,7 @@ public class Filter {
         this.mechanic = "";
         this.category = "";
         this.rating = "";
+        this.activeFilter = false;
     }
 
 
@@ -74,6 +76,31 @@ public class Filter {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public boolean checkActiveFilter() {
+        if(numPlayers != "") {
+            activeFilter = true;
+            return activeFilter;
+        } else if (playTime != "") {
+            activeFilter = true;
+            return activeFilter;
+        } else if (ageGroup != "") {
+            activeFilter = true;
+            return activeFilter;
+        } else if (mechanic != "") {
+            activeFilter = true;
+            return activeFilter;
+        } else if (category != "") {
+            activeFilter = true;
+            return activeFilter;
+        } else if (rating != "") {
+            activeFilter = true;
+            return activeFilter;
+        } else {
+            activeFilter = false;
+            return activeFilter;
+        }
     }
 
 }

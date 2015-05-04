@@ -45,6 +45,12 @@ public class MainCollectionActivity extends ListActivity {
         ga.notifyDataSetChanged();
         setListAdapter(ga);
         Log.d("On Resume", "The number of boardgames in the collection is "+bgm.getCollectionSize());
+
+        Filter filter = Filter.getInstance(this);
+        //boolean isActive = filter.checkActiveFilter();
+        if(filter.checkActiveFilter() == true) {
+            Log.i("RESUME", "The number of boardgames in the collection is "+bgm.getCollectionSize());
+        }
     }
 
 

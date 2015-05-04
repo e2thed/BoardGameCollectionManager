@@ -25,7 +25,12 @@ public class BoardGameManager {
     }
 
     public void addBoardGame(BoardGame bg) {
-        bgList.add(bg);
+        //GAG - 05/02/15
+        //Added in check if game is already in the collection it doesn't get added again.
+        //This is probably not very good performance, I'm guessing some better way to handle this.
+        if(getBoardGameById(bg.getObjectId()) == null) {
+            bgList.add(bg);
+        }
     }
 
     public void deleteBoardGame(BoardGame bg) {

@@ -1,7 +1,7 @@
 package com.brickedphoneclub.boardgamecollectionmanager;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,17 +10,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 
 
-public class FilterActivity extends Activity implements AdapterView.OnItemSelectedListener {
+public class FilterActivity extends Activity {
 
     private Map filters = new HashMap();
-    private static String filterNumOfPlayers, filterPlayTime, filterAgeGroup, filterMechanic, filterCategory, filterRating;
     private Spinner spnNumPlayers, spnPlayTime, spnAgeGroup, spnMechanic, spnCategory, spnRating;
     private Filter filter = Filter.getInstance(this);
 
@@ -30,8 +31,6 @@ public class FilterActivity extends Activity implements AdapterView.OnItemSelect
         setContentView(R.layout.activity_filter);
 
         BoardGameManager bgm = BoardGameManager.getInstance(this);
-        bgm.getNumOfPlayerFilterOptions();
-
 
         spnNumPlayers = (Spinner) findViewById(R.id.spn_filterNumPlayers);
         spnPlayTime = (Spinner) findViewById(R.id.spn_filterPlayTime);
@@ -40,23 +39,36 @@ public class FilterActivity extends Activity implements AdapterView.OnItemSelect
         spnCategory = (Spinner) findViewById(R.id.spn_filterCategory);
         spnRating = (Spinner) findViewById(R.id.spn_filterRating);
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.filter_player_count_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spnNumPlayers.setAdapter(adapter);
-        // set value for name spinner
-        spnNumPlayers.setSelection(((ArrayAdapter<String>) spnNumPlayers.getAdapter()).getPosition(filterNumOfPlayers));
-        // listener for change in selection
-        //spnNumPlayers.setOnItemSelectedListener(this);
+        Resources res = getResources();
 
+        ArrayList players = new ArrayList(Arrays.asList(res.getStringArray(R.array.filter_player_count_array)));
+        initSpinner(res, spnNumPlayers, players);
+
+        ArrayList time = new ArrayList(Arrays.asList(res.getStringArray(R.array.filter_play_time_array)));
+        initSpinner(res, spnPlayTime, time);
+
+        ArrayList age = new ArrayList(Arrays.asList(res.getStringArray(R.array.filter_age_group_array)));
+        initSpinner(res, spnAgeGroup, age);
+
+        ArrayList cat = new ArrayList(Arrays.asList(res.getStringArray(R.array.filter_category_array)));
+        initSpinner(res, spnCategory, cat);
+
+        ArrayList mech = new ArrayList(Arrays.asList(res.getStringArray(R.array.filter_mechanic_array)));
+        initSpinner(res, spnMechanic, mech);
+
+        ArrayList rating = new ArrayList(Arrays.asList(res.getStringArray(R.array.filter_rating_array)));
+        initSpinner(res, spnRating, rating);
+
+        //Number of Players
         spnNumPlayers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                filter.setNumPlayers(spnNumPlayers.getSelectedItem().toString());
-                filterNumOfPlayers = spnNumPlayers.getSelectedItem().toString();
-                Log.i("SPINNER", "Num of Players: " + filterNumOfPlayers);
+                if(position != 0) {
+                    filter.setNumPlayers(spnNumPlayers.getSelectedItem().toString());
+                    Log.i("SPINNER", "Num of Players: " + filter.getNumPlayers() + " pos " + position);
+                } else {
+                    filter.setNumPlayers("");
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -64,19 +76,16 @@ public class FilterActivity extends Activity implements AdapterView.OnItemSelect
             }
         });
 
-
         //Play Time
-        ArrayAdapter<CharSequence> aPlay = ArrayAdapter.createFromResource(this, R.array.filter_play_time_array, android.R.layout.simple_spinner_item);
-        aPlay.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnPlayTime.setAdapter(aPlay);
-        spnPlayTime.setSelection(((ArrayAdapter<String>) spnPlayTime.getAdapter()).getPosition(filterPlayTime));
-        //spnPlayTime.setOnItemSelectedListener(this);
         spnPlayTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                filter.setPlayTime(spnPlayTime.getSelectedItem().toString());
-                filterPlayTime = spnPlayTime.getSelectedItem().toString();
-                Log.i("SPINNER", "Play Time: " + filterPlayTime);
+                if(position != 0) {
+                    filter.setPlayTime(spnPlayTime.getSelectedItem().toString());
+                    Log.i("SPINNER", "Play Time: " + filter.getPlayTime());
+                } else {
+                    filter.setPlayTime("");
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -85,17 +94,16 @@ public class FilterActivity extends Activity implements AdapterView.OnItemSelect
         });
 
         //Age Group
-        ArrayAdapter<CharSequence> aAge = ArrayAdapter.createFromResource(this, R.array.filter_age_group_array, android.R.layout.simple_spinner_item);
-        aAge.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnAgeGroup.setAdapter(aAge);
-        spnAgeGroup.setSelection(((ArrayAdapter<String>) spnAgeGroup.getAdapter()).getPosition(filterAgeGroup));
-        //spnAgeGroup.setOnItemSelectedListener(this);
         spnAgeGroup.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                filter.setAgeGroup(spnAgeGroup.getSelectedItem().toString());
-                filterAgeGroup = spnAgeGroup.getSelectedItem().toString();
-                Log.i("SPINNER", "Age Group: " + filterAgeGroup);
+                if(position != 0) {
+                    filter.setAgeGroup(spnAgeGroup.getSelectedItem().toString());
+                    Log.i("SPINNER", "Age Group: " + filter.getAgeGroup());
+                } else {
+                    filter.setAgeGroup("");
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -105,17 +113,15 @@ public class FilterActivity extends Activity implements AdapterView.OnItemSelect
 
 
         //Category
-        ArrayAdapter<CharSequence> aCat = ArrayAdapter.createFromResource(this, R.array.filter_category_array, android.R.layout.simple_spinner_item);
-        aCat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnCategory.setAdapter(aCat);
-        spnCategory.setSelection(((ArrayAdapter<String>) spnCategory.getAdapter()).getPosition(filterCategory));
-        //spnCategory.setOnItemSelectedListener(this);
         spnCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                filter.setCategory(spnCategory.getSelectedItem().toString());
-                filterCategory = spnCategory.getSelectedItem().toString();
-                Log.i("SPINNER", "Category: " + filterCategory);
+                if(position != 0) {
+                    filter.setCategory(spnCategory.getSelectedItem().toString());
+                    Log.i("SPINNER", "Category: " + filter.getCategory());
+                } else {
+                    filter.setCategory("");
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -123,18 +129,17 @@ public class FilterActivity extends Activity implements AdapterView.OnItemSelect
             }
         });
 
+
         //Mechanic
-        ArrayAdapter<CharSequence> aMec = ArrayAdapter.createFromResource(this, R.array.filter_mechanic_array, android.R.layout.simple_spinner_item);
-        aMec.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnMechanic.setAdapter(aMec);
-        spnMechanic.setSelection(((ArrayAdapter<String>) spnMechanic.getAdapter()).getPosition(filterMechanic));
-        //spnMechanic.setOnItemSelectedListener(this);
         spnMechanic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                filter.setMechanic(spnMechanic.getSelectedItem().toString());
-                filterMechanic = spnMechanic.getSelectedItem().toString();
-                Log.i("SPINNER", "Mechanic: " + filterMechanic);
+                if (position != 0) {
+                    filter.setMechanic(spnMechanic.getSelectedItem().toString());
+                    Log.i("SPINNER", "Mechanic: " + filter.getMechanic());
+                } else {
+                    filter.setMechanic("");
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -142,29 +147,23 @@ public class FilterActivity extends Activity implements AdapterView.OnItemSelect
             }
         });
 
+
         //Rating
-        ArrayAdapter<CharSequence> aRate = ArrayAdapter.createFromResource(this, R.array.filter_rating_array, android.R.layout.simple_spinner_item);
-        aRate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnRating.setAdapter(aRate);
-        spnRating.setSelection(((ArrayAdapter<String>) spnRating.getAdapter()).getPosition(filterRating));
-        //spnRating.setOnItemSelectedListener(this);
         spnRating.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                filter.setRating(spnRating.getSelectedItem().toString());
-                filterRating = spnRating.getSelectedItem().toString();
-                Log.i("SPINNER", "Rating: " + filterRating);
+                if (position != 0) {
+                    filter.setRating(spnRating.getSelectedItem().toString());
+                    Log.i("SPINNER", "Rating: " + filter.getRating());
+                } else {
+                    filter.setRating("");
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 filter.setRating("");
             }
         });
-        /*private void setSpinner(Spinner s, String str, ArrayAdapter<CharSequence> adapter) {
-            s.setAdapter(adapter);
-            s.setSelection(((ArrayAdapter<String>) s.getAdapter()).getPosition(str));
-            s.setOnItemSelectedListener(this);
-        }*/
 
         //Cancel button, e.g. cancel out of any new applied filters.
         final Button btn_cancel = (Button) findViewById(R.id.btn_filterCancel);
@@ -182,24 +181,45 @@ public class FilterActivity extends Activity implements AdapterView.OnItemSelect
                 finish();
             }
         });
+
+        final Button btn_numPlayersClear = (Button) findViewById(R.id.btn_numPlayersClear);
+        btn_numPlayersClear.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                spnNumPlayers.setSelection(0);
+                //spnNumPlayers.setSelection(getIndex(spnNumPlayers, "[Select one]"));
+                filter.setNumPlayers("");
+            }
+        });
+
+
     }
 
+    /*
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         // An item was selected. You can retrieve the selected item using
-        parent.getItemAtPosition(pos);
-        //filterNumOfPlayers = spnNumPlayers.getSelectedItem().toString();
-        Log.i("SPINNER", "Num of Players: " + filterNumOfPlayers);
-        //filterPlayTime = spnPlayTime.getSelectedItem().toString();
-        Log.i("SPINNER", "Play Time: " + filterPlayTime);
-        //filterAgeGroup = spnAgeGroup.getSelectedItem().toString();
-        Log.i("SPINNER", "Age Group: " + filterAgeGroup);
-        //filterCategory = spnCategory.getSelectedItem().toString();
-        Log.i("SPINNER", "Category: " + filterCategory);
-        //filterMechanic = spnMechanic.getSelectedItem().toString();
-        Log.i("SPINNER", "Mechanic: " + filterMechanic);
-        //filterRating = spnRating.getSelectedItem().toString();
-        Log.i("SPINNER", "Rating: " + filterRating);
+        //parent.getItemAtPosition(pos);
+        Log.i("SPINNER", "Num of Players: " + filter.getNumPlayers());
+        Log.i("SPINNER", "Play Time: " + filter.getPlayTime());
+        Log.i("SPINNER", "Age Group: " + filter.getAgeGroup());
+        Log.i("SPINNER", "Category: " + filter.getCategory());
+        Log.i("SPINNER", "Mechanic: " + filter.getMechanic());
+        Log.i("SPINNER", "Rating: " + filter.getRating());
     }
+    */
+
+    //Little function to get the index of the passed String for the spinner.
+    private int getIndex(Spinner spinner, String myString){
+        int index = 0;
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(myString)){
+                index = i;
+            }
+        }
+        Log.i("INDEX", "Index for: " + myString + " is " + index);
+        return index;
+    }
+
+
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
@@ -227,5 +247,15 @@ public class FilterActivity extends Activity implements AdapterView.OnItemSelect
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void initSpinner(Resources res, Spinner spin, ArrayList list) {
+        //Create the adapter and pass it the list of items to populate
+        ArrayAdapter<ArrayList> adapter = new ArrayAdapter<ArrayList>(this,android.R.layout.simple_spinner_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(adapter);
+        //Set the initial selection to the first element.
+        spin.setSelection(0);
+    }
+
 
 }
