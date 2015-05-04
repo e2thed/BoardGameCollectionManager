@@ -24,7 +24,7 @@ import java.util.Collections;
 public class MainCollectionActivity extends ListActivity {
 
     public static String[] activeSortOptions = new String[3];
-
+    public String activeSearch = new String();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,6 @@ public class MainCollectionActivity extends ListActivity {
         setContentView(R.layout.activity_main_collection);
         BoardGameManager bgm = BoardGameManager.getInstance(this);
         // initialize the list view
-        //Collections.sort(bgm.getBgList(), new ListComparator());
         setListAdapter(new GameAdapter(this, R.layout.game_item, bgm.getBgList()));
 
     }
@@ -89,7 +88,7 @@ public class MainCollectionActivity extends ListActivity {
             randomBundle.putInt("CollectionSize", 5);
             Intent randomIntent = new Intent(this, RandomGameActivity.class);
             randomIntent.putExtras(randomBundle);
-            startActivityForResult(randomIntent, 1);
+            startActivityForResult(randomIntent, 3);
             return true;
         }else if(id == R.id.action_filter){
             Intent intent = new Intent(this, FilterActivity.class);
@@ -97,7 +96,7 @@ public class MainCollectionActivity extends ListActivity {
             return true;
         }else if(id == R.id.action_search){
             Intent searchIntent = new Intent(this, SearchActivity.class);
-            startActivity(searchIntent);
+            startActivityForResult(searchIntent, 2);
             return true;
         }else if(id == R.id.action_refresh){
             this.onResume();
@@ -153,6 +152,11 @@ public class MainCollectionActivity extends ListActivity {
        }
 
        @Override
+       public android.widget.Filter getFilter() {
+           return super.getFilter();
+       }
+
+       @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view;
             if(convertView == null) {
@@ -191,6 +195,17 @@ public class MainCollectionActivity extends ListActivity {
                 GameAdapter newGA = new GameAdapter(this, R.layout.game_item, bgmSort.getBgList());
                 setListAdapter(newGA);
                 newGA.notifyDataSetChanged();
+
+            }
+        }
+      else if (requestCode == 2){
+            if(resultCode == RESULT_OK){
+                activeSearch = data.getStringExtra("searchthis").trim();
+                Log.i("Active Search String:", activeSearch);
+                BoardGameManager bgmSearch = BoardGameManager.getInstance(this);
+                GameAdapter searchGA = new GameAdapter(this, R.layout.game_item, bgmSearch.getBgList());
+                searchGA.getFilter().filter(activeSearch);
+                setListAdapter(searchGA);
 
             }
         }
