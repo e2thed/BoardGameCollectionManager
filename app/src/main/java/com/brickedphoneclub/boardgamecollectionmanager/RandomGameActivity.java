@@ -39,7 +39,9 @@ public class RandomGameActivity extends Activity {
                
                 // TODO Auto-generated method stub
 
-                textGenerateNumber.setText(String.valueOf(myRandom.nextInt(4)));
+                textGenerateNumber.setText(String.valueOf(myRandom.nextInt(4)+1));
+
+
             }});
 
     }
