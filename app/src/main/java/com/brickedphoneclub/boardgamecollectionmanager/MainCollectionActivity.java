@@ -40,20 +40,21 @@ public class MainCollectionActivity extends ListActivity {
     public void onResume() {
         super.onResume();
         BoardGameManager bgm = BoardGameManager.getInstance(this);
-        GameAdapter ga = new GameAdapter(this,R.layout.game_item, bgm.getBgList());
-        ga.notifyDataSetChanged();
-        setListAdapter(ga);
-        Log.d("On Resume", "The number of boardgames in the collection is "+bgm.getCollectionSize());
-
         Filter filter = Filter.getInstance(this);
-        //boolean isActive = filter.checkActiveFilter();
+
+        Log.d("ON RESUME", "The number of boardgames in the collection is "+bgm.getCollectionSize());
+        //Check to see if any filters are active and if so filter the list.
         if(filter.checkActiveFilter() == true) {
-            Log.i("RESUME", "The number of boardgames in the collection is "+bgm.getCollectionSize());
+            Log.i("RESUME FILTER TRUE", filter.toString());
+            GameAdapter filterAdapter = new GameAdapter(this,R.layout.game_item, filter.applyFilters());
+            filterAdapter.notifyDataSetChanged();
+            setListAdapter(filterAdapter);
+        } else {
+            GameAdapter ga = new GameAdapter(this,R.layout.game_item, bgm.getBgList());
+            ga.notifyDataSetChanged();
+            setListAdapter(ga);
         }
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

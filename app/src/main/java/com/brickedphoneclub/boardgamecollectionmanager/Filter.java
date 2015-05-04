@@ -1,6 +1,9 @@
 package com.brickedphoneclub.boardgamecollectionmanager;
 
 import android.content.Context;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 /**
  * Created by Giovanni Galasso on 4/28/2015.
@@ -9,8 +12,11 @@ public class Filter {
     private static Filter ourInstance = null;
 
     private String numPlayers, playTime, ageGroup, mechanic, category, rating;
-    private Context context;
     private boolean activeFilter;
+    private Context context;
+
+    private ArrayList<BoardGame> mainList = BoardGameManager.getInstance(context).getBgList();
+    private ArrayList<BoardGame> filterList = new ArrayList<>();
 
     public static Filter getInstance(Context context) {
         if (ourInstance == null) {
@@ -29,6 +35,29 @@ public class Filter {
         this.activeFilter = false;
     }
 
+    public ArrayList<BoardGame> getFilterList() {
+        return filterList;
+    }
+
+    public void setFilterList(ArrayList<BoardGame> filterList) {
+        this.filterList = filterList;
+    }
+
+    public ArrayList<BoardGame> getMainList() {
+        return mainList;
+    }
+
+    public void setMainList(ArrayList<BoardGame> mainList) {
+        this.mainList = mainList;
+    }
+
+    public boolean isActiveFilter() {
+        return activeFilter;
+    }
+
+    public void setActiveFilter(boolean activeFilter) {
+        this.activeFilter = activeFilter;
+    }
 
     public String getNumPlayers() {
         return numPlayers;
@@ -100,6 +129,42 @@ public class Filter {
         } else {
             activeFilter = false;
             return activeFilter;
+        }
+    }
+
+    public ArrayList<BoardGame> applyFilters() {
+        filterList.clear();
+        if(numPlayers != "") {
+            filterCollectionByPlayer();
+            Log.i("FILTER SIZE", "Size:" + filterList.size());
+        }
+
+        return filterList;
+    }
+
+    public String toString() {
+        return "Players: " + numPlayers + "\n" +
+               "Time: " + playTime + "\n" +
+               "Age: " + ageGroup + "\n" +
+               "Category: " + category + "\n" +
+               "Mechanic: " + mechanic + "\n" +
+               "Rating: " + rating + "\n";
+    }
+
+    public ArrayList<BoardGame> filterCollectionByPlayer() {
+        int playerCount = Integer.parseInt(numPlayers);
+        for (BoardGame game: mainList) {
+            //TODO: Need to check for 10+ and filter appropriately
+            if(game.getMinPlayers() <= playerCount && game.getMaxPlayers() >= playerCount) {
+                addGameToFilterList(game);
+            }
+        }
+        return filterList;
+    }
+
+    public void addGameToFilterList(BoardGame game) {
+        if(!filterList.contains(game)) {
+            filterList.add(game);
         }
     }
 
