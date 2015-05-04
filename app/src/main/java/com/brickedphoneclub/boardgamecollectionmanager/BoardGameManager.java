@@ -55,7 +55,7 @@ public class BoardGameManager {
         game1.setMinAge(10);
         String[] categories = {"Bluffing","Card Game", "Science Fiction", "Science Fiction", "Science Fiction", "Science Fiction", "Science Fiction", "Science Fiction"};
         game1.setBoardGameCategory(categories);
-        String[] mechanics = {"HandManagement","Secret Unit Deployment", "Variable Player Powers"};
+        String[] mechanics = {"Hand Management","Secret Unit Deployment", "Variable Player Powers"};
         game1.setBoardGameMechanic(mechanics);
 
         bgList.add(game1);

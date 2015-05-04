@@ -56,13 +56,13 @@
         <item>Select...</item>
         <item>15 minutes</item>
         <item>30</item>
-        <item>30-60</item>
+        <item>45</item>
         <item>60</item>
-        <item>60-90</item>
+        <item>75</item>
         <item>90</item>
-        <item>90-120</item>
+        <item>105</item>
         <item>120</item>
-        <item>120-180</item>
+        <item>150</item>
         <item>180+</item>
     </string-array>
     <string-array name="filter_age_group_array">
@@ -94,7 +94,7 @@
     </string-array>
     <string-array name="filter_rating_array">
         <item>Select...</item>
-        <item>3 or less</item>
+        <item>3+</item>
         <item>4+</item>
         <item>5+</item>
         <item>6+</item>
