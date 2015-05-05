@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Collections;
 
 
@@ -40,7 +39,7 @@ public class MainCollectionActivity extends ListActivity {
     public void onResume() {
         super.onResume();
         BoardGameManager bgm = BoardGameManager.getInstance(this);
-        Filter filter = Filter.getInstance(this);
+        BoardGameFilter filter = BoardGameFilter.getInstance(this);
 
         Log.d("ON RESUME", "The number of boardgames in the collection is "+bgm.getCollectionSize());
         //Check to see if any filters are active and if so filter the list.

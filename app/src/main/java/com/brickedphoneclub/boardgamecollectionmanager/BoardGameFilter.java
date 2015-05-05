@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
 /**
  * Created by Giovanni Galasso on 4/28/2015.
  */
-public class Filter {
-    private static Filter ourInstance = null;
+public class BoardGameFilter {
+    private static BoardGameFilter ourInstance = null;
 
     private String numPlayers, playTime, ageGroup, mechanic, category, rating;
     private boolean activeFilter;
@@ -20,14 +20,14 @@ public class Filter {
     private ArrayList<BoardGame> mainList = BoardGameManager.getInstance(context).getBgList();
     private ArrayList<BoardGame> filterList = new ArrayList<>();
 
-    public static Filter getInstance(Context context) {
+    public static BoardGameFilter getInstance(Context context) {
         if (ourInstance == null) {
-            ourInstance = new Filter(context);
+            ourInstance = new BoardGameFilter(context);
         }
         return ourInstance;
     }
 
-    private Filter(Context context) {
+    private BoardGameFilter(Context context) {
         this.numPlayers = "";
         this.playTime = "";
         this.ageGroup = "";
@@ -35,6 +35,7 @@ public class Filter {
         this.category = "";
         this.rating = "";
         this.activeFilter = false;
+
     }
 
     public ArrayList<BoardGame> getFilterList() {
@@ -110,54 +111,54 @@ public class Filter {
     }
 
     public boolean checkActiveFilter() {
-        if(numPlayers != "") {
+        if(numPlayers != null && !numPlayers.isEmpty()) {
             activeFilter = true;
-            return activeFilter;
-        } else if (playTime != "") {
+            return true;
+        } else if (playTime != null && !playTime.isEmpty()) {
             activeFilter = true;
-            return activeFilter;
-        } else if (ageGroup != "") {
+            return true;
+        } else if (ageGroup != null && !ageGroup.isEmpty()) {
             activeFilter = true;
-            return activeFilter;
-        } else if (mechanic != "") {
+            return true;
+        } else if (mechanic != null && !mechanic.isEmpty()) {
             activeFilter = true;
-            return activeFilter;
-        } else if (category != "") {
+            return true;
+        } else if (category != null && !category.isEmpty()) {
             activeFilter = true;
-            return activeFilter;
-        } else if (rating != "") {
+            return true;
+        } else if (rating != null && !rating.isEmpty()) {
             activeFilter = true;
-            return activeFilter;
+            return true;
         } else {
             activeFilter = false;
-            return activeFilter;
+            return false;
         }
     }
 
     public ArrayList<BoardGame> applyFilters() {
         filterList.clear();
         ArrayList<BoardGame> tempList = mainList;
-        if(numPlayers != "") {
+        if(!numPlayers.equals("")) {
             tempList = filterByPlayer(tempList);
             Log.i("FILTER SIZE", "Size:" + tempList.size());
         }
-        if(playTime != "") {
+        if(!playTime.equals("")) {
             tempList = filterByTime(tempList);
             Log.i("FILTER SIZE", "Size:" + tempList.size());
         }
-        if(ageGroup != "") {
+        if(!ageGroup.equals("")) {
             tempList = filterByAge(tempList);
             Log.i("FILTER SIZE", "Size:" + tempList.size());
         }
-        if(mechanic != "") {
+        if(!mechanic.equals("")) {
             tempList = filterByMechanic(tempList);
             Log.i("FILTER SIZE", "Size:" + tempList.size());
         }
-        if(category != "") {
+        if(!category.equals("")) {
             tempList = filterByCategory(tempList);
             Log.i("FILTER SIZE", "Size:" + tempList.size());
         }
-        if(rating != "") {
+        if(!rating.equals("")) {
             tempList = filterByRating(tempList);
             Log.i("FILTER SIZE", "Size:" + tempList.size());
         }
@@ -182,7 +183,7 @@ public class Filter {
         for (BoardGame game: list) {
             //Debug print out
             Log.i("FILTER PLAYERS", "Game: " + game.getName() + " Min players: " + game.getMinPlayers() +
-                    " Max players: " + game.getMaxPlayers() + "Target players: " + playerCount);
+                    " Max players: " + game.getMaxPlayers() + " Target players: " + playerCount);
             //TODO: Is there some case for 10+ that would differ from the below?
             if(game.getMinPlayers() <= playerCount && game.getMaxPlayers() >= playerCount) {
                 addGameToList(tempList, game);
@@ -198,7 +199,7 @@ public class Filter {
         for (BoardGame game: list) {
             //Debug print out
             Log.i("FILTER TIME", "Game: " + game.getName() + " Min Time: " + game.getMinPlayTime() +
-                    " Max Time: " + game.getMaxPlayTime() + "Target Time: " + time);
+                    " Max Time: " + game.getMaxPlayTime() + " Target Time: " + time);
             if((game.getMinPlayTime() <= time && game.getMaxPlayTime() >= time) || game.getMaxPlayTime() <= time) {
                 addGameToList(tempList, game);
             }
