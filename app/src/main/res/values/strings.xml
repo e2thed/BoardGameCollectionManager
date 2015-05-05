@@ -105,5 +105,7 @@
     </string-array>
 
     <string name="title_activity_search">Search By</string>
+    <string name="title_activity_record_play">RecordPlayActivity</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

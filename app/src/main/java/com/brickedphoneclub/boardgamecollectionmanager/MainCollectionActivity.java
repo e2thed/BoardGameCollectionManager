@@ -102,6 +102,8 @@ public class MainCollectionActivity extends ListActivity {
             this.onResume();
             return true;
         }else if(id == R.id.action_record){
+            Intent recordIntent = new Intent(this, MapsActivity.class);
+            startActivity(recordIntent);
             return true;
         }
 
