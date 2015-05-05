@@ -420,6 +420,10 @@ public class FileHandler {
 
         private void readBoardgameDetails(BoardGame BG, XmlPullParser parser) throws XmlPullParserException, IOException {
             int value = -1;
+            String temp;
+            ArrayList<String> ListOfMechanics = new ArrayList<String>();
+            ArrayList<String> ListOfCategories = new ArrayList<String>();
+
             parser.require(XmlPullParser.START_TAG, ns, "boardgame");
 
             while (parser.next() != XmlPullParser.END_TAG) {
@@ -428,27 +432,81 @@ public class FileHandler {
                 }
                 String name = parser.getName();
                 if (name.equals("minplayers")) {
-                    value = readTagValue(parser, "minplayers");
+                    value = readTagIntValue(parser, "minplayers");
                     BG.setMinPlayers(value);
                 } else if (name.equals("maxplayers")) {
-                    value = readTagValue(parser, "maxplayers");
+                    value = readTagIntValue(parser, "maxplayers");
                     BG.setMaxPlayers(value);
                 } else if (name.equals("minplaytime")) {
-                    value = readTagValue(parser, "minplaytime");
+                    value = readTagIntValue(parser, "minplaytime");
                     BG.setMinPlayTime(value);
                 } else if (name.equals("maxplaytime")) {
-                    value = readTagValue(parser, "maxplaytime");
+                    value = readTagIntValue(parser, "maxplaytime");
                     BG.setMaxPlayTime(value);
                 } else if (name.equals("age")) {
-                    value = readTagValue(parser, "age");
+                    value = readTagIntValue(parser, "age");
                     BG.setMinAge(value);
+                } else if (name.equals("boardgamemechanic")) {
+                    temp = readTagStringValue(parser, "boardgamemechanic");
+                    //Log.d("FOUND", "mechanic "+temp);
+                    ListOfMechanics.add(new String(temp));
+                } else if (name.equals("boardgamecategory")) {
+                    temp = readTagStringValue(parser, "boardgamecategory");
+                    //Log.d("FOUND", "category "+temp);
+                    ListOfCategories.add(new String(temp));
+                } else if (name.equals("statistics")) {
+                    float f_value = parseStatistics(parser, "bayesaverage");
+                    BG.setRating(f_value);
+                /*} else if (name.equals("average")) {
+                    float f_value = readTagFloatValue(parser, "average");
+                    BG.setRating(f_value);*/
                 } else {
                     skip(parser);
                 }
             }
+
+            //Once we're done parsing this boardgame
+            String[] array = new String[ListOfMechanics.size()];
+            ListOfMechanics.toArray(array);
+            BG.setBoardGameMechanic(array);
+            array = new String[ListOfCategories.size()];
+            ListOfCategories.toArray(array);
+            BG.setBoardGameCategory(array);
         }
 
+        //Parses the deeper nested statistics portion.
+        //This may appear a little confusing but it's just a nested while loop to access the deep rating info
+        private float parseStatistics(XmlPullParser parser, String tagname) throws XmlPullParserException, IOException  {
+            float value = -1;
+            String name;
 
+            parser.require(XmlPullParser.START_TAG, ns, "statistics");
+            while (parser.next() != XmlPullParser.END_TAG) {
+                if (parser.getEventType() != XmlPullParser.START_TAG) {
+                    continue;
+                }
+                name = parser.getName();
+                if (name.equals("ratings")) {
+                    parser.require(XmlPullParser.START_TAG, ns, "ratings");
+                    while (parser.next() != XmlPullParser.END_TAG) {
+                        if (parser.getEventType() != XmlPullParser.START_TAG) {
+                            continue;
+                        }
+                        name = parser.getName();
+                        if (name.equals("bayesaverage")) {
+                            value = readTagFloatValue(parser, "bayesaverage");
+                        } else {
+                            skip(parser);
+                        }
+
+                    }
+                } else {
+                    skip(parser);
+                }
+
+            }
+            return value;
+        }
 
         // For the tags <name>, objectid, <yearpublished>, <thumbnail>, etc, and extracts their text values.
         private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
@@ -501,9 +559,26 @@ public class FileHandler {
         }
 
         // Processes board game tags in the item. (used by the details parser)
-        private int readTagValue(XmlPullParser parser, String tagname) throws IOException, XmlPullParserException {
+        private int readTagIntValue(XmlPullParser parser, String tagname) throws IOException, XmlPullParserException {
             parser.require(XmlPullParser.START_TAG, ns, tagname);
             int value = Integer.parseInt(readText(parser));
+            parser.require(XmlPullParser.END_TAG, ns, tagname);
+            return value;
+        }
+
+        // Processes board game tags in the item. (used by the details parser)
+        private String readTagStringValue(XmlPullParser parser, String tagname) throws IOException, XmlPullParserException {
+            String value;
+            parser.require(XmlPullParser.START_TAG, ns, tagname);
+            value = readText(parser);
+            parser.require(XmlPullParser.END_TAG, ns, tagname);
+            return value;
+        }
+
+        // Processes board game tags in the item. (used by the details parser)
+        private float readTagFloatValue(XmlPullParser parser, String tagname) throws IOException, XmlPullParserException {
+            parser.require(XmlPullParser.START_TAG, ns, tagname);
+            float value = Float.parseFloat(readText(parser));
             parser.require(XmlPullParser.END_TAG, ns, tagname);
             return value;
         }

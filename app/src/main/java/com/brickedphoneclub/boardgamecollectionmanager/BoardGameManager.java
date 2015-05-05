@@ -47,7 +47,7 @@ public class BoardGameManager {
         bgList.add(new BoardGame(2, "Two", "2008", "", "//cf.geekdo-images.com/images/pic719935_t.jpg"));
         BoardGame game1 = new BoardGame(3, "Four", "2003", "", "//cf.geekdo-images.com/images/pic1324609_t.jpg");
         //Mockup Info to test details screen since we don't have XML working yet.
-        game1.setRating(7.1234);
+        game1.setRating(7.1234f);
         game1.setMinPlayers(2);
         game1.setMaxPlayers(4);
         game1.setMinPlayTime(60);

@@ -24,7 +24,7 @@ public class DownloadImageTask extends AsyncTask<MainCollectionActivity.GameAdap
 
         try {
             String imageURL = "http:" + BG.getThumbnail_URL();
-            Log.d("ImageLoader", "Loading "+imageURL);
+            //Log.d("ImageLoader", "Loading "+imageURL);
             InputStream in = (InputStream) new URL(imageURL).getContent();
             Bitmap bitmap = BitmapFactory.decodeStream(in);
             BG.setThumbnail(bitmap);

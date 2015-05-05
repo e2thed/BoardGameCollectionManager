@@ -2,6 +2,8 @@ package com.brickedphoneclub.boardgamecollectionmanager;
 
 import android.graphics.Bitmap;
 
+import java.util.Arrays;
+
 /**
  * Created by Giovanni Galasso on 4/18/2015.
  */
@@ -18,7 +20,7 @@ public class BoardGame {
     private String thumbnail_url;
     private String image_url;
     private int rank;
-    private double rating;
+    private float rating;
 
     private Bitmap thumbnail_image;
     private Bitmap coverart_image;
@@ -162,19 +164,19 @@ public class BoardGame {
     }
 
     public String[] getBoardGameCategory() {
-        return boardGameCategory;
+        return Arrays.copyOf(boardGameCategory, boardGameCategory.length);
     }
 
     public void setBoardGameCategory(String[] boardGameCategory) {
-        this.boardGameCategory = boardGameCategory;
+        this.boardGameCategory = Arrays.copyOf(boardGameCategory, boardGameCategory.length);
     }
 
     public String[] getBoardGameMechanic() {
-        return boardGameMechanic;
+        return Arrays.copyOf(boardGameMechanic, boardGameMechanic.length);
     }
 
     public void setBoardGameMechanic(String[] boardGameMechanic) {
-        this.boardGameMechanic = boardGameMechanic;
+        this.boardGameMechanic = Arrays.copyOf(boardGameMechanic, boardGameMechanic.length);
     }
 
     public int getRank() {
@@ -185,17 +187,17 @@ public class BoardGame {
         this.rank = rank;
     }
 
-    public double getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
     //Return the double rating value as a string for printing out and added to text fields.
     public String getRatingToString() {
-        return Double.toString(rating);
+        return Float.toString(rating);
     }
 
     //Return the range of number of players as a string. If the game only can be played with a specific number
