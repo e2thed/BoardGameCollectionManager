@@ -20,7 +20,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
+
 public class MainCollectionActivity extends ListActivity {
+
 
     public static String[] activeSortOptions = new String[3];
     public String activeSearch = new String();
@@ -62,6 +64,10 @@ public class MainCollectionActivity extends ListActivity {
         return true;
     }
 
+
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -84,8 +90,11 @@ public class MainCollectionActivity extends ListActivity {
             return true;
         }
         else if(id == R.id.action_random){
+
+            BoardGameManager bgm = BoardGameManager.getInstance(this);
+
             Bundle randomBundle = new Bundle();
-            randomBundle.putInt("CollectionSize", 5);
+            randomBundle.putInt("CollectionSize", bgm.getCollectionSize());
             Intent randomIntent = new Intent(this, RandomGameActivity.class);
             randomIntent.putExtras(randomBundle);
             startActivityForResult(randomIntent, 3);
