@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by Giovanni Galasso on 4/28/2015.
+ * Renamed to BoardGameFilter due to some conflict Vandana was having.
  */
 public class BoardGameFilter {
     private static BoardGameFilter ourInstance = null;

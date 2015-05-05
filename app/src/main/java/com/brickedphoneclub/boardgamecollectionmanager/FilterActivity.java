@@ -192,19 +192,6 @@ public class FilterActivity extends Activity {
 
     }
 
-    /*
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        //parent.getItemAtPosition(pos);
-        Log.i("SPINNER", "Num of Players: " + filter.getNumPlayers());
-        Log.i("SPINNER", "Play Time: " + filter.getPlayTime());
-        Log.i("SPINNER", "Age Group: " + filter.getAgeGroup());
-        Log.i("SPINNER", "Category: " + filter.getCategory());
-        Log.i("SPINNER", "Mechanic: " + filter.getMechanic());
-        Log.i("SPINNER", "Rating: " + filter.getRating());
-    }
-    */
-
     //Little function to get the index of the passed String for the spinner.
     private int getIndex(Spinner spinner, String myString){
         int index = 0;
