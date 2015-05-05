@@ -130,34 +130,34 @@ public class MainCollectionActivity extends ListActivity {
     }
 
 
-   class GameAdapter extends ArrayAdapter<BoardGame> {
+    class GameAdapter extends ArrayAdapter<BoardGame> {
 
         public GameAdapter(Context context, int resource, ArrayList<BoardGame> objects) {
             super(context, resource, objects);
         }
 
-       @Override
-       public int getCount() {
-           //Log.e("List Size", String.valueOf(super.getCount()));
-           return super.getCount();
-       }
+        @Override
+        public int getCount() {
+            //Log.e("List Size", String.valueOf(super.getCount()));
+            return super.getCount();
+        }
 
-       @Override
-       public BoardGame getItem(int position) {
-           return super.getItem(position);
-       }
+        @Override
+        public BoardGame getItem(int position) {
+            return super.getItem(position);
+        }
 
-       @Override
-       public void notifyDataSetChanged() {
-           super.notifyDataSetChanged();
-       }
+        @Override
+        public void notifyDataSetChanged() {
+            super.notifyDataSetChanged();
+        }
 
-       @Override
-       public android.widget.Filter getFilter() {
-           return super.getFilter();
-       }
+        @Override
+        public android.widget.Filter getFilter() {
+            return super.getFilter();
+        }
 
-       @Override
+        @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view;
             if(convertView == null) {
@@ -165,19 +165,34 @@ public class MainCollectionActivity extends ListActivity {
             } else {
                 view = convertView;
             }
-            BoardGame bGame = getItem(position);
+            BoardGame BG = getItem(position);
 
             TextView nameView = (TextView)view.findViewById(R.id.lbl_gamename);
-            nameView.setText(bGame.getName());
+            nameView.setText(BG.getName());
 
             TextView yearView = (TextView)view.findViewById(R.id.lbl_yrpub);
-            yearView.setText(bGame.getYearPublished());
+            yearView.setText(BG.getYearPublished());
 
-            ImageView imgView_game = (ImageView)view.findViewById(R.id.img_game);
+            Bitmap thumbnail = BG.getThumbnail();
+            if (thumbnail != null) {
+                ImageView imgView_game = (ImageView)view.findViewById(R.id.img_game);
+                imgView_game.setImageBitmap(thumbnail);
+            }
+            else {
+                BoardGameAndView container = new BoardGameAndView();
+                container.BG = BG;
+                container.view = view;
 
-            AsyncTask<String, Void, Bitmap> thumbNail = new DownloadImageTask(imgView_game).execute("http:" + bGame.getThumbnail());
+                DownloadImageTask loader = new DownloadImageTask();
+                loader.execute(container);
+            }
 
             return view;
+        }
+
+        class BoardGameAndView {
+            public BoardGame BG;
+            public View view;
         }
    }
 

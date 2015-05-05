@@ -1,5 +1,7 @@
 package com.brickedphoneclub.boardgamecollectionmanager;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by Giovanni Galasso on 4/18/2015.
  */
@@ -13,11 +15,13 @@ public class BoardGame {
     //private int numplays
     //private Map<String, String> status = new HashMap<String, String>() ;
     //I don't think we need these right now, possibly later.
-    private String thumbnail;
-    private String image;
+    private String thumbnail_url;
+    private String image_url;
     private int rank;
     private double rating;
 
+    private Bitmap thumbnail_image;
+    private Bitmap coverart_image;
 
     //Board Game Details Fields
     //https://boardgamegeek.com/xmlapi2/thing?id=31260
@@ -36,12 +40,12 @@ public class BoardGame {
         this.name = name;
     }
 
-    public BoardGame(long objectId, String name, String yearPublished, String image, String thumbnail) {
+    public BoardGame(long objectId, String name, String yearPublished, String image_url, String thumbnail_url) {
         this.objectId = objectId;
         this.name = name;
         this.yearPublished = yearPublished;
-        this.image = image;
-        this.thumbnail = thumbnail;
+        this.image_url = image_url;
+        this.thumbnail_url = thumbnail_url;
     }
 
 
@@ -69,20 +73,36 @@ public class BoardGame {
         this.yearPublished = yearPublished;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
+    public String getThumbnail_URL() {
+        return thumbnail_url;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setThumbnail_URL(String thumbnail_url) {
+        this.thumbnail_url = thumbnail_url;
     }
 
-    public String getImage() {
-        return image;
+    public String getImage_URL() {
+        return image_url;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage_URL(String image_url) {
+        this.image_url = image_url;
+    }
+
+    public Bitmap getThumbnail() {
+        return thumbnail_image;
+    }
+
+    public void setThumbnail(Bitmap bitmap) {
+        this.thumbnail_image = bitmap;
+    }
+
+    public Bitmap getCoverart() {
+        return coverart_image;
+    }
+
+    public void setCoverart(Bitmap bitmap) {
+        this.coverart_image = bitmap;
     }
 
     public String getDescription() {

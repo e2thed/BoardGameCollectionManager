@@ -4,25 +4,32 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URL;
 
-public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-    ImageView bmImage;
+public class DownloadImageTask extends AsyncTask<MainCollectionActivity.GameAdapter.BoardGameAndView, Void, MainCollectionActivity.GameAdapter.BoardGameAndView> {
 
-    public DownloadImageTask(ImageView bmImage) {
-        this.bmImage = bmImage;
+    public DownloadImageTask() {
+
     }
 
-    protected Bitmap doInBackground(String... urls) {
-        String urldisplay = urls[0];
-        Bitmap mIcon11 = null;
+    protected MainCollectionActivity.GameAdapter.BoardGameAndView doInBackground(MainCollectionActivity.GameAdapter.BoardGameAndView... params) {
+
+        MainCollectionActivity.GameAdapter.BoardGameAndView container = params[0];
+        BoardGame BG = container.BG;
+
         try {
-            //Log.e("Debug","In try block");
-            InputStream in = new java.net.URL(urldisplay).openStream();
-            mIcon11 = BitmapFactory.decodeStream(in);
+            String imageURL = "http:" + BG.getThumbnail_URL();
+            Log.d("ImageLoader", "Loading "+imageURL);
+            InputStream in = (InputStream) new URL(imageURL).getContent();
+            Bitmap bitmap = BitmapFactory.decodeStream(in);
+            BG.setThumbnail(bitmap);
+            in.close();
+            return container;
         }
         catch(MalformedURLException e){
             e.printStackTrace();
@@ -31,10 +38,14 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
             Log.e("Error", e.getMessage());
             e.printStackTrace();
         }
-        return mIcon11;
+        return null;
     }
 
-    protected void onPostExecute(Bitmap result) {
-      bmImage.setImageBitmap(result);
+    protected void onPostExecute(MainCollectionActivity.GameAdapter.BoardGameAndView container) {
+        BoardGame BG = container.BG;
+        View view = container.view;
+
+        ImageView imgView = (ImageView)view.findViewById(R.id.img_game);
+        imgView.setImageBitmap(BG.getThumbnail());
     }
 }
