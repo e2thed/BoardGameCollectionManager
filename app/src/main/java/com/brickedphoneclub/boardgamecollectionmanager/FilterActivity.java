@@ -14,23 +14,16 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
-
 
 public class FilterActivity extends Activity {
 
-    private Map filters = new HashMap();
     private Spinner spnNumPlayers, spnPlayTime, spnAgeGroup, spnMechanic, spnCategory, spnRating;
-    private Filter filter = Filter.getInstance(this);
+    private BoardGameFilter filter = BoardGameFilter.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
-
-        BoardGameManager bgm = BoardGameManager.getInstance(this);
 
         spnNumPlayers = (Spinner) findViewById(R.id.spn_filterNumPlayers);
         spnPlayTime = (Spinner) findViewById(R.id.spn_filterPlayTime);
@@ -41,23 +34,23 @@ public class FilterActivity extends Activity {
 
         Resources res = getResources();
 
-        ArrayList players = new ArrayList(Arrays.asList(res.getStringArray(R.array.filter_player_count_array)));
-        initSpinner(res, spnNumPlayers, players);
+        ArrayList<String> players = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.filter_player_count_array)));
+        initSpinner(spnNumPlayers, players);
 
-        ArrayList time = new ArrayList(Arrays.asList(res.getStringArray(R.array.filter_play_time_array)));
-        initSpinner(res, spnPlayTime, time);
+        ArrayList<String> time = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.filter_play_time_array)));
+        initSpinner(spnPlayTime, time);
 
-        ArrayList age = new ArrayList(Arrays.asList(res.getStringArray(R.array.filter_age_group_array)));
-        initSpinner(res, spnAgeGroup, age);
+        ArrayList<String> age = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.filter_age_group_array)));
+        initSpinner(spnAgeGroup, age);
 
-        ArrayList cat = new ArrayList(Arrays.asList(res.getStringArray(R.array.filter_category_array)));
-        initSpinner(res, spnCategory, cat);
+        ArrayList<String> cat = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.filter_category_array)));
+        initSpinner(spnCategory, cat);
 
-        ArrayList mech = new ArrayList(Arrays.asList(res.getStringArray(R.array.filter_mechanic_array)));
-        initSpinner(res, spnMechanic, mech);
+        ArrayList<String> mech = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.filter_mechanic_array)));
+        initSpinner(spnMechanic, mech);
 
-        ArrayList rating = new ArrayList(Arrays.asList(res.getStringArray(R.array.filter_rating_array)));
-        initSpinner(res, spnRating, rating);
+        ArrayList<String> rating = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.filter_rating_array)));
+        initSpinner(spnRating, rating);
 
         //Number of Players
         spnNumPlayers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -169,6 +162,12 @@ public class FilterActivity extends Activity {
         final Button btn_cancel = (Button) findViewById(R.id.btn_filterCancel);
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                filter.setNumPlayers("");
+                filter.setPlayTime("");
+                filter.setAgeGroup("");
+                filter.setMechanic("");
+                filter.setCategory("");
+                filter.setRating("");
                 finish();
             }
         });
@@ -186,26 +185,12 @@ public class FilterActivity extends Activity {
         btn_numPlayersClear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 spnNumPlayers.setSelection(0);
-                //spnNumPlayers.setSelection(getIndex(spnNumPlayers, "[Select one]"));
                 filter.setNumPlayers("");
             }
         });
 
 
     }
-
-    /*
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        //parent.getItemAtPosition(pos);
-        Log.i("SPINNER", "Num of Players: " + filter.getNumPlayers());
-        Log.i("SPINNER", "Play Time: " + filter.getPlayTime());
-        Log.i("SPINNER", "Age Group: " + filter.getAgeGroup());
-        Log.i("SPINNER", "Category: " + filter.getCategory());
-        Log.i("SPINNER", "Mechanic: " + filter.getMechanic());
-        Log.i("SPINNER", "Rating: " + filter.getRating());
-    }
-    */
 
     //Little function to get the index of the passed String for the spinner.
     private int getIndex(Spinner spinner, String myString){
@@ -217,12 +202,6 @@ public class FilterActivity extends Activity {
         }
         Log.i("INDEX", "Index for: " + myString + " is " + index);
         return index;
-    }
-
-
-
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
     }
 
 
@@ -248,7 +227,7 @@ public class FilterActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void initSpinner(Resources res, Spinner spin, ArrayList list) {
+    private void initSpinner(Spinner spin, ArrayList list) {
         //Create the adapter and pass it the list of items to populate
         ArrayAdapter<ArrayList> adapter = new ArrayAdapter<ArrayList>(this,android.R.layout.simple_spinner_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
