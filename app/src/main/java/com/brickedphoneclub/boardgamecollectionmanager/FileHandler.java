@@ -122,23 +122,6 @@ public class FileHandler {
         }
     }
 
-    private static void ProcessXML() {
-
-        try {
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-/*
-    public ArrayList<BoardGame> getCollection() {
-        return Collection;
-    }
-*/
-
     private class DownloadFilesTask extends AsyncTask<URL, Integer, Long> {
 
         protected Long doInBackground(URL... urls) {
@@ -153,7 +136,7 @@ public class FileHandler {
                 for (int retry = 0; retry <= 8 && !connected; retry++) {
                     if (retry > 0) {
                         Log.i("XML Details Parsing", "Attempting connection retry");
-                        Thread.sleep(200);  //200 milliseconds
+                        Thread.sleep(100);  //200 milliseconds
                     }
                     connection = (HttpURLConnection)urls[0].openConnection();
                     connection.setReadTimeout(5000 /* milliseconds */);
@@ -214,7 +197,12 @@ public class FileHandler {
 
             try {
 
-                parse(ins[0]);
+                parseTopLevel(ins[0]);
+
+                String objectIDs = generateStringOfObjectIDs();
+
+                performDetailsSearch(objectIDs);
+
 
             } catch (XmlPullParserException xppe) {
                 Log.e("XML Parser", "XmlPullParser error", xppe);
@@ -227,66 +215,19 @@ public class FileHandler {
             return 0L;
         }
 
-        public void populateDetails(BoardGame BG) {
-
-            Log.v("XML Details Parser", "Attempting to download/parse details...");
-
-            //Now use the objectid to grab the XML details page and parse that
-            int objectid = (int)BG.getObjectId();
-            boolean connected = false;
-
-
-            try {
-                URL url = new URL("https://boardgamegeek.com/xmlapi/boardgame/"+(Integer.toString(objectid))+"?stats=1");
-
-                HttpURLConnection connection;
-                int code = -1;
-
-                for (int retry = 0; retry <= 8 && !connected; retry++) {
-                    if (retry > 0) {
-                        Log.i("XML Details Parsing", "Attempting connection retry");
-                        Thread.sleep(200);  //200 milliseconds
-                    }
-                    connection = (HttpURLConnection)url.openConnection();
-                    connection.setReadTimeout(5000 /* milliseconds */);
-                    connection.setConnectTimeout(6000 /* milliseconds */);
-                    connection.setRequestMethod("GET");
-                    connection.connect();
-                    code = connection.getResponseCode();
-                    if (code == HttpURLConnection.HTTP_OK) {
-                        connected = true;
-                        InputStream is = connection.getInputStream();
-                        parseDetails(BG, is);
-                        is.close();
-                        connection.disconnect();
-                        break;
-                    }
-                }
-
-            } catch (MalformedURLException mue) {
-                Log.e("XML Details Parser", "mue error", mue);
-            } catch (IOException ioe) {
-                Log.e("XML Details Parser", "io error", ioe);
-            } catch (SecurityException se) {
-                Log.e("XML Details Parser", "security error", se);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        public void parse(InputStream in) throws XmlPullParserException, IOException {
+        public void parseTopLevel(InputStream in) throws XmlPullParserException, IOException {
             try {
                 XmlPullParser parser = Xml.newPullParser();
                 parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
                 parser.setInput(in, null);
                 parser.nextTag();
-                readFeed(parser);
+                readTopLevelFeed(parser);
             } finally {
                 in.close();
             }
         }
 
-        private void readFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
+        private void readTopLevelFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
             BoardGame BG;
 
             parser.require(XmlPullParser.START_TAG, ns, "items");
@@ -304,33 +245,7 @@ public class FileHandler {
                 }
             }
 
-            Log.i("BGM size", "Boardgame Collection Size = "+BGM.getCollectionSize());
-        }
-
-        public void parseDetails(BoardGame BG, InputStream in) throws XmlPullParserException, IOException {
-            try {
-                XmlPullParser parser = Xml.newPullParser();
-                parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-                parser.setInput(in, null);
-                parser.nextTag();
-
-                parser.require(XmlPullParser.START_TAG, ns, "boardgames");
-                while (parser.next() != XmlPullParser.END_TAG) {
-                    if (parser.getEventType() != XmlPullParser.START_TAG) {
-                        continue;
-                    }
-                    String name = parser.getName();
-                    // Starts by looking for the item tag
-                    if (name.equals("boardgame")) {
-                        readBoardgame(BG, parser);
-                    } else {
-                        skip(parser);
-                    }
-                }
-
-            } finally {
-                in.close();
-            }
+            Log.i("BGM size", "Boardgame Collection Size = " + BGM.getCollectionSize());
         }
 
         // Parses the contents of an item. If it encounters a name, yearpublished, or thumbnail tag, hands them off
@@ -373,7 +288,7 @@ public class FileHandler {
             else
                 BG = new BoardGame(objectid, boardgamename, Integer.toString(yearpublished), image_link, thumbnail_link);
 
-            populateDetails(BG);
+            //populateDetails(BG);
 
             return BG;
             //return new Item(boardgamename, objectid, yearpublished, thumbnail_link);
@@ -397,7 +312,113 @@ public class FileHandler {
             }
         }
 
-        private void readBoardgame(BoardGame BG, XmlPullParser parser) throws XmlPullParserException, IOException {
+
+        public String generateStringOfObjectIDs() {
+
+            BoardGame BG;
+            String list_of_objectIDs = new String();
+            ArrayList<BoardGame> BG_List = BGM.getBgList();
+
+            for(int i = 0; i<BG_List.size(); i++)
+            {
+                BG = BG_List.get(i);
+                if (i >= 1) list_of_objectIDs += ",";
+                list_of_objectIDs += BG.getObjectId();    //concatenate ObjectID to the list
+            }
+
+            return list_of_objectIDs;
+        }
+
+        public void performDetailsSearch(String ObjectIDs) {
+
+            Log.v("XML Details Parser", "Attempting to download/parse details...");
+
+            //Now use the objectid to grab the XML details page and parse that
+            //int objectid = (int) BG.getObjectId();
+            boolean connected = false;
+
+            try {
+                //URL url = new URL("https://boardgamegeek.com/xmlapi/boardgame/" + (Integer.toString(objectid)) + "?stats=1");
+                URL url = new URL("https://boardgamegeek.com/xmlapi/boardgame/" + ObjectIDs + "?stats=1");
+
+                String tmp = new String("https://boardgamegeek.com/xmlapi/boardgame/" + ObjectIDs + "?stats=1");
+                Log.d("URL for details", tmp);
+
+                HttpURLConnection connection;
+                int code = -1;
+
+                for (int retry = 0; retry <= 8 && !connected; retry++) {
+                    if (retry > 0) {
+                        Log.i("XML Details Parsing", "Attempting connection retry");
+                        Thread.sleep(200);  //200 milliseconds
+                    }
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.setReadTimeout(5000 /* milliseconds */);
+                    connection.setConnectTimeout(6000 /* milliseconds */);
+                    connection.setRequestMethod("GET");
+                    connection.connect();
+                    code = connection.getResponseCode();
+                    if (code == HttpURLConnection.HTTP_OK) {
+                        connected = true;
+                        InputStream is = connection.getInputStream();
+                        parseDetailsSearchResult(is);
+                        is.close();
+                        connection.disconnect();
+                        break;
+                    }
+                }
+
+            } catch (MalformedURLException mue) {
+                Log.e("XML Details Parser", "mue error", mue);
+            } catch (IOException ioe) {
+                Log.e("XML Details Parser", "io error", ioe);
+            } catch (SecurityException se) {
+                Log.e("XML Details Parser", "security error", se);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void parseDetailsSearchResult(InputStream in) throws XmlPullParserException, IOException {
+            String name;
+            String result;
+            int objectID;
+            BoardGame BG;
+
+            try {
+                XmlPullParser parser = Xml.newPullParser();
+                parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+                parser.setInput(in, null);
+                parser.nextTag();
+
+                parser.require(XmlPullParser.START_TAG, ns, "boardgames");
+                while (parser.next() != XmlPullParser.END_TAG) {
+                    if (parser.getEventType() != XmlPullParser.START_TAG) {
+                        continue;
+                    }
+
+                    name = parser.getName();
+                    // Starts by looking for the item tag
+                    if (name.equals("boardgame")) {
+
+                        result = parser.getAttributeValue(ns, "objectid");
+                        if (result != null) {
+                            objectID = Integer.parseInt(result);
+                            BG = BGM.getBoardGameById(objectID);
+                            readBoardgameDetails(BG, parser);
+                        }
+
+                    } else {
+                        skip(parser);
+                    }
+                }
+
+            } finally {
+                in.close();
+            }
+        }
+
+        private void readBoardgameDetails(BoardGame BG, XmlPullParser parser) throws XmlPullParserException, IOException {
             int value = -1;
             parser.require(XmlPullParser.START_TAG, ns, "boardgame");
 
@@ -426,6 +447,8 @@ public class FileHandler {
                 }
             }
         }
+
+
 
         // For the tags <name>, objectid, <yearpublished>, <thumbnail>, etc, and extracts their text values.
         private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
