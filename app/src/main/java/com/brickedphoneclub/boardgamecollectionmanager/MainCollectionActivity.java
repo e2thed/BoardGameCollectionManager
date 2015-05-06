@@ -23,14 +23,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-
-
 public class MainCollectionActivity extends ListActivity {
-
 
     public static String[] activeSortOptions = new String[3];
     public String activeSearch = new String();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +40,6 @@ public class MainCollectionActivity extends ListActivity {
         LinearLayout filterLayout = (LinearLayout)findViewById(R.id.lnl_CollectionFilters);
         filterLayout.setVisibility(View.GONE);
 
-
         final ImageButton cancelPlayers = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelPlayers);
         final TextView lblFilterPlayers = (TextView) findViewById(R.id.lbl_CollectionFilterPlayers);
         final ImageButton cancelTime = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelTime);
@@ -57,7 +52,6 @@ public class MainCollectionActivity extends ListActivity {
         final TextView lblFilterCategory = (TextView) findViewById(R.id.lbl_CollectionFilterCategory);
         final ImageButton cancelRating = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelRating);
         final TextView lblFilterRating = (TextView) findViewById(R.id.lbl_CollectionFilterRating);
-
 
         disableLabelAndButton(lblFilterPlayers, cancelPlayers);
         cancelPlayers.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +73,6 @@ public class MainCollectionActivity extends ListActivity {
                 reloadList();
             }
         });
-
 
         disableLabelAndButton(lblFilterAge, cancelAge);
         cancelAge.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +103,6 @@ public class MainCollectionActivity extends ListActivity {
                 reloadList();
             }
         });
-
 
         disableLabelAndButton(lblFilterRating, cancelRating);
         cancelRating.setOnClickListener(new View.OnClickListener() {
@@ -198,13 +190,13 @@ public class MainCollectionActivity extends ListActivity {
             ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelCategory);
             TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterCategory);
             enableLabelAndButton(lbl, btn);
-            lbl.setText(filter.getCategory() + " category");
+            lbl.setText(filter.getCategory());
         }
         if(!filter.getMechanic().equals("")) {
             ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelMechanic);
             TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterMechanic);
             enableLabelAndButton(lbl, btn);
-            lbl.setText(filter.getMechanic() + " mechanic");
+            lbl.setText(filter.getMechanic());
         }
         if(!filter.getRating().equals("")) {
             ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelRating);

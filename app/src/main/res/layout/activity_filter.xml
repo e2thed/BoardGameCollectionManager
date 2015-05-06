@@ -18,7 +18,7 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content">
 
             <TableLayout
                 android:layout_width="fill_parent"
@@ -54,13 +54,15 @@
                         android:spinnerMode="dropdown"
                         android:layout_margin="5dp" />
 
-                    <Button
-                        style="?android:attr/buttonStyleSmall"
+                    <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Clear"
-                        android:id="@+id/btn_numPlayersClear"
+                        android:id="@+id/imgbtn_fcPlayer"
+                        android:padding="5dp"
+                        android:layout_gravity="center"
+                        android:background="@android:drawable/ic_delete"
                         android:layout_column="1" />
+
                 </TableRow>
 
                 <TableRow
@@ -76,7 +78,9 @@
                         android:id="@+id/lbl_filterPlayTime"
                         android:gravity="center_horizontal"
                         android:layout_column="0"
-                        android:layout_margin="5dp" />
+                        android:layout_margin="5dp"
+                        android:layout_span="2"
+                        android:layout_weight="1" />
                 </TableRow>
 
                 <TableRow
@@ -90,6 +94,16 @@
                         android:layout_column="0"
                         android:spinnerMode="dropdown"
                         android:layout_margin="5dp" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imgbtn_fcTime"
+                        android:padding="5dp"
+                        android:layout_gravity="center"
+                        android:background="@android:drawable/ic_delete"
+                        android:layout_column="1" />
+
                 </TableRow>
 
                 <TableRow
@@ -105,7 +119,9 @@
                         android:id="@+id/lbl_filterAgeGroup"
                         android:gravity="center_horizontal"
                         android:layout_column="0"
-                        android:layout_margin="5dp" />
+                        android:layout_margin="5dp"
+                        android:layout_span="2"
+                        android:layout_weight="1" />
                 </TableRow>
 
                 <TableRow
@@ -119,6 +135,15 @@
                         android:layout_column="0"
                         android:spinnerMode="dropdown"
                         android:layout_margin="5dp" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imgbtn_fcAge"
+                        android:padding="5dp"
+                        android:layout_gravity="center"
+                        android:background="@android:drawable/ic_delete"
+                        android:layout_column="1" />
                 </TableRow>
 
                 <TableRow
@@ -134,7 +159,9 @@
                         android:id="@+id/lbl_filterCategory"
                         android:gravity="center_horizontal"
                         android:layout_column="0"
-                        android:layout_margin="5dp" />
+                        android:layout_margin="5dp"
+                        android:layout_span="2"
+                        android:layout_weight="1" />
                 </TableRow>
 
                 <TableRow
@@ -148,6 +175,15 @@
                         android:layout_column="0"
                         android:spinnerMode="dropdown"
                         android:layout_margin="5dp" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imgbtn_fcCategory"
+                        android:padding="5dp"
+                        android:layout_gravity="center"
+                        android:background="@android:drawable/ic_delete"
+                        android:layout_column="1" />
                 </TableRow>
 
                 <TableRow
@@ -163,7 +199,9 @@
                         android:id="@+id/lbl_filterMechanic"
                         android:gravity="center_horizontal"
                         android:layout_column="0"
-                        android:layout_margin="5dp" />
+                        android:layout_margin="5dp"
+                        android:layout_span="2"
+                        android:layout_weight="1" />
                 </TableRow>
 
                 <TableRow
@@ -177,6 +215,15 @@
                         android:layout_column="0"
                         android:spinnerMode="dropdown"
                         android:layout_margin="5dp" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imgbtn_fcMechanic"
+                        android:padding="5dp"
+                        android:layout_gravity="center"
+                        android:background="@android:drawable/ic_delete"
+                        android:layout_column="1" />
                 </TableRow>
 
                 <TableRow
@@ -192,7 +239,9 @@
                         android:id="@+id/lbl_filterRating"
                         android:gravity="center_horizontal"
                         android:layout_column="0"
-                        android:layout_margin="5dp" />
+                        android:layout_margin="5dp"
+                        android:layout_span="2"
+                        android:layout_weight="1" />
                 </TableRow>
 
                 <TableRow
@@ -206,6 +255,15 @@
                         android:layout_column="0"
                         android:spinnerMode="dropdown"
                         android:layout_margin="5dp" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imgbtn_fcRating"
+                        android:padding="5dp"
+                        android:layout_gravity="center"
+                        android:background="@android:drawable/ic_delete"
+                        android:layout_column="1" />
                 </TableRow>
 
             </TableLayout>

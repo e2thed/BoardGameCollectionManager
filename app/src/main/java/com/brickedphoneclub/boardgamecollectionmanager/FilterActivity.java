@@ -2,6 +2,7 @@ package com.brickedphoneclub.boardgamecollectionmanager;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ public class FilterActivity extends Activity {
 
     private Spinner spnNumPlayers, spnPlayTime, spnAgeGroup, spnMechanic, spnCategory, spnRating;
     private BoardGameFilter filter = BoardGameFilter.getInstance(this);
+    private ImageButton playersClear, timeClear, ageClear, mechanicClear, categoryClear, ratingClear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +59,14 @@ public class FilterActivity extends Activity {
         spnNumPlayers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_fcPlayer);
                 if(position != 0) {
                     filter.setNumPlayers(spnNumPlayers.getSelectedItem().toString());
                     Log.i("SPINNER", "Num of Players: " + filter.getNumPlayers() + " pos " + position);
+                    btn.setVisibility(View.VISIBLE);
                 } else {
                     filter.setNumPlayers("");
+                    btn.setVisibility(View.GONE);
                 }
             }
             @Override
@@ -73,11 +79,14 @@ public class FilterActivity extends Activity {
         spnPlayTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_fcTime);
                 if(position != 0) {
                     filter.setPlayTime(spnPlayTime.getSelectedItem().toString());
                     Log.i("SPINNER", "Play Time: " + filter.getPlayTime());
+                    btn.setVisibility(View.VISIBLE);
                 } else {
                     filter.setPlayTime("");
+                    btn.setVisibility(View.GONE);
                 }
             }
             @Override
@@ -91,11 +100,14 @@ public class FilterActivity extends Activity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_fcAge);
                 if(position != 0) {
                     filter.setAgeGroup(spnAgeGroup.getSelectedItem().toString());
                     Log.i("SPINNER", "Age Group: " + filter.getAgeGroup());
+                    btn.setVisibility(View.VISIBLE);
                 } else {
                     filter.setAgeGroup("");
+                    btn.setVisibility(View.GONE);
                 }
             }
             @Override
@@ -109,11 +121,14 @@ public class FilterActivity extends Activity {
         spnCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_fcCategory);
                 if(position != 0) {
                     filter.setCategory(spnCategory.getSelectedItem().toString());
                     Log.i("SPINNER", "Category: " + filter.getCategory());
+                    btn.setVisibility(View.VISIBLE);
                 } else {
                     filter.setCategory("");
+                    btn.setVisibility(View.GONE);
                 }
             }
             @Override
@@ -127,11 +142,14 @@ public class FilterActivity extends Activity {
         spnMechanic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_fcMechanic);
                 if (position != 0) {
                     filter.setMechanic(spnMechanic.getSelectedItem().toString());
                     Log.i("SPINNER", "Mechanic: " + filter.getMechanic());
+                    btn.setVisibility(View.VISIBLE);
                 } else {
                     filter.setMechanic("");
+                    btn.setVisibility(View.GONE);
                 }
             }
             @Override
@@ -145,11 +163,14 @@ public class FilterActivity extends Activity {
         spnRating.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_fcRating);
                 if (position != 0) {
                     filter.setRating(spnRating.getSelectedItem().toString());
                     Log.i("SPINNER", "Rating: " + filter.getRating());
+                    btn.setVisibility(View.VISIBLE);
                 } else {
                     filter.setRating("");
+                    btn.setVisibility(View.GONE);
                 }
             }
             @Override
@@ -163,11 +184,17 @@ public class FilterActivity extends Activity {
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 filter.setNumPlayers("");
+                playersClear.setVisibility(View.GONE);
                 filter.setPlayTime("");
+                timeClear.setVisibility(View.GONE);
                 filter.setAgeGroup("");
+                ageClear.setVisibility(View.GONE);
                 filter.setMechanic("");
+                mechanicClear.setVisibility(View.GONE);
                 filter.setCategory("");
+                categoryClear.setVisibility(View.GONE);
                 filter.setRating("");
+                ratingClear.setVisibility(View.GONE);
                 finish();
             }
         });
@@ -181,14 +208,59 @@ public class FilterActivity extends Activity {
             }
         });
 
-        final Button btn_numPlayersClear = (Button) findViewById(R.id.btn_numPlayersClear);
-        btn_numPlayersClear.setOnClickListener(new View.OnClickListener() {
+        playersClear = (ImageButton) findViewById(R.id.imgbtn_fcPlayer);
+        playersClear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 spnNumPlayers.setSelection(0);
                 filter.setNumPlayers("");
+                playersClear.setVisibility(View.GONE);
             }
         });
 
+       timeClear = (ImageButton) findViewById(R.id.imgbtn_fcTime);
+        timeClear.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                spnPlayTime.setSelection(0);
+                filter.setPlayTime("");
+                timeClear.setVisibility(View.GONE);
+            }
+        });
+
+        ageClear = (ImageButton) findViewById(R.id.imgbtn_fcAge);
+        ageClear.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                spnAgeGroup.setSelection(0);
+                filter.setAgeGroup("");
+                ageClear.setVisibility(View.GONE);
+            }
+        });
+
+        mechanicClear = (ImageButton) findViewById(R.id.imgbtn_fcMechanic);
+        mechanicClear.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                spnMechanic.setSelection(0);
+                filter.setMechanic("");
+                mechanicClear.setVisibility(View.GONE);
+            }
+        });
+
+        categoryClear = (ImageButton) findViewById(R.id.imgbtn_fcCategory);
+        categoryClear.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                spnCategory.setSelection(0);
+                filter.setCategory("");
+                categoryClear.setVisibility(View.GONE);
+            }
+        });
+
+        ratingClear = (ImageButton) findViewById(R.id.imgbtn_fcRating);
+        ratingClear.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                spnRating.setSelection(0);
+                filter.setRating("");
+                ratingClear.setVisibility(View.GONE);
+            }
+        });
 
     }
 
@@ -196,7 +268,56 @@ public class FilterActivity extends Activity {
     public void onResume() {
         super.onResume();
         Log.i("FILTER", "INSIDE ON RESUME **************************************");
+        BoardGameFilter filter = BoardGameFilter.getInstance(this);
 
+        //Player Count
+        if(!filter.getNumPlayers().equals("")) {
+            spnNumPlayers.setSelection(getIndex(spnNumPlayers, filter.getNumPlayers()));
+            playersClear.setVisibility(View.VISIBLE);
+        } else {
+            spnNumPlayers.setSelection(0);
+            playersClear.setVisibility(View.GONE);
+        }
+        //Play Time
+        if(!filter.getPlayTime().equals("")) {
+            spnPlayTime.setSelection(getIndex(spnPlayTime, filter.getPlayTime()));
+            timeClear.setVisibility(View.VISIBLE);
+        } else {
+            spnPlayTime.setSelection(0);
+            timeClear.setVisibility(View.GONE);
+        }
+        //Age Group
+        if(!filter.getAgeGroup().equals("")) {
+            spnAgeGroup.setSelection(getIndex(spnAgeGroup, filter.getAgeGroup()));
+            ageClear.setVisibility(View.VISIBLE);
+        } else {
+            spnAgeGroup.setSelection(0);
+            ageClear.setVisibility(View.GONE);
+        }
+        //Mechanic
+        if(!filter.getMechanic().equals("")) {
+            spnMechanic.setSelection(getIndex(spnMechanic, filter.getMechanic()));
+            mechanicClear.setVisibility(View.VISIBLE);
+        } else {
+            spnMechanic.setSelection(0);
+            mechanicClear.setVisibility(View.GONE);
+        }
+        //Category
+        if(!filter.getCategory().equals("")) {
+            spnCategory.setSelection(getIndex(spnCategory, filter.getCategory()));
+            categoryClear.setVisibility(View.VISIBLE);
+        } else {
+            spnCategory.setSelection(0);
+            categoryClear.setVisibility(View.GONE);
+        }
+        //Rating
+        if(!filter.getRating().equals("")) {
+            spnRating.setSelection(getIndex(spnRating, filter.getRating()));
+            ratingClear.setVisibility(View.VISIBLE);
+        } else {
+            spnRating.setSelection(0);
+            ratingClear.setVisibility(View.GONE);
+        }
     }
 
     //Little function to get the index of the passed String for the spinner.
