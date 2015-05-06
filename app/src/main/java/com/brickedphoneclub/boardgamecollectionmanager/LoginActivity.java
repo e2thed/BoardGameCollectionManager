@@ -67,4 +67,12 @@ public class LoginActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("LOGIN", "Resume login activity.");
+    }
+
+
 }
