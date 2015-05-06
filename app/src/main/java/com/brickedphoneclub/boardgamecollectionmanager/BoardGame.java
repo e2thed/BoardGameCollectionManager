@@ -1,6 +1,7 @@
 package com.brickedphoneclub.boardgamecollectionmanager;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import java.util.Arrays;
 
@@ -80,7 +81,7 @@ public class BoardGame {
     }
 
     public void setThumbnail_URL(String thumbnail_url) {
-        this.thumbnail_url = thumbnail_url;
+        this.thumbnail_url = new String(thumbnail_url);
     }
 
     public String getImage_URL() {
@@ -88,7 +89,7 @@ public class BoardGame {
     }
 
     public void setImage_URL(String image_url) {
-        this.image_url = image_url;
+        this.image_url = new String(image_url);
     }
 
     public Bitmap getThumbnail() {
@@ -99,11 +100,11 @@ public class BoardGame {
         this.thumbnail_image = bitmap;
     }
 
-    public Bitmap getCoverart() {
+    public Bitmap getImage() {
         return coverart_image;
     }
 
-    public void setCoverart(Bitmap bitmap) {
+    public void setImage(Bitmap bitmap) {
         this.coverart_image = bitmap;
     }
 

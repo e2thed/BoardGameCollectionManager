@@ -11,23 +11,37 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class DownloadImageTask extends AsyncTask<MainCollectionActivity.GameAdapter.BoardGameAndView, Void, MainCollectionActivity.GameAdapter.BoardGameAndView> {
+public class DownloadImageTask extends AsyncTask<BoardGameAndView, Void, BoardGameAndView> {
 
     public DownloadImageTask() {
 
     }
 
-    protected MainCollectionActivity.GameAdapter.BoardGameAndView doInBackground(MainCollectionActivity.GameAdapter.BoardGameAndView... params) {
+    protected BoardGameAndView doInBackground(BoardGameAndView... params) {
 
-        MainCollectionActivity.GameAdapter.BoardGameAndView container = params[0];
+        BoardGameAndView container = params[0];
         BoardGame BG = container.BG;
+        String task = container.task;
+        String imageURL;
 
         try {
-            String imageURL = "http:" + BG.getThumbnail_URL();
-            //Log.d("ImageLoader", "Loading "+imageURL);
+
+            if (task.toLowerCase().contains("thumb")) {
+                imageURL = "http:" + BG.getThumbnail_URL();
+                Log.d("DownloadImageTask", "Downloading Thumbnail " + imageURL);
+            } else {
+                imageURL = "http:" + BG.getImage_URL();
+                Log.d("DownloadImageTask", "Downloading Image " + imageURL);
+            }
+
             InputStream in = (InputStream) new URL(imageURL).getContent();
             Bitmap bitmap = BitmapFactory.decodeStream(in);
-            BG.setThumbnail(bitmap);
+
+            if (task.toLowerCase().contains("thumb"))
+                BG.setThumbnail(bitmap);
+            else
+                BG.setImage(bitmap);
+
             in.close();
             return container;
         }
@@ -41,11 +55,18 @@ public class DownloadImageTask extends AsyncTask<MainCollectionActivity.GameAdap
         return null;
     }
 
-    protected void onPostExecute(MainCollectionActivity.GameAdapter.BoardGameAndView container) {
+    protected void onPostExecute(BoardGameAndView container) {
+ /*
         BoardGame BG = container.BG;
         View view = container.view;
+        String task = container.task;
 
-        ImageView imgView = (ImageView)view.findViewById(R.id.img_game);
-        imgView.setImageBitmap(BG.getThumbnail());
+        if (task.toLowerCase().contains("thumb")) {
+            ImageView imgView = (ImageView) view.findViewById(R.id.img_game);
+            imgView.setImageBitmap(BG.getThumbnail());
+        }
+        //else
+        //    imgView.setImageBitmap(BG.getImage());
+*/
     }
 }

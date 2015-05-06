@@ -18,6 +18,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 
 public class MainCollectionActivity extends ListActivity {
@@ -183,18 +186,40 @@ public class MainCollectionActivity extends ListActivity {
                 BoardGameAndView container = new BoardGameAndView();
                 container.BG = BG;
                 container.view = view;
+                container.task = "getThumbnail";
 
                 DownloadImageTask loader = new DownloadImageTask();
                 loader.execute(container);
+
+                try {
+
+                    loader.get(3000, TimeUnit.MILLISECONDS);
+
+                } catch (TimeoutException te) {
+                    Log.e("FileHandler", "Taking too long to download file", te);
+                } catch (InterruptedException ie) {
+                    Log.e("FileHandler", "Taking too long to download file", ie);
+                } catch (ExecutionException ee) {
+                    Log.e("FileHandler", "Taking too long to download file", ee);
+                }
+
+                if (BG.getThumbnail() != null) {
+                    Log.d("whateves", "Refreshing thumbnail bitmap in view");
+
+                    ImageView imgView_game = (ImageView)view.findViewById(R.id.img_game);
+                    imgView_game.setImageBitmap(BG.getThumbnail());
+
+                    /*RefreshImageTask refresh = new RefreshImageTask();
+                    refresh.execute(container);
+                    */
+                }
+
             }
 
             return view;
         }
 
-        class BoardGameAndView {
-            public BoardGame BG;
-            public View view;
-        }
+
    }
 
   @Override

@@ -288,6 +288,21 @@ public class FileHandler {
             else
                 BG = new BoardGame(objectid, boardgamename, Integer.toString(yearpublished), image_link, thumbnail_link);
 
+
+            if (objectid != -1)
+                BG.setObjectId(objectid);
+
+            if (yearpublished != -1)
+                BG.setYearPublished(""+yearpublished);
+
+            if (thumbnail_link != null)
+                BG.setThumbnail_URL(thumbnail_link);
+
+            if (image_link != null)
+                BG.setImage_URL(image_link);
+
+
+
             //populateDetails(BG);
 
             return BG;

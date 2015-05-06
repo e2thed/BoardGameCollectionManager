@@ -2,11 +2,17 @@ package com.brickedphoneclub.boardgamecollectionmanager;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 
 public class BoardGameDetailActivity extends Activity {
@@ -53,6 +59,27 @@ public class BoardGameDetailActivity extends Activity {
     private void loadGame(long id){
         BoardGameManager bgm = BoardGameManager.getInstance(this);
         BoardGame game = bgm.getBoardGameById(id);
+        BoardGameAndView container = new BoardGameAndView();
+        container.BG = game;
+        container.task = "image";
+
+        Bitmap image = game.getImage();
+        if (image == null) {    //If we haven't cached the large coverart image yet
+            DownloadImageTask loader = new DownloadImageTask();     //Asyncronously download the large coverart image
+            loader.execute(container);
+
+            try {
+
+                loader.get(3000, TimeUnit.MILLISECONDS);
+
+            } catch (TimeoutException te) {
+                Log.e("FileHandler", "Taking too long to download file", te);
+            } catch (InterruptedException ie) {
+                Log.e("FileHandler", "Taking too long to download file", ie);
+            } catch (ExecutionException ee) {
+                Log.e("FileHandler", "Taking too long to download file", ee);
+            }
+        }
 
         ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
         ((TextView) findViewById(R.id.lbl_detailValueYear)).setText(game.getYearPublished());
@@ -62,6 +89,17 @@ public class BoardGameDetailActivity extends Activity {
         ((TextView) findViewById(R.id.lbl_detailValueAgeGroup)).setText(game.getAgeGroupToString());
         ((TextView) findViewById(R.id.lbl_detailValueCategory)).setText(game.getCategoryToString());
         ((TextView) findViewById(R.id.lbl_detailValueMechanic)).setText(game.getMechanicsToString());
+
+
+        if (image != null) {
+            ImageView imgView_game = (ImageView)findViewById(R.id.img_detailImage);
+            imgView_game.setImageBitmap(image);
+
+            //RefreshImageTask refresh = new RefreshImageTask();
+            //refresh.execute(container);
+        }
+
+
         Log.i("Detail Loaded", "Details of game loaded for ID:" + game.getObjectId());
     }
 

@@ -26,16 +26,17 @@ public class LoginActivity extends Activity {
         final Button btn_Login = (Button) findViewById(R.id.btn_LoginSubmit);
         btn_Login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.i("Info", "Switching activity to MainCollectionActivity");
-                Intent myIntent=new Intent(LoginActivity.this, MainCollectionActivity.class );
-                startActivity(myIntent);
-
                 //Grab username from form and print it for debugging.
                 final EditText editUserName = (EditText) findViewById(R.id.login_name_field);
                 String textUserName = editUserName.getText().toString();
                 Log.d("USERNAME", "User is:" + textUserName);
 
                 fh.setUser(textUserName);
+
+                Log.i("Info", "Switching activity to MainCollectionActivity");
+                Intent myIntent=new Intent(LoginActivity.this, MainCollectionActivity.class );
+                startActivity(myIntent);
+
                 LoginActivity.this.finish();
             }
         });
