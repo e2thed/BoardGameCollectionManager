@@ -26,7 +26,6 @@ import java.util.concurrent.TimeoutException;
 public class MainCollectionActivity extends ListActivity {
 
     public static String[] activeSortOptions = new String[3];
-    public String activeSearch = new String();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +51,8 @@ public class MainCollectionActivity extends ListActivity {
         final TextView lblFilterCategory = (TextView) findViewById(R.id.lbl_CollectionFilterCategory);
         final ImageButton cancelRating = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelRating);
         final TextView lblFilterRating = (TextView) findViewById(R.id.lbl_CollectionFilterRating);
+        final ImageButton cancelGamName = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelGamName);
+        final TextView lblFilterGamName = (TextView) findViewById(R.id.lbl_CollectionFilterGamName);
 
         disableLabelAndButton(lblFilterPlayers, cancelPlayers);
         cancelPlayers.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +111,16 @@ public class MainCollectionActivity extends ListActivity {
                 Log.i("COLLECTION", "Disable rating filter.");
                 filter.setRating("");
                 disableLabelAndButton(lblFilterRating, cancelRating);
+                reloadList();
+            }
+        });
+
+        disableLabelAndButton(lblFilterGamName, cancelGamName);
+        cancelGamName.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.i("COLLECTION", "Disable game search.");
+                filter.setGamName("");
+                disableLabelAndButton(lblFilterGamName, cancelGamName);
                 reloadList();
             }
         });
@@ -204,6 +215,12 @@ public class MainCollectionActivity extends ListActivity {
             enableLabelAndButton(lbl, btn);
             lbl.setText(filter.getRating() + " rating");
         }
+        if(!filter.getGamName().equals("")) {
+            ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelGamName);
+            TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterGamName);
+            enableLabelAndButton(lbl, btn);
+            lbl.setText("Search : " + filter.getGamName());
+        }
     }
 
     @Override
@@ -254,7 +271,7 @@ public class MainCollectionActivity extends ListActivity {
             return true;
         }else if(id == R.id.action_search){
             Intent searchIntent = new Intent(this, SearchActivity.class);
-            startActivityForResult(searchIntent, 2);
+            startActivity(searchIntent);
             return true;
         }else if(id == R.id.action_refresh){
             this.onResume();
@@ -267,7 +284,6 @@ public class MainCollectionActivity extends ListActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
 
     @Override
@@ -395,17 +411,7 @@ public class MainCollectionActivity extends ListActivity {
 
             }
         }
-      else if (requestCode == 2){
-            if(resultCode == RESULT_OK){
-                activeSearch = data.getStringExtra("searchthis").trim();
-                Log.i("Active Search String:", activeSearch);
-                BoardGameManager bgmSearch = BoardGameManager.getInstance(this);
-                GameAdapter searchGA = new GameAdapter(this, R.layout.game_item, bgmSearch.getBgList());
-                searchGA.getFilter().filter(activeSearch);
-                setListAdapter(searchGA);
 
-            }
-        }
     }
 
 

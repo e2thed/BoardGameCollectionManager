@@ -19,12 +19,26 @@
         android:layout_marginTop="5dp"/>
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txt_searchByName"
         android:layout_below="@id/lbl_searchByName"
         android:layout_marginTop="20dp"
+        android:ems="17"
         android:hint="e.g Risk"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgbtn_gamName"
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:background="@android:drawable/ic_delete"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_below="@id/lbl_searchByName"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/txt_searchByName"/>
 
     <RadioGroup
         android:id="@+id/radioSearch"

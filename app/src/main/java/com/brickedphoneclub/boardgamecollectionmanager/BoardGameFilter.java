@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class BoardGameFilter {
     private static BoardGameFilter ourInstance = null;
 
-    private String numPlayers, playTime, ageGroup, mechanic, category, rating;
+    private String numPlayers, playTime, ageGroup, mechanic, category, rating, gamName;
     private boolean activeFilter;
     private Context context;
 
@@ -29,6 +29,7 @@ public class BoardGameFilter {
     }
 
     private BoardGameFilter(Context context) {
+        this.gamName = "";
         this.numPlayers = "";
         this.playTime = "";
         this.ageGroup = "";
@@ -61,6 +62,14 @@ public class BoardGameFilter {
 
     public void setActiveFilter(boolean activeFilter) {
         this.activeFilter = activeFilter;
+    }
+
+    public String getGamName() {
+        return gamName;
+    }
+
+    public void setGamName(String gamName) {
+        this.gamName = gamName;
     }
 
     public String getNumPlayers() {
@@ -112,6 +121,7 @@ public class BoardGameFilter {
     }
 
     public boolean checkActiveFilter() {
+
         if(numPlayers != null && !numPlayers.isEmpty()) {
             activeFilter = true;
             return true;
@@ -130,7 +140,10 @@ public class BoardGameFilter {
         } else if (rating != null && !rating.isEmpty()) {
             activeFilter = true;
             return true;
-        } else {
+        } else if (gamName != null && !gamName.isEmpty()) {
+            activeFilter = true;
+            return true;
+        }else {
             activeFilter = false;
             return false;
         }
@@ -139,6 +152,12 @@ public class BoardGameFilter {
     public ArrayList<BoardGame> applyFilters() {
         filterList.clear();
         ArrayList<BoardGame> tempList = mainList;
+
+        if(!gamName.equals("")) {
+            tempList = searchByGamName(tempList);
+            Log.i("FILTER SIZE", "Size:" + tempList.size());
+        }
+
         if(!numPlayers.equals("")) {
             tempList = filterByPlayer(tempList);
             Log.i("FILTER SIZE", "Size:" + tempList.size());
@@ -168,12 +187,30 @@ public class BoardGameFilter {
     }
 
     public String toString() {
-        return "Players: " + numPlayers + "\n" +
-               "Time: " + playTime + "\n" +
-               "Age: " + ageGroup + "\n" +
-               "Category: " + category + "\n" +
-               "Mechanic: " + mechanic + "\n" +
-               "Rating: " + rating + "\n";
+        return "Game: " + gamName + "\n" +
+                "Players: " + numPlayers + "\n" +
+                "Time: " + playTime + "\n" +
+                "Age: " + ageGroup + "\n" +
+                "Category: " + category + "\n" +
+                "Mechanic: " + mechanic + "\n" +
+                "Rating: " + rating + "\n";
+
+    }
+
+    // Search by gameName
+    public ArrayList<BoardGame> searchByGamName(ArrayList<BoardGame> list) {
+        ArrayList<BoardGame> tempList = new ArrayList<>();
+        for (BoardGame game: list) {
+            String gName = game.getName();
+            if (gName != null) {
+                //Debug print out
+                Log.i("Search Game", "List Item Name: " + gName + " Target Name: " + gamName);
+                if (gName.toLowerCase().contains(gamName.toLowerCase())) {
+                    addGameToList(tempList, game);
+                }
+            }
+        }
+        return tempList;
     }
 
     //GAG: Filter by player count

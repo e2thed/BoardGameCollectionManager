@@ -1,43 +1,95 @@
 package com.brickedphoneclub.boardgamecollectionmanager;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 
 public class SearchActivity extends Activity {
+
+    private BoardGameFilter filter = BoardGameFilter.getInstance(this);
+    public EditText txt_searchString;
+    public ImageButton btn_delSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        final EditText txt_searchString = (EditText) findViewById(R.id.txt_searchByName);
+        txt_searchString = (EditText) findViewById(R.id.txt_searchByName);
         final Button buttonSearch = (Button) findViewById(R.id.btn_search);
+        btn_delSearch = (ImageButton) findViewById(R.id.imgbtn_gamName);
 
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String searchString = txt_searchString.getText().toString();
-                Bundle searchBundle = new Bundle();
-                searchBundle.putString("searchthis", searchString);
-                Log.i("Search String:", searchString);
 
-                Intent lastIntent = new Intent();
-                lastIntent.putExtras(searchBundle);
-                setResult(RESULT_OK, lastIntent);
+                if(!searchString.equals("")) {
+                    filter.setGamName(searchString);
+                    btn_delSearch.setVisibility(View.VISIBLE);
+                }
+                else {
+                    filter.setGamName("");
+                    btn_delSearch.setVisibility(View.GONE);
+                }
+
                 finish();
+            }
+        });
+
+        btn_delSearch.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                txt_searchString.setText("");
+                filter.setGamName("");
+                btn_delSearch.setVisibility(View.GONE);
+            }
+        });
+
+        txt_searchString.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (s.length()== 0){
+                    btn_delSearch.setVisibility(View.GONE);
+                }
+                else {
+                    btn_delSearch.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!filter.getGamName().equals("")) {
+            txt_searchString.setText(filter.getGamName());
+            txt_searchString.requestFocus();
+            btn_delSearch.setVisibility(View.VISIBLE);
+        } else {
+            txt_searchString.setText("");
+            btn_delSearch.setVisibility(View.GONE);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
