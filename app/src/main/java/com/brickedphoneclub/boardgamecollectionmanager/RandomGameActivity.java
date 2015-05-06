@@ -19,10 +19,22 @@ import android.widget.TextView;
 
 
 public class RandomGameActivity extends Activity {
+
+    public int collectionSize, randomGeneratedNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_game);
+
+        Intent intentExtras = getIntent();
+        Bundle extrasBundle = intentExtras.getExtras();
+        if (!(extrasBundle == null) && !(extrasBundle.isEmpty())) {
+            collectionSize = extrasBundle.getInt("CollectionSize");
+
+        }
+
+
 
         final Random myRandom = new Random(10);
 
@@ -39,7 +51,11 @@ public class RandomGameActivity extends Activity {
                
                 // TODO Auto-generated method stub
 
-                textGenerateNumber.setText(String.valueOf(myRandom.nextInt(4)+1));
+
+                randomGeneratedNumber = myRandom.nextInt(collectionSize);
+
+                textGenerateNumber.setText(String.valueOf(randomGeneratedNumber +1));
+
 
 
             }});
