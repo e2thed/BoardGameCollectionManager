@@ -192,6 +192,13 @@ public class FilterActivity extends Activity {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("FILTER", "INSIDE ON RESUME **************************************");
+
+    }
+
     //Little function to get the index of the passed String for the spinner.
     private int getIndex(Spinner spinner, String myString){
         int index = 0;

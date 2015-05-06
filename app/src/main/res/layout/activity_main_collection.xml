@@ -4,18 +4,119 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.brickedphoneclub.boardgamecollectionmanager.MainCollectionActivity">
+    tools:context="com.brickedphoneclub.boardgamecollectionmanager.MainCollectionActivity"
+    android:id="@+id/lbl_collectionFilterPlayers">
 
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/frm_collectionFilter">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/lbl_collectionFilterOne" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/lnl_CollectionFilters">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/lbl_CollectionFilterPlayers"
+                    android:layout_gravity="center_vertical" />
+
+                <ImageButton
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/imgbtn_CollectionCancelPlayers"
+                    android:background="@android:drawable/ic_delete"
+                    android:contentDescription="Cancel Players Filter" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/lbl_CollectionFilterTime"
+                    android:layout_gravity="center_vertical" />
+
+                <ImageButton
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/imgbtn_CollectionCancelTime"
+                    android:background="@android:drawable/ic_delete"
+                    android:contentDescription="Cancel Time Filter" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/lbl_CollectionFilterAge"
+                    android:layout_gravity="center_vertical"/>
+
+                <ImageButton
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/imgbtn_CollectionCancelAge"
+                    android:background="@android:drawable/ic_delete"
+                    android:contentDescription="Cancel Age Filter" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/lbl_CollectionFilterCategory"
+                    android:layout_gravity="center_vertical"/>
+
+                <ImageButton
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/imgbtn_CollectionCancelCategory"
+                    android:background="@android:drawable/ic_delete"
+                    android:contentDescription="Cancel Category Filter" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/lbl_CollectionFilterMechanic"
+                    android:layout_gravity="center_vertical"/>
+
+                <ImageButton
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/imgbtn_CollectionCancelMechanic"
+                    android:background="@android:drawable/ic_delete"
+                    android:contentDescription="Cancel Mechanic Filter"
+                    android:cropToPadding="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/lbl_CollectionFilterRating"
+                    android:layout_gravity="center_vertical"/>
+
+                <ImageButton
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/imgbtn_CollectionCancelRating"
+                    android:background="@android:drawable/ic_delete"
+                    android:contentDescription="Cancel Rating Filter" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+            </LinearLayout>
+
+        </LinearLayout>
     </FrameLayout>
 
     <ListView android:id="@android:id/list"

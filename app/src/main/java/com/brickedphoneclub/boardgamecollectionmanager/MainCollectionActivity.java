@@ -4,7 +4,6 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -12,7 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,19 +31,106 @@ public class MainCollectionActivity extends ListActivity {
     public static String[] activeSortOptions = new String[3];
     public String activeSearch = new String();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_collection);
         BoardGameManager bgm = BoardGameManager.getInstance(this);
+        final BoardGameFilter filter = BoardGameFilter.getInstance(this);
         // initialize the list view
         setListAdapter(new GameAdapter(this, R.layout.game_item, bgm.getBgList()));
+        //GAG: On startup disable the filter layout. No filters should be enabled when the app starts.
+        LinearLayout filterLayout = (LinearLayout)findViewById(R.id.lnl_CollectionFilters);
+        filterLayout.setVisibility(View.GONE);
 
+
+        final ImageButton cancelPlayers = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelPlayers);
+        final TextView lblFilterPlayers = (TextView) findViewById(R.id.lbl_CollectionFilterPlayers);
+        final ImageButton cancelTime = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelTime);
+        final TextView lblFilterTime = (TextView) findViewById(R.id.lbl_CollectionFilterTime);
+        final ImageButton cancelAge = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelAge);
+        final TextView lblFilterAge = (TextView) findViewById(R.id.lbl_CollectionFilterAge);
+        final ImageButton cancelMechanic = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelMechanic);
+        final TextView lblFilterMechanic = (TextView) findViewById(R.id.lbl_CollectionFilterMechanic);
+        final ImageButton cancelCategory = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelCategory);
+        final TextView lblFilterCategory = (TextView) findViewById(R.id.lbl_CollectionFilterCategory);
+        final ImageButton cancelRating = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelRating);
+        final TextView lblFilterRating = (TextView) findViewById(R.id.lbl_CollectionFilterRating);
+
+
+        disableLabelAndButton(lblFilterPlayers, cancelPlayers);
+        cancelPlayers.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.i("COLLECTION", "Disable player filter.");
+                filter.setNumPlayers("");
+                disableLabelAndButton(lblFilterPlayers, cancelPlayers);
+                reloadList();
+            }
+        });
+
+
+        disableLabelAndButton(lblFilterTime, cancelTime);
+        cancelTime.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.i("COLLECTION", "Disable play time filter.");
+                filter.setPlayTime("");
+                disableLabelAndButton(lblFilterTime, cancelTime);
+                reloadList();
+            }
+        });
+
+
+        disableLabelAndButton(lblFilterAge, cancelAge);
+        cancelAge.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.i("COLLECTION", "Disable age filter.");
+                filter.setAgeGroup("");
+                disableLabelAndButton(lblFilterAge, cancelAge);
+                reloadList();
+            }
+        });
+
+        disableLabelAndButton(lblFilterMechanic, cancelMechanic);
+        cancelMechanic.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.i("COLLECTION", "Disable mechanic filter.");
+                filter.setMechanic("");
+                disableLabelAndButton(lblFilterMechanic, cancelMechanic);
+                reloadList();
+            }
+        });
+
+        disableLabelAndButton(lblFilterCategory, cancelCategory);
+        cancelCategory.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.i("COLLECTION", "Disable category filter.");
+                filter.setCategory("");
+                disableLabelAndButton(lblFilterCategory, cancelCategory);
+                reloadList();
+            }
+        });
+
+
+        disableLabelAndButton(lblFilterRating, cancelRating);
+        cancelRating.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.i("COLLECTION", "Disable rating filter.");
+                filter.setRating("");
+                disableLabelAndButton(lblFilterRating, cancelRating);
+                reloadList();
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        reloadList();
+
+    }
+
+    public void reloadList() {
         BoardGameManager bgm = BoardGameManager.getInstance(this);
         BoardGameFilter filter = BoardGameFilter.getInstance(this);
 
@@ -50,13 +138,79 @@ public class MainCollectionActivity extends ListActivity {
         //Check to see if any filters are active and if so filter the list.
         if(filter.checkActiveFilter() == true) {
             Log.i("RESUME FILTER TRUE", filter.toString());
+            //GAG: Make the Linear Layout visible.
+            LinearLayout filterLayout = (LinearLayout)findViewById(R.id.lnl_CollectionFilters);
+            filterLayout.setVisibility(View.VISIBLE);
+            //GAG: Enable the labels and buttons for any active filters
+            checkFilterButtons(filter);
             GameAdapter filterAdapter = new GameAdapter(this,R.layout.game_item, filter.applyFilters());
             filterAdapter.notifyDataSetChanged();
             setListAdapter(filterAdapter);
+
         } else {
             GameAdapter ga = new GameAdapter(this,R.layout.game_item, bgm.getBgList());
             ga.notifyDataSetChanged();
             setListAdapter(ga);
+            //GAG: If no filters are active than make the linear layout gone, doesn't take up any space.
+            LinearLayout filterLayout = (LinearLayout)findViewById(R.id.lnl_CollectionFilters);
+            filterLayout.setVisibility(View.GONE);
+        }
+    }
+
+
+    private void disableLabelAndButton(TextView label, ImageButton imgBtn) {
+        imgBtn.setVisibility(View.GONE);
+        imgBtn.setEnabled(false);
+        imgBtn.setClickable(false);
+        label.setVisibility(View.GONE);
+        label.setEnabled(false);
+        label.setText("");
+    }
+
+    private void enableLabelAndButton(TextView label, ImageButton imgBtn) {
+        imgBtn.setVisibility(View.VISIBLE);
+        imgBtn.setEnabled(true);
+        imgBtn.setClickable(true);
+        label.setVisibility(View.VISIBLE);
+        label.setEnabled(true);
+    }
+
+    private void checkFilterButtons(BoardGameFilter filter) {
+        if(!filter.getNumPlayers().equals("")) {
+            ImageButton cancelPlayers = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelPlayers);
+            TextView lblFilterPlayers = (TextView) findViewById(R.id.lbl_CollectionFilterPlayers);
+            enableLabelAndButton(lblFilterPlayers, cancelPlayers);
+            lblFilterPlayers.setText(filter.getNumPlayers() + " players");
+        }
+        if(!filter.getPlayTime().equals("")) {
+            ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelTime);
+            TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterTime);
+            enableLabelAndButton(lbl, btn);
+            lbl.setText(filter.getPlayTime() + " minutes");
+        }
+        if(!filter.getAgeGroup().equals("")) {
+            ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelAge);
+            TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterAge);
+            enableLabelAndButton(lbl, btn);
+            lbl.setText(filter.getAgeGroup() + " age");
+        }
+        if(!filter.getCategory().equals("")) {
+            ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelCategory);
+            TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterCategory);
+            enableLabelAndButton(lbl, btn);
+            lbl.setText(filter.getCategory() + " category");
+        }
+        if(!filter.getMechanic().equals("")) {
+            ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelMechanic);
+            TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterMechanic);
+            enableLabelAndButton(lbl, btn);
+            lbl.setText(filter.getMechanic() + " mechanic");
+        }
+        if(!filter.getRating().equals("")) {
+            ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelRating);
+            TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterRating);
+            enableLabelAndButton(lbl, btn);
+            lbl.setText(filter.getRating() + " rating");
         }
     }
 
@@ -205,11 +359,11 @@ public class MainCollectionActivity extends ListActivity {
                     loader.get(3000, TimeUnit.MILLISECONDS);
 
                 } catch (TimeoutException te) {
-                    Log.e("FileHandler", "Taking too long to download file", te);
+                    Log.e("FileHandler", "Taking too long to download file " + te.getMessage(), te);
                 } catch (InterruptedException ie) {
-                    Log.e("FileHandler", "Taking too long to download file", ie);
+                    Log.e("FileHandler", "Taking too long to download file " + ie.getMessage(), ie);
                 } catch (ExecutionException ee) {
-                    Log.e("FileHandler", "Taking too long to download file", ee);
+                    Log.e("FileHandler", "Taking too long to download file " + ee.getMessage(), ee);
                 }
 
                 if (BG.getThumbnail() != null) {
