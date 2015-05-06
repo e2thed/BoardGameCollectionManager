@@ -2,7 +2,6 @@ package com.brickedphoneclub.boardgamecollectionmanager;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 
 public class LoginActivity extends Activity {
@@ -22,6 +22,7 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
         BoardGameManager bgm = BoardGameManager.getInstance(this);
 
+        ((ImageView) findViewById(R.id.img_TitleImage)).setImageResource(R.drawable.bgcm_title);
 
         final Button btn_Login = (Button) findViewById(R.id.btn_LoginSubmit);
         btn_Login.setOnClickListener(new View.OnClickListener() {
