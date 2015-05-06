@@ -6,9 +6,22 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.brickedphoneclub.boardgamecollectionmanager.MainCollectionActivity">
 
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/frm_collectionFilter">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/lbl_collectionFilterOne" />
+    </FrameLayout>
+
     <ListView android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/frm_collectionFilter">
     </ListView>
 
 </RelativeLayout>
