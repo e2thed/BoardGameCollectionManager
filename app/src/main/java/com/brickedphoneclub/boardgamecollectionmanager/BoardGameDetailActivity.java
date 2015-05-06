@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -62,7 +63,9 @@ public class BoardGameDetailActivity extends Activity {
         ((TextView) findViewById(R.id.lbl_detailValueAgeGroup)).setText(game.getAgeGroupToString());
         ((TextView) findViewById(R.id.lbl_detailValueCategory)).setText(game.getCategoryToString());
         ((TextView) findViewById(R.id.lbl_detailValueMechanic)).setText(game.getMechanicsToString());
-        Log.i("Detail Loaded", "Details of game loaded for ID:" + game.getObjectId());
+        ((ImageView) findViewById(R.id.img_detailImage)).setImageBitmap(game.getThumbnail());
+        Log.i("DETAIL SCREEN", "Details of game loaded for ID:" + game.getObjectId());
+        Log.i("DETAIL SCREEN", "Rating:" + game.getRating());
     }
 
 }
