@@ -2,18 +2,24 @@ package com.brickedphoneclub.boardgamecollectionmanager;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -27,16 +33,24 @@ public class RandomGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_game);
 
+        Intent intentExtras = getIntent();
+        Bundle extrasBundle = intentExtras.getExtras();
+        if (!(extrasBundle == null) && !(extrasBundle.isEmpty())) {
+            loadGame(extrasBundle.getLong("id"));
+        } else {
+            Log.e("NO GAME ID", "Error the game id wasn't found in the bundle.");
+        }
 
-        Button buttonGenerate = (Button)findViewById(R.id.button1);
-        buttonGenerate.setOnClickListener(new OnClickListener()
+        Button buttonRecord = (Button)findViewById(R.id.btn_recordGamePlay);
+        buttonRecord.setOnClickListener(new OnClickListener()
         {
 
             @Override
             public void onClick(View v)
             {
 
-
+                Intent recordIntent = new Intent();
+                startActivity(recordIntent);
 
             }});
 
@@ -48,9 +62,6 @@ public class RandomGameActivity extends Activity {
         getMenuInflater().inflate(R.menu.menu_random_game, menu);
         return true;
     }
-
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -73,9 +84,8 @@ public class RandomGameActivity extends Activity {
             }
             final Random myRandom = new Random();
             randomGeneratedNumber = myRandom.nextInt(collectionSize);
-            final TextView textGenerateNumber = (TextView)findViewById(R.id.text4);
-            textGenerateNumber.setText(String.valueOf(randomGeneratedNumber + 1));
-
+            randomGeneratedNumber = randomGeneratedNumber + 1;
+            Log.i("RandomNum: ", " " + randomGeneratedNumber);
 
             return true;
         }
@@ -84,6 +94,43 @@ public class RandomGameActivity extends Activity {
 
     }
 
+    private void loadGame(long id){
+        BoardGameManager bgm = BoardGameManager.getInstance(this);
+        BoardGame game = bgm.getBoardGameById(id);
+        BoardGameAndView container = new BoardGameAndView();
+        container.BG = game;
+        container.task = "image";
+
+        Bitmap image = game.getImage();
+        if (image == null) {    //If we haven't cached the large coverart image yet
+            DownloadImageTask loader = new DownloadImageTask();     //Asyncronously download the large coverart image
+            loader.execute(container);
+
+            try {
+
+                loader.get(3000, TimeUnit.MILLISECONDS);
+
+            } catch (TimeoutException te) {
+                Log.e("FileHandler", "Taking too long to download file", te);
+            } catch (InterruptedException ie) {
+                Log.e("FileHandler", "Taking too long to download file", ie);
+            } catch (ExecutionException ee) {
+                Log.e("FileHandler", "Taking too long to download file", ee);
+            }
+        }
+
+        ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
+        ((TextView) findViewById(R.id.lbl_detailValueYear)).setText(game.getYearPublished());
+        ((TextView) findViewById(R.id.lbl_detailValueRating)).setText(game.getRatingToString());
+        ((TextView) findViewById(R.id.lbl_detailValueNumPlayers)).setText(game.getPlayerRange());
+        ((TextView) findViewById(R.id.lbl_detailValuePlayTime)).setText(game.getPlayTimeRangeToString());
+        ((TextView) findViewById(R.id.lbl_detailValueAgeGroup)).setText(game.getAgeGroupToString());
+        ((TextView) findViewById(R.id.lbl_detailValueCategory)).setText(game.getCategoryToString());
+        ((TextView) findViewById(R.id.lbl_detailValueMechanic)).setText(game.getMechanicsToString());
+        ((ImageView) findViewById(R.id.img_detailImage)).setImageBitmap(game.getThumbnail());
+        Log.i("DETAIL SCREEN", "Details of game loaded for ID:" + game.getObjectId());
+        Log.i("DETAIL SCREEN", "Rating:" + game.getRating());
+    }
         }
 
 

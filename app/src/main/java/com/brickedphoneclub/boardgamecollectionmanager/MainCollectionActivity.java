@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -230,10 +231,6 @@ public class MainCollectionActivity extends ListActivity {
         return true;
     }
 
-
-
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -257,21 +254,31 @@ public class MainCollectionActivity extends ListActivity {
         }
         else if(id == R.id.action_random){
 
+            int randomGeneratedNumber, collectionSize;
             BoardGameManager bgm = BoardGameManager.getInstance(this);
             BoardGameFilter bgfilter = BoardGameFilter.getInstance(this);
-            Bundle randomBundle = new Bundle();
+            //Bundle randomBundle = new Bundle();
             if(bgfilter.checkActiveFilter() == true){
-                randomBundle.putInt("CollectionSize", bgfilter.getFilterList().size());
+                collectionSize = bgfilter.getFilterList().size();
             }
             else{
-                randomBundle.putInt("CollectionSize", bgm.getCollectionSize());
+                collectionSize =  bgm.getCollectionSize();
             }
+            final Random myRandom = new Random();
+            randomGeneratedNumber = myRandom.nextInt(collectionSize);
+            randomGeneratedNumber = randomGeneratedNumber + 1;
+            Log.i("RandomNum: ", " " + randomGeneratedNumber);
+            BoardGame bg = (BoardGame)getListAdapter().getItem(randomGeneratedNumber);
 
+            Bundle randomBundle = new Bundle();
+            randomBundle.putLong("id", bg.getObjectId());
+            Log.i("BG ID:", "Id is: " + bg.getObjectId());
 
             Intent randomIntent = new Intent(this, RandomGameActivity.class);
             randomIntent.putExtras(randomBundle);
-            startActivityForResult(randomIntent, 2);
+            startActivity(randomIntent);
             return true;
+
         }else if(id == R.id.action_filter){
             Intent intent = new Intent(this, FilterActivity.class);
             startActivity(intent);

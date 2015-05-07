@@ -1,34 +1,308 @@
-<?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="fill_parent"
-        android:padding="5dip"
-        android:layout_height="fill_parent"
-    android:weightSum="1">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.brickedphoneclub.boardgamecollectionmanager.BoardGameDetailActivity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scr_detailScroll"
+        android:layout_above="@+id/fra_PlayButton"
+        android:layout_alignParentTop="true">
 
 
-        <TextView android:layout_width="fill_parent"
-            android:layout_height="wrap_content"  />
-        <EditText android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/enternumberofdice"></EditText>
 
-    <TextView android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-        android:id="@+id/generatenumber" />
-        <TextView android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Random"
-            android:id="@+id/text4"></TextView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rlt_detailLayout"
 
-    <Button android:text="Record Game Play"
-        android:id="@+id/button1"
+            >
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="1"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/lnl_detailTitle"
+                android:showDividers="end">
+
+                <ImageView
+                    android:layout_width="145dp"
+                    android:layout_height="145dp"
+                    android:id="@+id/img_detailImage"
+                    android:contentDescription="Board Game Image"
+                    android:padding="5dp" />
+
+                <TableLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tbl_detailTitleInfo"
+                    android:paddingLeft="5dp">
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:splitMotionEvents="false"
+                        android:duplicateParentState="true"
+                        android:layout_marginTop="20dp">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="valueGameName"
+                            android:id="@+id/lbl_detailValueGameName"
+                            android:layout_column="0"
+                            android:layout_marginBottom="10dp"
+                            android:textStyle="bold"
+                            android:layout_span="2"
+                            android:layout_weight="1"
+                            android:layout_gravity="top"
+                            android:textColor="#ff2400ff" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Year:"
+                            android:id="@+id/lbl_detailYearPub"
+                            android:layout_column="0"
+                            android:layout_gravity="right|top"
+                            android:layout_marginBottom="10dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="valYear"
+                            android:id="@+id/lbl_detailValueYear"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_column="1"
+                            android:layout_gravity="top" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Rating:"
+                            android:id="@+id/lbl_detailRating"
+                            android:layout_column="0"
+                            android:layout_gravity="right|top"
+                            android:layout_marginBottom="10dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="valRating"
+                            android:id="@+id/lbl_detailValueRating"
+                            android:layout_marginBottom="10dp"
+                            android:layout_column="1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_gravity="top" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+            </LinearLayout>
+
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tbl_detailInfo"
+                android:layout_below="@+id/lnl_detailTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true">
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Number of Players:"
+                        android:id="@+id/lbl_detailNumPlayers"
+                        android:layout_column="0"
+                        android:layout_marginBottom="20dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="right|top" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="valueNumPlayers"
+                        android:id="@+id/lbl_detailValueNumPlayers"
+                        android:layout_marginLeft="10dp"
+                        android:layout_column="1"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="top" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Playing Time:"
+                        android:id="@+id/lbl_detailPlayTime"
+
+                        android:layout_column="0"
+                        android:textStyle="bold"
+                        android:layout_gravity="right|top"
+                        android:layout_marginBottom="20dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="valuePlayTime"
+                        android:id="@+id/lbl_detailValuePlayTime"
+                        android:layout_column="1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="top"
+                        android:layout_marginBottom="20dp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Age Group:"
+                        android:id="@+id/lbl_detailAgeGroup"
+                        android:layout_column="0"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="right|top" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="valueAgeGroup"
+                        android:id="@+id/lbl_detailValueAgeGroup"
+                        android:layout_column="1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="top" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Category:"
+                        android:id="@+id/lbl_detailCategory"
+                        android:layout_column="0"
+                        android:layout_gravity="right|top"
+                        android:layout_marginBottom="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="valueCategory"
+                        android:id="@+id/lbl_detailValueCategory"
+                        android:layout_column="1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="top"
+                        android:layout_marginBottom="20dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Mechanic:"
+                        android:id="@+id/lbl_detailMechanic"
+                        android:layout_column="0"
+                        android:layout_gravity="right|top"
+                        android:layout_marginBottom="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="valueMechanic"
+                        android:id="@+id/lbl_detailValueMechanic"
+                        android:layout_column="1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="20dp" />
+                </TableRow>
+
+            </TableLayout>
+
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="false"
+        android:id="@+id/fra_PlayButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
-        </Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Record Game Play"
+            android:id="@+id/btn_recordGamePlay"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+    </FrameLayout>
 
-</LinearLayout>
-
-
-
+</RelativeLayout>
