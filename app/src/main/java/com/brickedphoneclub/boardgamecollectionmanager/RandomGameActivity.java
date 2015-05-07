@@ -80,7 +80,6 @@ public class RandomGameActivity extends Activity {
             if(bgfilter.checkActiveFilter() == true){
                 collectionSize = bgfilter.getFilterList().size();
                 randomGeneratedNumber = myRandom.nextInt(collectionSize);
-                randomGeneratedNumber = randomGeneratedNumber + 1;
                 Log.i("RandomNum: ", " " + randomGeneratedNumber);
                 BoardGame bg =  bgfilter.getFilterList().get(randomGeneratedNumber);
                 loadGame(bg.getObjectId());
@@ -88,7 +87,6 @@ public class RandomGameActivity extends Activity {
             else{
                 collectionSize =  bgm.getCollectionSize();
                 randomGeneratedNumber = myRandom.nextInt(collectionSize);
-                randomGeneratedNumber = randomGeneratedNumber + 1;
                 Log.i("RandomNum: ", " " + randomGeneratedNumber);
                 BoardGame bg = bgm.getBgList().get(randomGeneratedNumber);
                 loadGame(bg.getObjectId());

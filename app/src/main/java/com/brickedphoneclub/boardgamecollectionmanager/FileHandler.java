@@ -197,11 +197,15 @@ public class FileHandler {
 
             try {
 
+                Log.d("XMLParserTask","Starting Top Level Parser");
                 parseTopLevel(ins[0]);
+                Log.d("XMLParserTask","Stopping Top Level Parser");
 
                 String objectIDs = generateStringOfObjectIDs();
 
+                Log.d("XMLParserTask","Starting Details Parser");
                 performDetailsSearch(objectIDs);
+                Log.d("XMLParserTask","Stopping Details Parser");
 
 
             } catch (XmlPullParserException xppe) {
@@ -302,11 +306,7 @@ public class FileHandler {
                 BG.setImage_URL(image_link);
 
 
-
-            //populateDetails(BG);
-
             return BG;
-            //return new Item(boardgamename, objectid, yearpublished, thumbnail_link);
         }
 
         //This handles skipping the XML tags that we don't care about
