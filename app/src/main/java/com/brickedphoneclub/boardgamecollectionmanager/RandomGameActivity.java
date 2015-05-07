@@ -91,9 +91,6 @@ public class RandomGameActivity extends Activity {
                 BoardGame bg = bgm.getBgList().get(randomGeneratedNumber);
                 loadGame(bg.getObjectId());
             }
-
-
-
             return true;
         }
 

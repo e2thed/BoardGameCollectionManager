@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.brickedphoneclub.boardgamecollectionmanager.RandomGameActivity">
     <item android:id="@+id/action_random"
-        android:title="@string/action_random"
+        android:icon="@drawable/ic_action_refresh"
         android:orderInCategory="200"
         android:showAsAction="always" />
 </menu>
