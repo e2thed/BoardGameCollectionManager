@@ -49,8 +49,8 @@ public class RandomGameActivity extends Activity {
             public void onClick(View v)
             {
 
-                Intent recordIntent = new Intent();
-                startActivity(recordIntent);
+                //Intent recordIntent = new Intent();
+                //startActivity(recordIntent);
 
             }});
 
