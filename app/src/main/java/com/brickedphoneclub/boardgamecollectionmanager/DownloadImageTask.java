@@ -27,15 +27,11 @@ public class DownloadImageTask extends AsyncTask<BoardGameAndView, Void, BoardGa
         try {
 
             if (task.toLowerCase().contains("thumb")) {
-                if (BG.getThumbnail_URL() == null || BG.getThumbnail_URL().isEmpty())
-                    return container;   //short circuit
                 imageURL = "http:" + BG.getThumbnail_URL();
                 Log.d("DownloadImageTask", "Downloading Thumbnail " + imageURL);
             } else {
-                if (BG.getLargeImage_URL() == null || BG.getLargeImage_URL().isEmpty())
-                    return container;   //short circuit
-                imageURL = "http:" + BG.getLargeImage_URL();
-                Log.d("DownloadImageTask", "Downloading Large Image " + imageURL);
+                imageURL = "http:" + BG.getImage_URL();
+                Log.d("DownloadImageTask", "Downloading Image " + imageURL);
             }
 
             InputStream in = (InputStream) new URL(imageURL).getContent();
@@ -44,7 +40,7 @@ public class DownloadImageTask extends AsyncTask<BoardGameAndView, Void, BoardGa
             if (task.toLowerCase().contains("thumb"))
                 BG.setThumbnail(bitmap);
             else
-                BG.setLargeImage(bitmap);
+                BG.setImage(bitmap);
 
             in.close();
             return container;

@@ -33,9 +33,9 @@ public class RefreshImageTask extends AsyncTask<BoardGameAndView, Void, BoardGam
             //    imgView.setImageBitmap(thumbnail);
 
         } else {                                        //all other non-thumbnail related tasks
-            Log.d("ImageRefreshingTask", "Refreshing Image "+BG.getLargeImage_URL());
+            Log.d("ImageRefreshingTask", "Refreshing Image "+BG.getImage_URL());
             ImageView imgView = (ImageView)view.findViewById(R.id.img_detailImage);
-            Bitmap image = BG.getLargeImage();
+            Bitmap image = BG.getImage();
             if (image != null)
                 Log.d("whateves", "Setting image bitmap in view");
                 //imgView.setImageBitmap(image);

@@ -43,9 +43,9 @@ public class BoardGameManager {
 
     private ArrayList<BoardGame> createDefaults() {
         //e.g.: contactList.add(new Contact("Malcolm", "Reynolds", "Captain", "Mobile", "123-456-7890", "", "m123.hotmail", "Twitter", "MRey", 1));
-        bgList.add(new BoardGame(1, "One", "2015", null, "//cf.geekdo-images.com/images/pic1104600_t.jpg"));
-        bgList.add(new BoardGame(2, "Two", "2008", null, "//cf.geekdo-images.com/images/pic719935_t.jpg"));
-        BoardGame game1 = new BoardGame(3, "Four", "2003", null, "//cf.geekdo-images.com/images/pic1324609_t.jpg");
+        bgList.add(new BoardGame(1, "One", "2015", "", "//cf.geekdo-images.com/images/pic1104600_t.jpg"));
+        bgList.add(new BoardGame(2, "Two", "2008", "", "//cf.geekdo-images.com/images/pic719935_t.jpg"));
+        BoardGame game1 = new BoardGame(3, "Four", "2003", "", "//cf.geekdo-images.com/images/pic1324609_t.jpg");
         //Mockup Info to test details screen since we don't have XML working yet.
         game1.setRating(7.1234f);
         game1.setMinPlayers(2);

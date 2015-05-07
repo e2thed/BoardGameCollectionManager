@@ -84,11 +84,11 @@ public class BoardGame {
         this.thumbnail_url = new String(thumbnail_url);
     }
 
-    public String getLargeImage_URL() {
+    public String getImage_URL() {
         return image_url;
     }
 
-    public void setLargeImage_URL(String image_url) {
+    public void setImage_URL(String image_url) {
         this.image_url = new String(image_url);
     }
 
@@ -100,11 +100,11 @@ public class BoardGame {
         this.thumbnail_image = bitmap;
     }
 
-    public Bitmap getLargeImage() {
+    public Bitmap getImage() {
         return coverart_image;
     }
 
-    public void setLargeImage(Bitmap bitmap) {
+    public void setImage(Bitmap bitmap) {
         this.coverart_image = bitmap;
     }
 

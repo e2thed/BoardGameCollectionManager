@@ -63,7 +63,7 @@ public class BoardGameDetailActivity extends Activity {
         container.BG = game;
         container.task = "image";
 
-        Bitmap image = game.getLargeImage();
+        Bitmap image = game.getImage();
         if (image == null) {    //If we haven't cached the large coverart image yet
             DownloadImageTask loader = new DownloadImageTask();     //Asyncronously download the large coverart image
             loader.execute(container);
