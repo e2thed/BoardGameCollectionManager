@@ -75,17 +75,26 @@ public class RandomGameActivity extends Activity {
 
             BoardGameManager bgm = BoardGameManager.getInstance(this);
             BoardGameFilter bgfilter = BoardGameFilter.getInstance(this);
-            Bundle randomBundle = new Bundle();
+            //Bundle randomBundle = new Bundle();
+            final Random myRandom = new Random();
             if(bgfilter.checkActiveFilter() == true){
                 collectionSize = bgfilter.getFilterList().size();
+                randomGeneratedNumber = myRandom.nextInt(collectionSize);
+                randomGeneratedNumber = randomGeneratedNumber + 1;
+                Log.i("RandomNum: ", " " + randomGeneratedNumber);
+                BoardGame bg =  bgfilter.getFilterList().get(randomGeneratedNumber);
+                loadGame(bg.getObjectId());
             }
             else{
                 collectionSize =  bgm.getCollectionSize();
+                randomGeneratedNumber = myRandom.nextInt(collectionSize);
+                randomGeneratedNumber = randomGeneratedNumber + 1;
+                Log.i("RandomNum: ", " " + randomGeneratedNumber);
+                BoardGame bg = bgm.getBgList().get(randomGeneratedNumber);
+                loadGame(bg.getObjectId());
             }
-            final Random myRandom = new Random();
-            randomGeneratedNumber = myRandom.nextInt(collectionSize);
-            randomGeneratedNumber = randomGeneratedNumber + 1;
-            Log.i("RandomNum: ", " " + randomGeneratedNumber);
+
+
 
             return true;
         }

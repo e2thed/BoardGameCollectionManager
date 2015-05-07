@@ -270,6 +270,7 @@ public class MainCollectionActivity extends ListActivity {
             Log.i("RandomNum: ", " " + randomGeneratedNumber);
             BoardGame bg = (BoardGame)getListAdapter().getItem(randomGeneratedNumber);
 
+
             Bundle randomBundle = new Bundle();
             randomBundle.putLong("id", bg.getObjectId());
             Log.i("BG ID:", "Id is: " + bg.getObjectId());
