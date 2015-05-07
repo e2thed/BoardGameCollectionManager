@@ -20,41 +20,21 @@ import android.widget.TextView;
 
 public class RandomGameActivity extends Activity {
 
-    public int collectionSize, randomGeneratedNumber;
+    public static int collectionSize, randomGeneratedNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_game);
 
-        Intent intentExtras = getIntent();
-        Bundle extrasBundle = intentExtras.getExtras();
-        if (!(extrasBundle == null) && !(extrasBundle.isEmpty())) {
-            collectionSize = extrasBundle.getInt("CollectionSize");
-
-        }
-
-
-
-        final Random myRandom = new Random(10);
 
         Button buttonGenerate = (Button)findViewById(R.id.button1);
-        final TextView textGenerateNumber = (TextView)findViewById(R.id.text4);
-
         buttonGenerate.setOnClickListener(new OnClickListener()
         {
 
             @Override
             public void onClick(View v)
             {
-               Log.i("info for random", "click Random");
-               
-                // TODO Auto-generated method stub
-
-
-                randomGeneratedNumber = myRandom.nextInt(collectionSize);
-
-                textGenerateNumber.setText(String.valueOf(randomGeneratedNumber +1));
 
 
 
@@ -80,7 +60,23 @@ public class RandomGameActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_random) {
+
+            BoardGameManager bgm = BoardGameManager.getInstance(this);
+            BoardGameFilter bgfilter = BoardGameFilter.getInstance(this);
+            Bundle randomBundle = new Bundle();
+            if(bgfilter.checkActiveFilter() == true){
+                collectionSize = bgfilter.getFilterList().size();
+            }
+            else{
+                collectionSize =  bgm.getCollectionSize();
+            }
+            final Random myRandom = new Random();
+            randomGeneratedNumber = myRandom.nextInt(collectionSize);
+            final TextView textGenerateNumber = (TextView)findViewById(R.id.text4);
+            textGenerateNumber.setText(String.valueOf(randomGeneratedNumber + 1));
+
+
             return true;
         }
 

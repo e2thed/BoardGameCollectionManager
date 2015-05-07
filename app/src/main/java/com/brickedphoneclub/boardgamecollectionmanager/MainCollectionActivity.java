@@ -258,12 +258,19 @@ public class MainCollectionActivity extends ListActivity {
         else if(id == R.id.action_random){
 
             BoardGameManager bgm = BoardGameManager.getInstance(this);
-
+            BoardGameFilter bgfilter = BoardGameFilter.getInstance(this);
             Bundle randomBundle = new Bundle();
-            randomBundle.putInt("CollectionSize", bgm.getCollectionSize());
+            if(bgfilter.checkActiveFilter() == true){
+                randomBundle.putInt("CollectionSize", bgfilter.getFilterList().size());
+            }
+            else{
+                randomBundle.putInt("CollectionSize", bgm.getCollectionSize());
+            }
+
+
             Intent randomIntent = new Intent(this, RandomGameActivity.class);
             randomIntent.putExtras(randomBundle);
-            startActivityForResult(randomIntent, 3);
+            startActivityForResult(randomIntent, 2);
             return true;
         }else if(id == R.id.action_filter){
             Intent intent = new Intent(this, FilterActivity.class);

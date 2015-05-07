@@ -20,7 +20,7 @@
             android:text="Random"
             android:id="@+id/text4"></TextView>
 
-    <Button android:text="Random Game Play"
+    <Button android:text="Record Game Play"
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
