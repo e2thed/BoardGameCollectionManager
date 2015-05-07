@@ -23,6 +23,10 @@
     <string name="search_byname"> Game Name </string>
     <string name="search_collection"> Games in Collection </string>
     <string name="search_all"> All Games </string>
+    <string name="location">Location</string>
+    <string name="address_hint">Street Address</string>
+    <string name="citystate_hint">City, State</string>
+    <string name="country_hint">Country</string>
 
     <string-array name="alpha_array">
         <item>A-Z</item>
