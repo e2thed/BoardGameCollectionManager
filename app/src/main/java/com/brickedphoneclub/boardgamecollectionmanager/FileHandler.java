@@ -303,7 +303,7 @@ public class FileHandler {
                 BG.setThumbnail_URL(thumbnail_link);
 
             if (image_link != null)
-                BG.setImage_URL(image_link);
+                BG.setLargeImage_URL(image_link);
 
 
             return BG;
