@@ -27,6 +27,7 @@ import java.util.concurrent.TimeoutException;
 public class MainCollectionActivity extends ListActivity {
 
     public static String[] activeSortOptions = new String[3];
+    BoardGameFilter bgfilterchk = BoardGameFilter.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,8 @@ public class MainCollectionActivity extends ListActivity {
         final TextView lblFilterRating = (TextView) findViewById(R.id.lbl_CollectionFilterRating);
         final ImageButton cancelGamName = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelGamName);
         final TextView lblFilterGamName = (TextView) findViewById(R.id.lbl_CollectionFilterGamName);
+
+
 
         disableLabelAndButton(lblFilterPlayers, cancelPlayers);
         cancelPlayers.setOnClickListener(new View.OnClickListener() {
@@ -282,33 +285,25 @@ public class MainCollectionActivity extends ListActivity {
             return true;
         }
         else if(id == R.id.action_random){
-
-            int randomGeneratedNumber, collectionSize;
+            ArrayList<BoardGame> rList;
+            BoardGameFilter filter = BoardGameFilter.getInstance(this);
             BoardGameManager bgm = BoardGameManager.getInstance(this);
-            BoardGameFilter bgfilter = BoardGameFilter.getInstance(this);
-            //Bundle randomBundle = new Bundle();
-            if(bgfilter.checkActiveFilter() == true){
-                collectionSize = bgfilter.getFilterList().size();
+            if(filter.checkActiveFilter() == true) {
+                rList = filter.getFilterList();
+            } else {
+                rList = bgm.getBgList();
             }
-            else{
-                collectionSize =  bgm.getCollectionSize();
-            }
-            final Random myRandom = new Random();
-            randomGeneratedNumber = myRandom.nextInt(collectionSize);
-            randomGeneratedNumber = randomGeneratedNumber + 1;
-            Log.i("RandomNum: ", " " + randomGeneratedNumber);
-            BoardGame bg = (BoardGame)getListAdapter().getItem(randomGeneratedNumber);
+            final Random randomGen = new Random();
+            int randomNum = randomGen.nextInt(rList.size());
+            Log.i("COLLECTION RANDOM", "Random num is: " + (randomNum) + " List size:" + rList.size());
+            BoardGame game = rList.get(randomNum);
 
-
-            Bundle randomBundle = new Bundle();
-            randomBundle.putLong("id", bg.getObjectId());
-            Log.i("BG ID:", "Id is: " + bg.getObjectId());
-
-            Intent randomIntent = new Intent(this, RandomGameActivity.class);
-            randomIntent.putExtras(randomBundle);
-            startActivity(randomIntent);
+            Bundle bgDetail = new Bundle();
+            bgDetail.putLong("id", game.getObjectId());
+            Intent intent = new Intent(this, BoardGameDetailActivity.class);
+            intent.putExtras(bgDetail);
+            startActivity(intent);
             return true;
-
         }else if(id == R.id.action_filter){
             Intent intent = new Intent(this, FilterActivity.class);
             startActivity(intent);
@@ -390,7 +385,54 @@ public class MainCollectionActivity extends ListActivity {
             nameView.setText(BG.getName());
 
             TextView yearView = (TextView)view.findViewById(R.id.lbl_yrpub);
-            yearView.setText(BG.getYearPublished());
+
+            if(bgfilterchk.checkActiveFilter() == true) {
+                if (!bgfilterchk.getNumPlayers().equals("")) {
+                        yearView.setText(BG.getMinPlayers() + " - " + BG.getMaxPlayers() + " players");
+                }
+
+                if(!bgfilterchk.getPlayTime().equals("")) {
+                    if (yearView.getText().length() == 0) {
+                        yearView.setText(BG.getMaxPlayTime() + " min");
+                    } else {
+                        yearView.setText(yearView.getText().toString() + ", " + BG.getMaxPlayTime() + " min");
+                    }
+                }
+
+                if(!bgfilterchk.getAgeGroup().equals("")) {
+                    if (yearView.getText().length() == 0) {
+                        yearView.setText(BG.getAgeGroupToString());
+                    } else {
+                        yearView.setText(yearView.getText().toString() + ", " + BG.getAgeGroupToString());
+                    }
+                }
+
+                if(!bgfilterchk.getRating().equals("")) {
+                    if (yearView.getText().length() == 0) {
+                        yearView.setText(BG.getRating() + " rating");
+                    } else {
+                        yearView.setText(yearView.getText().toString() + ", " + BG.getRating() + " rating");
+                    }
+                }
+
+                if(!bgfilterchk.getCategory().equals("")) {
+                    if (yearView.getText().length() == 0) {
+                        yearView.setText(BG.getYearPublished());
+                    }
+                }
+                if(!bgfilterchk.getMechanic().equals("")) {
+                    if (yearView.getText().length() == 0) {
+                        yearView.setText(BG.getYearPublished());
+                    }
+                }
+                if(!bgfilterchk.getGamName().equals("")){
+                    if (yearView.getText().length() == 0) {
+                        yearView.setText(BG.getYearPublished());
+                    }
+                }
+            } else {
+                yearView.setText(BG.getYearPublished());
+            }
 
             Bitmap thumbnail = BG.getThumbnail();
             if (thumbnail != null) {

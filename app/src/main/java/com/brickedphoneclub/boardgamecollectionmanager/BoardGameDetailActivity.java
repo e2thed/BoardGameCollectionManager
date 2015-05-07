@@ -50,6 +50,20 @@ public class BoardGameDetailActivity extends Activity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if(id == R.id.action_random){
+            ArrayList<BoardGame> rList;
+            BoardGameFilter filter = BoardGameFilter.getInstance(this);
+            BoardGameManager bgm = BoardGameManager.getInstance(this);
+            if(filter.checkActiveFilter() == true) {
+                rList = filter.getFilterList();
+            } else {
+                rList = bgm.getBgList();
+            }
+            final Random randomGen = new Random();
+            int randomNum = randomGen.nextInt(rList.size());
+            Log.i("COLLECTION RANDOM", "Random num is: " + (randomNum) + " List size:" + rList.size());
+            BoardGame game = rList.get(randomNum);
+            loadGame(game.getObjectId());
         }
 
         return super.onOptionsItemSelected(item);
