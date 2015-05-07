@@ -48,9 +48,9 @@ public class RandomGameActivity extends Activity {
             @Override
             public void onClick(View v)
             {
-                //Intent recordIntent = new Intent(this, MapsActivity.class);
 
-                //startActivity(recordIntent);
+                Intent recordIntent = new Intent();
+                startActivity(recordIntent);
 
             }});
 
