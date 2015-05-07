@@ -157,7 +157,6 @@ public class BoardGameFilter {
             tempList = searchByGamName(tempList);
             Log.i("FILTER SIZE", "Size:" + tempList.size());
         }
-
         if(!numPlayers.equals("")) {
             tempList = filterByPlayer(tempList);
             Log.i("FILTER SIZE", "Size:" + tempList.size());

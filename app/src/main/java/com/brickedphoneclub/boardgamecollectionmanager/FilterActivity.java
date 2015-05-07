@@ -36,6 +36,7 @@ public class FilterActivity extends Activity {
         spnRating = (Spinner) findViewById(R.id.spn_filterRating);
 
         Resources res = getResources();
+        BoardGameManager bgm = BoardGameManager.getInstance(this);
 
         ArrayList<String> players = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.filter_player_count_array)));
         initSpinner(spnNumPlayers, players);
@@ -46,11 +47,11 @@ public class FilterActivity extends Activity {
         ArrayList<String> age = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.filter_age_group_array)));
         initSpinner(spnAgeGroup, age);
 
-        ArrayList<String> cat = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.filter_category_array)));
-        initSpinner(spnCategory, cat);
+        //ArrayList<String> cat = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.filter_category_array)));
+        initSpinner(spnCategory, bgm.getUniqueCategories());
 
-        ArrayList<String> mech = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.filter_mechanic_array)));
-        initSpinner(spnMechanic, mech);
+        //ArrayList<String> mech = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.filter_mechanic_array)));
+        initSpinner(spnMechanic, bgm.getUniqueMechanics());
 
         ArrayList<String> rating = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.filter_rating_array)));
         initSpinner(spnRating, rating);

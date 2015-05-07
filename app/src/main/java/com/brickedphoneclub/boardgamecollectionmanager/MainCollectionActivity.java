@@ -180,47 +180,76 @@ public class MainCollectionActivity extends ListActivity {
     }
 
     private void checkFilterButtons(BoardGameFilter filter) {
+
         if(!filter.getNumPlayers().equals("")) {
             ImageButton cancelPlayers = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelPlayers);
             TextView lblFilterPlayers = (TextView) findViewById(R.id.lbl_CollectionFilterPlayers);
             enableLabelAndButton(lblFilterPlayers, cancelPlayers);
             lblFilterPlayers.setText(filter.getNumPlayers() + " players");
+        } else {
+            ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelPlayers);
+            TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterPlayers);
+            disableLabelAndButton(lbl, btn);
         }
         if(!filter.getPlayTime().equals("")) {
             ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelTime);
             TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterTime);
             enableLabelAndButton(lbl, btn);
             lbl.setText(filter.getPlayTime() + " minutes");
+        } else {
+            ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelTime);
+            TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterTime);
+            disableLabelAndButton(lbl, btn);
         }
         if(!filter.getAgeGroup().equals("")) {
             ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelAge);
             TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterAge);
             enableLabelAndButton(lbl, btn);
             lbl.setText(filter.getAgeGroup() + " age");
+        } else {
+            ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelAge);
+            TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterAge);
+            disableLabelAndButton(lbl, btn);
         }
         if(!filter.getCategory().equals("")) {
             ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelCategory);
             TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterCategory);
             enableLabelAndButton(lbl, btn);
             lbl.setText(filter.getCategory());
+        } else {
+            ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelCategory);
+            TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterCategory);
+            disableLabelAndButton(lbl, btn);
         }
         if(!filter.getMechanic().equals("")) {
             ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelMechanic);
             TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterMechanic);
             enableLabelAndButton(lbl, btn);
             lbl.setText(filter.getMechanic());
+        } else {
+            ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelMechanic);
+            TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterMechanic);
+            disableLabelAndButton(lbl, btn);
         }
         if(!filter.getRating().equals("")) {
             ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelRating);
             TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterRating);
             enableLabelAndButton(lbl, btn);
             lbl.setText(filter.getRating() + " rating");
+        } else {
+            ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelRating);
+            TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterRating);
+            disableLabelAndButton(lbl, btn);
         }
         if(!filter.getGamName().equals("")) {
             ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelGamName);
             TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterGamName);
             enableLabelAndButton(lbl, btn);
             lbl.setText("Search : " + filter.getGamName());
+        } else {
+            ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelGamName);
+            TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterGamName);
+            disableLabelAndButton(lbl, btn);
         }
     }
 

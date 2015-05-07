@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 
 /**
  * Created by Giovanni Galasso on 4/18/2015.
@@ -28,24 +30,15 @@ public class BoardGameManager {
         //GAG - 05/02/15
         //Added in check if game is already in the collection it doesn't get added again.
         //This is probably not very good performance, I'm guessing some better way to handle this.
-        if(getBoardGameById(bg.getObjectId()) == null) {
+        if(!bgList.contains(bg)) {
             bgList.add(bg);
         }
     }
 
-    public void deleteBoardGame(BoardGame bg) {
-
-    }
-
-    public void deleteBoardGameById(Integer id) {
-
-    }
-
     private ArrayList<BoardGame> createDefaults() {
-        //e.g.: contactList.add(new Contact("Malcolm", "Reynolds", "Captain", "Mobile", "123-456-7890", "", "m123.hotmail", "Twitter", "MRey", 1));
-        bgList.add(new BoardGame(1, "One", "2015", null, "//cf.geekdo-images.com/images/pic1104600_t.jpg"));
-        bgList.add(new BoardGame(2, "Two", "2008", null, "//cf.geekdo-images.com/images/pic719935_t.jpg"));
-        BoardGame game1 = new BoardGame(3, "Four", "2003", null, "//cf.geekdo-images.com/images/pic1324609_t.jpg");
+        bgList.add(new BoardGame(1, "One", "2015", "", "//cf.geekdo-images.com/images/pic1104600_t.jpg"));
+        bgList.add(new BoardGame(2, "Two", "2008", "", "//cf.geekdo-images.com/images/pic719935_t.jpg"));
+        BoardGame game1 = new BoardGame(3, "Four", "2003", "", "//cf.geekdo-images.com/images/pic1324609_t.jpg");
         //Mockup Info to test details screen since we don't have XML working yet.
         game1.setRating(7.1234f);
         game1.setMinPlayers(2);
@@ -85,10 +78,34 @@ public class BoardGameManager {
         return null;
     }
 
-    /*
-    public String[] getNumOfPlayerFilterOptions() {
-        String[] numOfPlayers = {"1","2","3","4","5","6","7","8","9","10+"};
-        return numOfPlayers;
+    public ArrayList<String> getUniqueCategories() {
+        ArrayList<String> newList = new ArrayList<>();
+        for(BoardGame bg: bgList) {
+            for(String s: bg.getBoardGameCategory()) {
+                if(!newList.contains(s)) {
+                    newList.add(s);
+                }
+            }
+        }
+        Collections.sort(newList);
+        newList.add(0, "Select...");
+        Log.i("BGM:", "Test unique category: " + newList.toString()) ;
+        return newList;
     }
-    */
+
+    public ArrayList<String> getUniqueMechanics() {
+        ArrayList<String> newList = new ArrayList<>();
+        for(BoardGame bg: bgList) {
+            for(String s: bg.getBoardGameMechanic()) {
+                if(!newList.contains(s)) {
+                    newList.add(s);
+                }
+            }
+        }
+        Collections.sort(newList);
+        newList.add(0, "Select...");
+        Log.i("BGM:", "Test unique mechanics: " + newList.toString()) ;
+        return newList;
+    }
+
 }
