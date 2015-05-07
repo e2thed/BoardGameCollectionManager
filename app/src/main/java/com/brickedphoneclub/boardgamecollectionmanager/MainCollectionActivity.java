@@ -385,13 +385,14 @@ public class MainCollectionActivity extends ListActivity {
             nameView.setText(BG.getName());
 
             TextView yearView = (TextView)view.findViewById(R.id.lbl_yrpub);
+            yearView.setText(BG.getYearPublished());
 
             if(bgfilterchk.checkActiveFilter() == true) {
                 if (!bgfilterchk.getNumPlayers().equals("")) {
-                        yearView.setText(BG.getMinPlayers() + " - " + BG.getMaxPlayers() + " players");
+                    yearView.setText(BG.getMinPlayers() + " - " + BG.getMaxPlayers() + " players");
                 }
 
-                if(!bgfilterchk.getPlayTime().equals("")) {
+                if (!bgfilterchk.getPlayTime().equals("")) {
                     if (yearView.getText().length() == 0) {
                         yearView.setText(BG.getMaxPlayTime() + " min");
                     } else {
@@ -399,7 +400,7 @@ public class MainCollectionActivity extends ListActivity {
                     }
                 }
 
-                if(!bgfilterchk.getAgeGroup().equals("")) {
+                if (!bgfilterchk.getAgeGroup().equals("")) {
                     if (yearView.getText().length() == 0) {
                         yearView.setText(BG.getAgeGroupToString());
                     } else {
@@ -407,32 +408,15 @@ public class MainCollectionActivity extends ListActivity {
                     }
                 }
 
-                if(!bgfilterchk.getRating().equals("")) {
+                if (!bgfilterchk.getRating().equals("")) {
                     if (yearView.getText().length() == 0) {
                         yearView.setText(BG.getRating() + " rating");
                     } else {
                         yearView.setText(yearView.getText().toString() + ", " + BG.getRating() + " rating");
                     }
                 }
-
-                if(!bgfilterchk.getCategory().equals("")) {
-                    if (yearView.getText().length() == 0) {
-                        yearView.setText(BG.getYearPublished());
-                    }
-                }
-                if(!bgfilterchk.getMechanic().equals("")) {
-                    if (yearView.getText().length() == 0) {
-                        yearView.setText(BG.getYearPublished());
-                    }
-                }
-                if(!bgfilterchk.getGamName().equals("")){
-                    if (yearView.getText().length() == 0) {
-                        yearView.setText(BG.getYearPublished());
-                    }
-                }
-            } else {
-                yearView.setText(BG.getYearPublished());
             }
+
 
             Bitmap thumbnail = BG.getThumbnail();
             if (thumbnail != null) {
