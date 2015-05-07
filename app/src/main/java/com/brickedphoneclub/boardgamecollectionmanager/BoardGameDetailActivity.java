@@ -63,11 +63,14 @@ public class BoardGameDetailActivity extends Activity {
         container.BG = game;
         container.task = "image";
 
-        Bitmap image = game.getImage();
+        Bitmap image = game.getLargeImage();
         if (image == null) {    //If we haven't cached the large coverart image yet
             DownloadImageTask loader = new DownloadImageTask();     //Asyncronously download the large coverart image
             loader.execute(container);
 
+            //((ImageView) findViewById(R.id.img_detailImage)).setImageBitmap(game.getThumbnail());
+
+            /*
             try {
 
                 loader.get(3000, TimeUnit.MILLISECONDS);
@@ -79,6 +82,8 @@ public class BoardGameDetailActivity extends Activity {
             } catch (ExecutionException ee) {
                 Log.e("FileHandler", "Taking too long to download file", ee);
             }
+            */
+
         }
 
         ((TextView) findViewById(R.id.lbl_detailValueGameName)).setText(game.getName());
@@ -89,7 +94,14 @@ public class BoardGameDetailActivity extends Activity {
         ((TextView) findViewById(R.id.lbl_detailValueAgeGroup)).setText(game.getAgeGroupToString());
         ((TextView) findViewById(R.id.lbl_detailValueCategory)).setText(game.getCategoryToString());
         ((TextView) findViewById(R.id.lbl_detailValueMechanic)).setText(game.getMechanicsToString());
-        ((ImageView) findViewById(R.id.img_detailImage)).setImageBitmap(game.getThumbnail());
+
+        if (image == null)      //if the large image isn't downloaded yet, then use the thumbnail
+            ((ImageView) findViewById(R.id.img_detailImage)).setImageBitmap(game.getThumbnail());
+        else
+            ((ImageView) findViewById(R.id.img_detailImage)).setImageBitmap(image);
+
+
+
         Log.i("DETAIL SCREEN", "Details of game loaded for ID:" + game.getObjectId());
         Log.i("DETAIL SCREEN", "Rating:" + game.getRating());
     }
