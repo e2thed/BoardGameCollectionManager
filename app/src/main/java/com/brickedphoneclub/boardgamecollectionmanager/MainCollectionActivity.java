@@ -27,6 +27,7 @@ import java.util.concurrent.TimeoutException;
 public class MainCollectionActivity extends ListActivity {
 
     public static String[] activeSortOptions = new String[3];
+    BoardGameFilter bgfilterchk = BoardGameFilter.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,8 @@ public class MainCollectionActivity extends ListActivity {
         final TextView lblFilterRating = (TextView) findViewById(R.id.lbl_CollectionFilterRating);
         final ImageButton cancelGamName = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelGamName);
         final TextView lblFilterGamName = (TextView) findViewById(R.id.lbl_CollectionFilterGamName);
+
+
 
         disableLabelAndButton(lblFilterPlayers, cancelPlayers);
         cancelPlayers.setOnClickListener(new View.OnClickListener() {
@@ -390,7 +393,27 @@ public class MainCollectionActivity extends ListActivity {
             nameView.setText(BG.getName());
 
             TextView yearView = (TextView)view.findViewById(R.id.lbl_yrpub);
-            yearView.setText(BG.getYearPublished());
+
+            if(bgfilterchk.checkActiveFilter() == true)
+            {
+                if(!bgfilterchk.getNumPlayers().equals("")) {
+                    yearView.setText(BG.getMinPlayers() + " - " + BG.getMaxPlayers() + " players");
+                }else if(!bgfilterchk.getPlayTime().equals("")) {
+                    yearView.setText(BG.getMinPlayTime() + " - " + BG.getMaxPlayTime() + " minutes");
+                } else if(!bgfilterchk.getAgeGroup().equals("")) {
+                    yearView.setText(BG.getAgeGroupToString());
+                }else if(!bgfilterchk.getCategory().equals("")) {
+                    yearView.setText(BG.getCategoryToString());
+                }else if(!bgfilterchk.getMechanic().equals("")) {
+                    yearView.setText(BG.getMechanicsToString());
+                } else if(!bgfilterchk.getRating().equals("")) {
+                    yearView.setText(BG.getRating() + " rating");
+                } else {
+                    yearView.setText(BG.getYearPublished());
+                }
+            } else {
+                yearView.setText(BG.getYearPublished());
+            }
 
             Bitmap thumbnail = BG.getThumbnail();
             if (thumbnail != null) {
