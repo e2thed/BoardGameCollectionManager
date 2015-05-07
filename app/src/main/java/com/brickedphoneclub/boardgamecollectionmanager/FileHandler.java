@@ -219,7 +219,11 @@ public class FileHandler {
             return 0L;
         }
 
-        public void parseTopLevel(InputStream in) throws XmlPullParserException, IOException {
+        protected void onProgressUpdate(Integer... progress) {
+            //setProgressPercent(progress[0]);
+        }
+
+        private void parseTopLevel(InputStream in) throws XmlPullParserException, IOException {
             try {
                 XmlPullParser parser = Xml.newPullParser();
                 parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -234,7 +238,15 @@ public class FileHandler {
         private void readTopLevelFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
             BoardGame BG;
 
+            publishProgress((int) 0);      //reset progress bar
+
             parser.require(XmlPullParser.START_TAG, ns, "items");
+            String result = parser.getAttributeValue(ns, "totalitems");
+            int collection_size = Integer.parseInt(result);
+            int i = 0;
+
+            Log.i("BGM size", "Boardgame Collection Size = " + BGM.getCollectionSize());
+
             while (parser.next() != XmlPullParser.END_TAG) {
                 if (parser.getEventType() != XmlPullParser.START_TAG) {
                     continue;
@@ -244,12 +256,14 @@ public class FileHandler {
                 if (name.equals("item")) {
                     BG = readItem(parser);
                     BGM.addBoardGame(BG);
+                    i++;
+                    publishProgress( (int) ( (i/(float)collection_size) * 100 ) );
                 } else {
                     skip(parser);
                 }
+                if (isCancelled()) break;
             }
-
-            Log.i("BGM size", "Boardgame Collection Size = " + BGM.getCollectionSize());
+            publishProgress( (int) ( (i/(float)collection_size) * 100 ) );  //should be 100%
         }
 
         // Parses the contents of an item. If it encounters a name, yearpublished, or thumbnail tag, hands them off
@@ -328,7 +342,7 @@ public class FileHandler {
         }
 
 
-        public String generateStringOfObjectIDs() {
+        private String generateStringOfObjectIDs() {
 
             BoardGame BG;
             String list_of_objectIDs = new String();
