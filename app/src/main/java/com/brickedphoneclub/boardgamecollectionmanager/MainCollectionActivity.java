@@ -388,12 +388,13 @@ public class MainCollectionActivity extends ListActivity {
             yearView.setText(BG.getYearPublished());
 
             if(bgfilterchk.checkActiveFilter() == true) {
+
                 if (!bgfilterchk.getNumPlayers().equals("")) {
                     yearView.setText(BG.getMinPlayers() + " - " + BG.getMaxPlayers() + " players");
                 }
 
                 if (!bgfilterchk.getPlayTime().equals("")) {
-                    if (yearView.getText().length() == 0) {
+                    if (yearView.getText().length() == 4) {
                         yearView.setText(BG.getMaxPlayTime() + " min");
                     } else {
                         yearView.setText(yearView.getText().toString() + ", " + BG.getMaxPlayTime() + " min");
@@ -401,7 +402,7 @@ public class MainCollectionActivity extends ListActivity {
                 }
 
                 if (!bgfilterchk.getAgeGroup().equals("")) {
-                    if (yearView.getText().length() == 0) {
+                    if (yearView.getText().length() == 4) {
                         yearView.setText(BG.getAgeGroupToString());
                     } else {
                         yearView.setText(yearView.getText().toString() + ", " + BG.getAgeGroupToString());
@@ -409,7 +410,7 @@ public class MainCollectionActivity extends ListActivity {
                 }
 
                 if (!bgfilterchk.getRating().equals("")) {
-                    if (yearView.getText().length() == 0) {
+                    if (yearView.getText().length() == 4) {
                         yearView.setText(BG.getRating() + " rating");
                     } else {
                         yearView.setText(yearView.getText().toString() + ", " + BG.getRating() + " rating");
