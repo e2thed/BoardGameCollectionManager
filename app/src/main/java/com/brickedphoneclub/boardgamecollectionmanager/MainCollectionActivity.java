@@ -386,6 +386,7 @@ public class MainCollectionActivity extends ListActivity {
 
             TextView yearView = (TextView)view.findViewById(R.id.lbl_yrpub);
             yearView.setText(BG.getYearPublished());
+            int yrPubLen = yearView.length();
 
             if(bgfilterchk.checkActiveFilter() == true) {
 
@@ -394,7 +395,7 @@ public class MainCollectionActivity extends ListActivity {
                 }
 
                 if (!bgfilterchk.getPlayTime().equals("")) {
-                    if (yearView.getText().length() == 4) {
+                    if (yearView.getText().length() == yrPubLen) {
                         yearView.setText(BG.getMaxPlayTime() + " min");
                     } else {
                         yearView.setText(yearView.getText().toString() + ", " + BG.getMaxPlayTime() + " min");
@@ -402,7 +403,7 @@ public class MainCollectionActivity extends ListActivity {
                 }
 
                 if (!bgfilterchk.getAgeGroup().equals("")) {
-                    if (yearView.getText().length() == 4) {
+                    if (yearView.getText().length() == yrPubLen) {
                         yearView.setText(BG.getAgeGroupToString());
                     } else {
                         yearView.setText(yearView.getText().toString() + ", " + BG.getAgeGroupToString());
@@ -410,7 +411,7 @@ public class MainCollectionActivity extends ListActivity {
                 }
 
                 if (!bgfilterchk.getRating().equals("")) {
-                    if (yearView.getText().length() == 4) {
+                    if (yearView.getText().length() == yrPubLen) {
                         yearView.setText(BG.getRating() + " rating");
                     } else {
                         yearView.setText(yearView.getText().toString() + ", " + BG.getRating() + " rating");
