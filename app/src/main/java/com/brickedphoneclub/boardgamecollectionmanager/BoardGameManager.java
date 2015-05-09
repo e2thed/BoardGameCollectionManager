@@ -31,9 +31,17 @@ public class BoardGameManager {
         //GAG - 05/02/15
         //Added in check if game is already in the collection it doesn't get added again.
         //This is probably not very good performance, I'm guessing some better way to handle this.
-        if(!bgList.contains(bg)) {
+
+        /*if(!bgList.contains(bg)) {
             bgList.add(bg);
+        }*/
+
+        //Revert back to old add, looks like duplicates were being generated with the new way when reading in the XML.
+        if(getBoardGameById(bg.getObjectId()) == null) {
+            bgList.add(bg);
+
         }
+
     }
 
     private ArrayList<BoardGame> createDefaults() {

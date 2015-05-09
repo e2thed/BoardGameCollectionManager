@@ -57,9 +57,10 @@
             android:ems="10"
             android:id="@+id/login_name_field"
             android:editable="true"
-            android:hint="User-ID"
+            android:hint="BGG User ID"
             android:layout_gravity="center_horizontal"
-            android:paddingBottom="10dp" />
+            android:paddingBottom="10dp"
+            android:singleLine="true" />
 
     </LinearLayout>
 
