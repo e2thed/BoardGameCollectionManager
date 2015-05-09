@@ -3,6 +3,7 @@ package com.brickedphoneclub.boardgamecollectionmanager;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 /**
@@ -198,7 +199,11 @@ public class BoardGame {
 
     //Return the double rating value as a string for printing out and added to text fields.
     public String getRatingToString() {
-        return Float.toString(rating);
+        //GAG: Formatted number to one decimal places so it looks better.
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(1);
+        return df.format(rating);
+        //return Float.toString(rating);
     }
 
     //Return the range of number of players as a string. If the game only can be played with a specific number

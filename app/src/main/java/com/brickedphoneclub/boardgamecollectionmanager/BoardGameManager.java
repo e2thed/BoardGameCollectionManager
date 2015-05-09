@@ -23,7 +23,8 @@ public class BoardGameManager {
     }
 
     private BoardGameManager(Context context) {
-        createDefaults();
+        //GAG: Removed defaults for demo purposes.
+        //createDefaults();
     }
 
     public void addBoardGame(BoardGame bg) {

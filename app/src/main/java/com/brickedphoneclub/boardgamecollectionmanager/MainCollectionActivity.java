@@ -412,9 +412,9 @@ public class MainCollectionActivity extends ListActivity {
 
                 if (!bgfilterchk.getRating().equals("")) {
                     if (yearView.getText().length() == yrPubLen) {
-                        yearView.setText(BG.getRating() + " rating");
+                        yearView.setText(BG.getRatingToString() + " rating");
                     } else {
-                        yearView.setText(yearView.getText().toString() + ", " + BG.getRating() + " rating");
+                        yearView.setText(yearView.getText().toString() + ", " + BG.getRatingToString() + " rating");
                     }
                 }
             }
