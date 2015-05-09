@@ -23,6 +23,7 @@ public class SearchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         txt_searchString = (EditText) findViewById(R.id.txt_searchByName);
+        //txt_searchString.setImeOptions(EditorInfo.IME_ACTION_DONE);
         final Button buttonSearch = (Button) findViewById(R.id.btn_search);
         btn_delSearch = (ImageButton) findViewById(R.id.imgbtn_gamName);
 
