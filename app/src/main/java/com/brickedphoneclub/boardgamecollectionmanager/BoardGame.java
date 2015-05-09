@@ -166,7 +166,10 @@ public class BoardGame {
     }
 
     public String[] getBoardGameCategory() {
-        return Arrays.copyOf(boardGameCategory, boardGameCategory.length);
+        if(boardGameCategory != null) {
+            return Arrays.copyOf(boardGameCategory, boardGameCategory.length);
+        }
+        return null;
     }
 
     public void setBoardGameCategory(String[] boardGameCategory) {
@@ -174,7 +177,10 @@ public class BoardGame {
     }
 
     public String[] getBoardGameMechanic() {
-        return Arrays.copyOf(boardGameMechanic, boardGameMechanic.length);
+        if(boardGameMechanic != null) {
+            return Arrays.copyOf(boardGameMechanic, boardGameMechanic.length);
+        }
+        return null;
     }
 
     public void setBoardGameMechanic(String[] boardGameMechanic) {

@@ -61,14 +61,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LoginActivity" />
         </activity>
-        <activity
-            android:name=".RandomGameActivity"
-            android:label="@string/title_activity_random_game"
-            android:parentActivityName=".MainCollectionActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LoginActivity" />
-        </activity>
+
         <activity
             android:name=".SearchActivity"
             android:label="@string/title_activity_search" >

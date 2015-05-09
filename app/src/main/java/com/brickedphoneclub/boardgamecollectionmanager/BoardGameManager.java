@@ -91,9 +91,11 @@ public class BoardGameManager {
     public ArrayList<String> getUniqueCategories() {
         ArrayList<String> newList = new ArrayList<>();
         for(BoardGame bg: bgList) {
-            for(String s: bg.getBoardGameCategory()) {
-                if(!newList.contains(s)) {
-                    newList.add(s);
+            if (bg.getBoardGameCategory() != null) {
+                for (String s : bg.getBoardGameCategory()) {
+                    if (!newList.contains(s)) {
+                        newList.add(s);
+                    }
                 }
             }
         }
@@ -106,9 +108,11 @@ public class BoardGameManager {
     public ArrayList<String> getUniqueMechanics() {
         ArrayList<String> newList = new ArrayList<>();
         for(BoardGame bg: bgList) {
-            for(String s: bg.getBoardGameMechanic()) {
-                if(!newList.contains(s)) {
-                    newList.add(s);
+            if (bg.getBoardGameMechanic() != null) {
+                for (String s : bg.getBoardGameMechanic()) {
+                    if (!newList.contains(s)) {
+                        newList.add(s);
+                    }
                 }
             }
         }
