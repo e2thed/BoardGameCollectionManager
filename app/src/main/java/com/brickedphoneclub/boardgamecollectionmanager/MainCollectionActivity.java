@@ -198,7 +198,7 @@ public class MainCollectionActivity extends ListActivity {
             ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelTime);
             TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterTime);
             enableLabelAndButton(lbl, btn);
-            lbl.setText(filter.getPlayTime() + " minutes");
+            lbl.setText(Integer.toString(filter.extractInt(filter.getPlayTime())) + " minutes");
         } else {
             ImageButton btn = (ImageButton) findViewById(R.id.imgbtn_CollectionCancelTime);
             TextView lbl = (TextView) findViewById(R.id.lbl_CollectionFilterTime);
