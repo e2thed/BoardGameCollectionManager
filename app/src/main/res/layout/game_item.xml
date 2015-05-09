@@ -40,7 +40,6 @@
                 android:textSize="15sp"
                 android:text="Game Name"
                 android:layout_gravity="left"
-                android:layout_marginTop="2dp"
                 android:gravity="clip_horizontal" />
 
             <TextView
@@ -50,7 +49,6 @@
                 android:textSize="14dp"
                 android:textStyle="italic"
                 android:text="Year Published"
-                android:layout_marginTop="2dp"
                 android:layout_gravity="left" />
 
 
