@@ -396,9 +396,9 @@ public class MainCollectionActivity extends ListActivity {
 
                 if (!bgfilterchk.getPlayTime().equals("")) {
                     if (yearView.getText().length() == yrPubLen) {
-                        yearView.setText(BG.getMaxPlayTime() + " min");
+                        yearView.setText(BG.getPlayTimeRangeToString());
                     } else {
-                        yearView.setText(yearView.getText().toString() + ", " + BG.getMaxPlayTime() + " min");
+                        yearView.setText(yearView.getText().toString() + ", " + BG.getPlayTimeRangeToString());
                     }
                 }
 
