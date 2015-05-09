@@ -1,31 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="8dp">
+    android:layout_width="match_parent" android:layout_height="70dp"
+    android:id="@+id/rlt_collectionMain"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
 
 
-    <ImageView android:id="@+id/img_game"
+    <ImageView
+        android:id="@+id/img_game"
         android:layout_width="60dp"
-        android:layout_height="60dp" />
+        android:layout_height="60dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp" />
 
-    <TextView android:id="@+id/lbl_gamename"
+
+
+    <FrameLayout
+        android:id="@+id/frm_collectionDetails"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:layout_alignParentRight="true"
-        android:text="Game Name"
-        />
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@+id/img_game"
+        android:layout_toLeftOf="@+id/img_collectionArrow"
+        android:layout_toStartOf="@+id/img_collectionArrow">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/lnr_collectionItemDetails"
+            android:layout_gravity="left">
+
+            <TextView
+                android:id="@+id/lbl_gamename"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:text="Game Name"
+                android:layout_gravity="left"
+                android:layout_marginTop="2dp"
+                android:gravity="clip_horizontal" />
+
+            <TextView
+                android:id="@+id/lbl_yrpub"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:textStyle="italic"
+                android:text="Year Published"
+                android:layout_marginTop="2dp"
+                android:layout_gravity="left" />
 
 
-    <TextView android:id="@+id/lbl_yrpub"
+        </LinearLayout>
+    </FrameLayout>
+
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle="italic"
-        android:text="Year Published"
+        android:layout_height="match_parent"
+        android:id="@+id/img_collectionArrow"
+        android:contentDescription="Arrrow to detail"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_chevron_right_black_24dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/lbl_gamename"
-        />
+        android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>
