@@ -29,6 +29,7 @@ public class BoardGameFilter {
     }
 
     private BoardGameFilter(Context context) {
+        this.context = context;
         this.gamName = "";
         this.numPlayers = "";
         this.playTime = "";

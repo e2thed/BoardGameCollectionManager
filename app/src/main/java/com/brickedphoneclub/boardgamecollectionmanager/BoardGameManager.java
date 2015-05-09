@@ -23,6 +23,7 @@ public class BoardGameManager {
     }
 
     private BoardGameManager(Context context) {
+        this.context = context;
         //GAG: Removed defaults for demo purposes.
         //createDefaults();
     }
