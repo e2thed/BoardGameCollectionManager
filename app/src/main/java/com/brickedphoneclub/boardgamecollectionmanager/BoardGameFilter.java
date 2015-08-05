@@ -3,13 +3,16 @@ package com.brickedphoneclub.boardgamecollectionmanager;
 import android.content.Context;
 import android.util.Log;
 
+import com.brickedphoneclub.boardgamecollectionmanager.BoardGameManager;
+import com.brickedphoneclub.boardgamecollectionmanager.SimpleBoardGame;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Created by Giovanni Galasso on 4/28/2015.
- * Renamed to BoardGameFilter due to some conflict Vandana was having.
+ * Renamed to SimpleBoardGameFilter due to some conflict Vandana was having.
  */
 public class BoardGameFilter {
     private static BoardGameFilter ourInstance = null;
@@ -18,8 +21,8 @@ public class BoardGameFilter {
     private boolean activeFilter;
     private Context context;
 
-    private ArrayList<BoardGame> mainList = BoardGameManager.getInstance(context).getBgList();
-    private ArrayList<BoardGame> filterList = new ArrayList<>();
+    private ArrayList<SimpleBoardGame> mainList = BoardGameManager.getInstance(context).getBgList();
+    private ArrayList<SimpleBoardGame> filterList = new ArrayList<>();
 
     public static BoardGameFilter getInstance(Context context) {
         if (ourInstance == null) {
@@ -41,19 +44,19 @@ public class BoardGameFilter {
 
     }
 
-    public ArrayList<BoardGame> getFilterList() {
+    public ArrayList<SimpleBoardGame> getFilterList() {
         return filterList;
     }
 
-    public void setFilterList(ArrayList<BoardGame> filterList) {
+    public void setFilterList(ArrayList<SimpleBoardGame> filterList) {
         this.filterList = filterList;
     }
 
-    public ArrayList<BoardGame> getMainList() {
+    public ArrayList<SimpleBoardGame> getMainList() {
         return mainList;
     }
 
-    public void setMainList(ArrayList<BoardGame> mainList) {
+    public void setMainList(ArrayList<SimpleBoardGame> mainList) {
         this.mainList = mainList;
     }
 
@@ -150,9 +153,9 @@ public class BoardGameFilter {
         }
     }
 
-    public ArrayList<BoardGame> applyFilters() {
+    public ArrayList<SimpleBoardGame> applyFilters() {
         filterList.clear();
-        ArrayList<BoardGame> tempList = mainList;
+        ArrayList<SimpleBoardGame> tempList = mainList;
 
         if(!gamName.equals("")) {
             tempList = searchByGamName(tempList);
@@ -198,9 +201,9 @@ public class BoardGameFilter {
     }
 
     // Search by gameName
-    public ArrayList<BoardGame> searchByGamName(ArrayList<BoardGame> list) {
-        ArrayList<BoardGame> tempList = new ArrayList<>();
-        for (BoardGame game: list) {
+    public ArrayList<SimpleBoardGame> searchByGamName(ArrayList<SimpleBoardGame> list) {
+        ArrayList<SimpleBoardGame> tempList = new ArrayList<>();
+        for (SimpleBoardGame game: list) {
             String gName = game.getName();
             if (gName != null) {
                 //Debug print out
@@ -214,11 +217,11 @@ public class BoardGameFilter {
     }
 
     //GAG: Filter by player count
-    public ArrayList<BoardGame> filterByPlayer(ArrayList<BoardGame> list) {
+    public ArrayList<SimpleBoardGame> filterByPlayer(ArrayList<SimpleBoardGame> list) {
         //int playerCount = Integer.parseInt(numPlayers);
         int playerCount = extractInt(numPlayers);
-        ArrayList<BoardGame> tempList = new ArrayList<>();
-        for (BoardGame game: list) {
+        ArrayList<SimpleBoardGame> tempList = new ArrayList<>();
+        for (SimpleBoardGame game: list) {
             //Debug print out
             Log.i("FILTER PLAYERS", "Game: " + game.getName() + " Min players: " + game.getMinPlayers() +
                     " Max players: " + game.getMaxPlayers() + " Target players: " + playerCount);
@@ -231,10 +234,10 @@ public class BoardGameFilter {
     }
 
     //GAG: Filter by play time
-    public ArrayList<BoardGame> filterByTime(ArrayList<BoardGame> list) {
+    public ArrayList<SimpleBoardGame> filterByTime(ArrayList<SimpleBoardGame> list) {
         int time = extractInt(playTime);
-        ArrayList<BoardGame> tempList = new ArrayList<>();
-        for (BoardGame game: list) {
+        ArrayList<SimpleBoardGame> tempList = new ArrayList<>();
+        for (SimpleBoardGame game: list) {
             //Debug print out
             Log.i("FILTER TIME", "Game: " + game.getName() + " Min Time: " + game.getMinPlayTime() +
                     " Max Time: " + game.getMaxPlayTime() + " Target Time: " + time);
@@ -245,10 +248,10 @@ public class BoardGameFilter {
         return tempList;
     }
 
-    public ArrayList<BoardGame> filterByAge(ArrayList<BoardGame> list) {
+    public ArrayList<SimpleBoardGame> filterByAge(ArrayList<SimpleBoardGame> list) {
         int age = extractInt(ageGroup);
-        ArrayList<BoardGame> tempList = new ArrayList<>();
-        for (BoardGame game: list) {
+        ArrayList<SimpleBoardGame> tempList = new ArrayList<>();
+        for (SimpleBoardGame game: list) {
             //Debug print out
             Log.i("FILTER Age", "Game: " + game.getName() + " Min Age: " + game.getMinAge() +
                     " Target Age: " + age);
@@ -259,9 +262,9 @@ public class BoardGameFilter {
         return tempList;
     }
 
-    public ArrayList<BoardGame> filterByMechanic(ArrayList<BoardGame> list) {
-        ArrayList<BoardGame> tempList = new ArrayList<>();
-        for (BoardGame game: list) {
+    public ArrayList<SimpleBoardGame> filterByMechanic(ArrayList<SimpleBoardGame> list) {
+        ArrayList<SimpleBoardGame> tempList = new ArrayList<>();
+        for (SimpleBoardGame game: list) {
             if (game.getBoardGameMechanic() != null) {
                 for (String mec : game.getBoardGameMechanic()) {
                     //Debug print out
@@ -275,9 +278,9 @@ public class BoardGameFilter {
         return tempList;
     }
 
-    public ArrayList<BoardGame> filterByCategory(ArrayList<BoardGame> list) {
-        ArrayList<BoardGame> tempList = new ArrayList<>();
-        for (BoardGame game: list) {
+    public ArrayList<SimpleBoardGame> filterByCategory(ArrayList<SimpleBoardGame> list) {
+        ArrayList<SimpleBoardGame> tempList = new ArrayList<>();
+        for (SimpleBoardGame game: list) {
             if (game.getBoardGameCategory() != null) {
                 for (String cat : game.getBoardGameCategory()) {
                     //Debug print out
@@ -291,10 +294,10 @@ public class BoardGameFilter {
         return tempList;
     }
 
-    public ArrayList<BoardGame> filterByRating(ArrayList<BoardGame> list) {
-        ArrayList<BoardGame> tempList = new ArrayList<>();
+    public ArrayList<SimpleBoardGame> filterByRating(ArrayList<SimpleBoardGame> list) {
+        ArrayList<SimpleBoardGame> tempList = new ArrayList<>();
         Double targetRating = extractDouble(rating);
-        for (BoardGame game: list) {
+        for (SimpleBoardGame game: list) {
             //Debug print out
             Log.i("FILTER Rating", "Game: " + game.getName() + " Rating: " + game.getRating() + " Target Rating: " + targetRating);
             if (game.getRating() >= targetRating) {
@@ -304,7 +307,7 @@ public class BoardGameFilter {
         return tempList;
     }
 
-    public void addGameToList(ArrayList<BoardGame> list, BoardGame game) {
+    public void addGameToList(ArrayList<SimpleBoardGame> list, SimpleBoardGame game) {
         if(!list.contains(game)) {
             list.add(game);
         }

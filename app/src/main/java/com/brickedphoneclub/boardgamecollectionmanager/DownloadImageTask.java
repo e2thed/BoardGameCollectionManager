@@ -20,7 +20,7 @@ public class DownloadImageTask extends AsyncTask<BoardGameAndView, Void, BoardGa
     protected BoardGameAndView doInBackground(BoardGameAndView... params) {
 
         BoardGameAndView container = params[0];
-        BoardGame BG = container.BG;
+        SimpleBoardGame BG = container.BG;
         String task = container.task;
         String imageURL;
 

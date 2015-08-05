@@ -50,7 +50,7 @@ public class BoardGameDetailActivity extends Activity {
         if (id == R.id.action_settings) {
             return true;
         } else if(id == R.id.action_random){
-            ArrayList<BoardGame> rList;
+            ArrayList<SimpleBoardGame> rList;
             BoardGameFilter filter = BoardGameFilter.getInstance(this);
             BoardGameManager bgm = BoardGameManager.getInstance(this);
             if(filter.checkActiveFilter() == true) {
@@ -61,7 +61,7 @@ public class BoardGameDetailActivity extends Activity {
             final Random randomGen = new Random();
             int randomNum = randomGen.nextInt(rList.size());
             Log.i("COLLECTION RANDOM", "Random num is: " + (randomNum) + " List size:" + rList.size());
-            BoardGame game = rList.get(randomNum);
+            SimpleBoardGame game = rList.get(randomNum);
             loadGame(game.getObjectId());
         }
 
@@ -71,7 +71,7 @@ public class BoardGameDetailActivity extends Activity {
 
     private void loadGame(long id){
         BoardGameManager bgm = BoardGameManager.getInstance(this);
-        BoardGame game = bgm.getBoardGameById(id);
+        SimpleBoardGame game = bgm.getSimpleBoardGameById(id);
         BoardGameAndView container = new BoardGameAndView();
         container.BG = game;
         container.task = "image";

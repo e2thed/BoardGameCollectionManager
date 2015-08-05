@@ -17,7 +17,7 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final FileHandler fh = FileHandler.getInstance(this);
+        final SimpleFileHandler fh = SimpleFileHandler.getInstance(this);
 
         setContentView(R.layout.activity_login);
         BoardGameManager bgm = BoardGameManager.getInstance(this);

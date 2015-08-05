@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.android.support:support-v4:22.1.1'
     compile 'com.google.android.gms:play-services:7.3.0'
+    compile files('C:/Android_Studio/BoardGameCollectionManager_v2/libs/simple-xml-2.7.1.jar')
 }

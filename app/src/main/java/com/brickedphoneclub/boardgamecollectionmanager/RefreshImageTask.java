@@ -20,7 +20,7 @@ public class RefreshImageTask extends AsyncTask<BoardGameAndView, Void, BoardGam
     protected BoardGameAndView doInBackground(BoardGameAndView... params) {
 
         BoardGameAndView container = params[0];
-        BoardGame BG = container.BG;
+        SimpleBoardGame BG = container.BG;
         View view = container.view;
         String task = container.task;
 

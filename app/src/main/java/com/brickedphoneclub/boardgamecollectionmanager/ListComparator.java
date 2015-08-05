@@ -5,8 +5,7 @@ import java.util.Comparator;
 /**
  * Created by Vandana on 4/27/2015.
  */
-public
-class ListComparator implements Comparator<BoardGame> {
+public class ListComparator implements Comparator<SimpleBoardGame> {
 
     private String orderType;
 
@@ -17,7 +16,7 @@ class ListComparator implements Comparator<BoardGame> {
     }
 
     @Override
-    public int compare(BoardGame lhs, BoardGame rhs) {
+    public int compare(SimpleBoardGame lhs, SimpleBoardGame rhs) {
 
         int res=0;
         if (orderType.equals("A-Z")) {

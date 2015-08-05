@@ -3,6 +3,8 @@ package com.brickedphoneclub.boardgamecollectionmanager;
 import android.content.Context;
 import android.util.Log;
 
+import com.brickedphoneclub.boardgamecollectionmanager.SimpleBoardGame;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -12,7 +14,7 @@ import java.util.Collections;
  */
 public class BoardGameManager {
     private static BoardGameManager ourInstance = null;
-    private ArrayList<BoardGame> bgList = new ArrayList<>();
+    private ArrayList<SimpleBoardGame> bgList = new ArrayList<>();
     private Context context;
 
     public static BoardGameManager getInstance(Context context) {
@@ -28,7 +30,7 @@ public class BoardGameManager {
         //createDefaults();
     }
 
-    public void addBoardGame(BoardGame bg) {
+    public void addBoardGame(SimpleBoardGame bg) {
         //GAG - 05/02/15
         //Added in check if game is already in the collection it doesn't get added again.
         //This is probably not very good performance, I'm guessing some better way to handle this.
@@ -38,17 +40,17 @@ public class BoardGameManager {
         }*/
 
         //Revert back to old add, looks like duplicates were being generated with the new way when reading in the XML.
-        if(getBoardGameById(bg.getObjectId()) == null) {
+        if(getSimpleBoardGameById(bg.getObjectId()) == null) {
             bgList.add(bg);
 
         }
 
     }
 
-    private ArrayList<BoardGame> createDefaults() {
-        bgList.add(new BoardGame(1, "One", "2015", "", "//cf.geekdo-images.com/images/pic1104600_t.jpg"));
-        bgList.add(new BoardGame(2, "Two", "2008", "", "//cf.geekdo-images.com/images/pic719935_t.jpg"));
-        BoardGame game1 = new BoardGame(3, "Four", "2003", "", "//cf.geekdo-images.com/images/pic1324609_t.jpg");
+    private ArrayList<SimpleBoardGame> createDefaults() {
+        bgList.add(new SimpleBoardGame(1, "One", "2015"));
+        bgList.add(new SimpleBoardGame(2, "Two", "2008"));
+        SimpleBoardGame game1 = new SimpleBoardGame(3, "Four", "2003");
         //Mockup Info to test details screen since we don't have XML working yet.
         game1.setRating(7.1234f);
         game1.setMinPlayers(2);
@@ -66,7 +68,7 @@ public class BoardGameManager {
         return bgList;
     }
 
-    public ArrayList<BoardGame> getBgList() {
+    public ArrayList<SimpleBoardGame> getBgList() {
         return bgList;
     }
 
@@ -74,12 +76,12 @@ public class BoardGameManager {
         return this.bgList.size();
     }
 
-    public void setBgList(ArrayList<BoardGame> bgList) {
+    public void setBgList(ArrayList<SimpleBoardGame> bgList) {
         this.bgList = bgList;
     }
 
-    public BoardGame getBoardGameById(long id) {
-        for (BoardGame game : getBgList()) {
+    public SimpleBoardGame getSimpleBoardGameById(long id) {
+        for (SimpleBoardGame game : getBgList()) {
             if (game.getObjectId() == id) {
                 Log.i("BoardGameManager", "Found game ID: " + game.getObjectId() + "\n");
                 return game;
@@ -90,7 +92,7 @@ public class BoardGameManager {
 
     public ArrayList<String> getUniqueCategories() {
         ArrayList<String> newList = new ArrayList<>();
-        for(BoardGame bg: bgList) {
+        for(SimpleBoardGame bg: bgList) {
             if (bg.getBoardGameCategory() != null) {
                 for (String s : bg.getBoardGameCategory()) {
                     if (!newList.contains(s)) {
@@ -107,7 +109,7 @@ public class BoardGameManager {
 
     public ArrayList<String> getUniqueMechanics() {
         ArrayList<String> newList = new ArrayList<>();
-        for(BoardGame bg: bgList) {
+        for(SimpleBoardGame bg: bgList) {
             if (bg.getBoardGameMechanic() != null) {
                 for (String s : bg.getBoardGameMechanic()) {
                     if (!newList.contains(s)) {

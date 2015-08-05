@@ -285,7 +285,7 @@ public class MainCollectionActivity extends ListActivity {
             return true;
         }
         else if(id == R.id.action_random){
-            ArrayList<BoardGame> rList;
+            ArrayList<SimpleBoardGame> rList;
             BoardGameFilter filter = BoardGameFilter.getInstance(this);
             BoardGameManager bgm = BoardGameManager.getInstance(this);
             if(filter.checkActiveFilter() == true) {
@@ -296,7 +296,7 @@ public class MainCollectionActivity extends ListActivity {
             final Random randomGen = new Random();
             int randomNum = randomGen.nextInt(rList.size());
             Log.i("COLLECTION RANDOM", "Random num is: " + (randomNum) + " List size:" + rList.size());
-            BoardGame game = rList.get(randomNum);
+            SimpleBoardGame game = rList.get(randomNum);
 
             Bundle bgDetail = new Bundle();
             bgDetail.putLong("id", game.getObjectId());
@@ -344,9 +344,9 @@ public class MainCollectionActivity extends ListActivity {
     }
 
 
-    class GameAdapter extends ArrayAdapter<BoardGame> {
+    class GameAdapter extends ArrayAdapter<SimpleBoardGame> {
 
-        public GameAdapter(Context context, int resource, ArrayList<BoardGame> objects) {
+        public GameAdapter(Context context, int resource, ArrayList<SimpleBoardGame> objects) {
             super(context, resource, objects);
         }
 
@@ -357,7 +357,7 @@ public class MainCollectionActivity extends ListActivity {
         }
 
         @Override
-        public BoardGame getItem(int position) {
+        public SimpleBoardGame getItem(int position) {
             return super.getItem(position);
         }
 
@@ -379,7 +379,7 @@ public class MainCollectionActivity extends ListActivity {
             } else {
                 view = convertView;
             }
-            BoardGame BG = getItem(position);
+            SimpleBoardGame BG = getItem(position);
 
             TextView nameView = (TextView)view.findViewById(R.id.lbl_gamename);
             nameView.setText(BG.getName());
